@@ -3,8 +3,6 @@ import logoImg from '@shared/assets/images/logo.webp'
 </script>
 
 <template>
-  <!-- relative: занимает место в потоке, всегда будет ПЕРВЫМ сверху на мобилках -->
-  <!-- xl:absolute: на десктопе всплывает в угол -->
   <header class="relative xl:absolute top-0 left-0 w-full flex justify-center xl:justify-start p-6 sm:p-8 xl:p-10 z-20 pointer-events-none">
     <img
       :src="logoImg"

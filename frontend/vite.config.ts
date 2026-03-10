@@ -3,12 +3,12 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
-import VueRouter from 'unplugin-vue-router/vite' // 1. Импорт
+import VueRouter from 'unplugin-vue-router/vite'
 
 export default defineConfig({
   base: '/STALKER_ROLE_PLAY/',
   plugins: [
-    VueRouter({ // 2. Вызов ПЕРЕД vue()
+    VueRouter({
       routesFolder: 'src/pages',
     }),
     vue(),

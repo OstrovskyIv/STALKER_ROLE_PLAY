@@ -1,4 +1,3 @@
-// Этот файл принудительно объясняет IDE, где искать типы роутера
 import 'unplugin-vue-router/client'
 
 declare module 'vue-router/auto' {
