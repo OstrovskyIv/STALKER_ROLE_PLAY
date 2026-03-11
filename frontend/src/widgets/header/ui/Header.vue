@@ -6,12 +6,10 @@ const navStore = useNavStore()
 </script>
 
 <template>
-  <!-- transition-all обеспечивает плавное исчезновение -->
-  <!-- Если мы не на 'home', ставим opacity-0 (прозрачность) -->
   <header
     :class="[
-      'fixed xl:absolute top-0 left-0 w-full flex justify-center xl:justify-start p-6 sm:p-8 xl:p-10 z-20 pointer-events-none transition-all duration-300',
-      navStore.activeSectionId === 'home' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+      'fixed xl:absolute top-0 left-0 w-full flex justify-center xl:justify-start p-6 sm:p-8 xl:p-10 z-20 pointer-events-none transition-all duration-500',
+      navStore.activeSectionId === 'home' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'
     ]"
   >
     <img
