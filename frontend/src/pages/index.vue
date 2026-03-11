@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { useNavStore } from '@entities/navigation'
 import { HomeSection, InfoSection, ConnectSection, GallerySection } from '@widgets/sections'
 
 const navStore = useNavStore()
-const sectionsContainer = ref<HTMLElement | null>(null)
-
 let observer: IntersectionObserver | null = null
 
-// Логика отслеживания секции в который вы находитесь
 onMounted(() => {
   observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        navStore.setActiveSection(entry.target.id)
-      }
+      if (entry.isIntersecting) navStore.setActiveSection(entry.target.id)
     })
   }, { threshold: 0.6 })
 
@@ -25,33 +20,27 @@ onMounted(() => {
   })
 })
 
-onUnmounted(() => {
-  observer?.disconnect()
-})
+onUnmounted(() => observer?.disconnect())
 </script>
 
 <template>
-  <div ref="sectionsContainer" class="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth overflow-x-hidden">
+  <div class="w-full flex flex-col items-center">
 
-    <section id="home" class="h-screen w-full snap-start">
+    <section id="home" class="h-screen w-full snap-start shrink-0">
       <HomeSection />
     </section>
 
-    <section id="information" class="h-screen w-full snap-start">
+    <section id="information" class="h-screen w-full snap-start shrink-0">
       <InfoSection />
     </section>
 
-    <section id="connection" class="h-screen w-full snap-start">
+    <section id="connection" class="h-screen w-full snap-start shrink-0">
       <ConnectSection />
     </section>
 
-    <section id="gallery" class="h-screen w-full snap-start">
+    <section id="gallery" class="h-screen w-full snap-start shrink-0">
       <GallerySection />
     </section>
 
   </div>
 </template>
-
-<style>
-::-webkit-scrollbar { display: none; }
-</style>
