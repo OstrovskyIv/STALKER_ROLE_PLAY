@@ -1,5 +1,4 @@
 <template>
-  <!-- pt-64 на мобилках создает пространство под Логотип и Меню -->
   <div class="w-full h-full flex flex-col items-center justify-center p-6 pt-64 sm:pt-80 xl:pt-0 text-center gap-6">
     <h1 class="text-6xl md:text-[120px] font-black font-capture uppercase tracking-tighter text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] leading-none">
       LAST ZONE

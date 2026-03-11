@@ -16,14 +16,12 @@ const scrollToSection = (id: string) => {
 </script>
 
 <template>
-  <!-- Динамический класс для top: меняется в зависимости от активной секции -->
-  <!-- transition-all duration-500 обеспечит плавный перелет плашки меню -->
   <nav
     :class="[
       'fixed left-0 w-full z-30 flex justify-center px-4 pointer-events-none font-capture transition-all duration-500',
       navStore.activeSectionId === 'home'
-        ? 'top-44 sm:top-56 xl:top-20'  /* Позиция под логотипом */
-        : 'top-6 xl:top-20'             /* Позиция в самом верху (когда лого скрыто) */
+        ? 'top-28 sm:top-40 xl:top-20'
+        : 'top-6 xl:top-20'
     ]"
   >
     <div
