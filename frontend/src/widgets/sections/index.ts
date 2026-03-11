@@ -1,0 +1,4 @@
+export { default as HomeSection } from './ui/HomeSection.vue'
+export { default as InfoSection } from './ui/InfoSection.vue'
+export { default as ConnectSection } from './ui/ConnectSection.vue'
+export { default as GallerySection } from './ui/GallerySection.vue'
