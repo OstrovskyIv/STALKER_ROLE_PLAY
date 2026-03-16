@@ -9,7 +9,7 @@ const navStore = useNavStore()
   <header
     :class="[
       'absolute left-0 w-full flex justify-center xl:justify-start xl:left-12 z-20 pointer-events-none transition-all duration-500 ease-out',
-      'top-6 xl:top-4',
+      'top-2 xl:top-0',
       navStore.activeSectionId === 'home' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'
     ]"
   >

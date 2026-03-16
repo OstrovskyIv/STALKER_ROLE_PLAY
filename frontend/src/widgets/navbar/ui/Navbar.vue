@@ -20,8 +20,8 @@ const scrollToSection = (id: string) => {
     :class="[
       'fixed left-0 w-full z-30 flex justify-center px-4 pointer-events-none font-capture transition-all duration-500 ease-in-out',
       navStore.activeSectionId === 'home'
-        ? 'top-32 sm:top-44 xl:top-[82px]'
-        : 'top-6 xl:top-[82px]'
+        ? 'top-32 sm:top-44 xl:top-[65px]'
+        : 'top-6 xl:top-[65px]'
     ]"
   >
     <div
