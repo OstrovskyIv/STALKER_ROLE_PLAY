@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-// Описываем структуру объекта
 interface Step {
   id: number
   title: string
@@ -11,8 +10,6 @@ interface Step {
 }
 
 const currentStep = ref(1)
-
-// Данные шагов
 const steps: Step[] = [
   {
     id: 1,
@@ -30,13 +27,8 @@ const steps: Step[] = [
   }
 ]
 
-// Исправленный Computed: убираем дженерик <Step> и явно возвращаем Step
 const activeStep = computed((): Step => {
-  const index = currentStep.value - 1
-  const foundStep = steps[index]
-
-  // Используем утверждение типа (as Step), чтобы TS не сомневался
-  return foundStep ?? (steps[0] as Step)
+  return steps[currentStep.value - 1] ?? (steps[0] as Step)
 })
 
 const nextStep = () => { if (currentStep.value < steps.length) currentStep.value++ }
@@ -44,72 +36,122 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
 </script>
 
 <template>
-  <!-- v-if на всякий случай для шаблона -->
-  <div v-if="activeStep" class="w-full max-w-3xl aspect-[16/9] md:aspect-[16/8] bg-black/90 border-2 border-fuchsia-900/50 rounded-3xl overflow-hidden flex flex-col relative shadow-[0_0_50px_rgba(162,28,175,0.2)] font-capture">
+  <div v-if="activeStep"
+       class="w-full max-w-4xl min-h-[450px] bg-zinc-950/90 border-2 border-[#b347f0] shadow-[0_0_40px_rgba(179,71,240,0.2)] rounded-3xl overflow-hidden flex flex-col relative font-capture transition-all">
 
-    <!-- ЭФФЕКТ ПОМЕХ -->
-    <div class="absolute inset-0 pointer-events-none opacity-20 mix-blend-screen bg-scanlines animate-flicker"></div>
+    <!-- СЛОИ ПОМЕХ (INTERFERENCE) -->
+    <!-- 1. Зернистый шум -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.15] bg-noise"></div>
+    <!-- 2. Горизонтальные линии -->
+    <div class="absolute inset-0 pointer-events-none opacity-30 bg-scanlines"></div>
+    <!-- 3. Бегущая "глючная" полоса -->
+    <div class="absolute inset-0 pointer-events-none bg-glitch-line animate-glitch"></div>
 
-    <!-- HEADER -->
-    <div class="bg-fuchsia-950/30 border-b border-fuchsia-900/50 px-8 py-4 flex justify-between items-center">
-      <span class="text-white text-xl md:text-2xl tracking-widest uppercase italic font-bold">КАК НАЧАТЬ ИГРАТЬ</span>
-      <div class="flex gap-2">
-        <div class="w-3 h-3 rounded-full bg-fuchsia-900/50"></div>
-        <div class="w-3 h-3 rounded-full bg-fuchsia-600 animate-pulse"></div>
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ (HEADER) -->
+    <div class="border-b border-[#b347f0]/50 px-8 py-5 flex justify-between items-center bg-[#b347f0]/5">
+      <span class="text-white text-xl md:text-3xl tracking-widest uppercase italic">КАК НАЧАТЬ ИГРАТЬ</span>
+
+      <!-- КНОПКИ-ЛАМПОЧКИ (Control Panel Lamps) -->
+      <div class="flex gap-4">
+        <!-- Красная (Питание) -->
+        <div class="w-4 h-4 rounded-full border border-red-900 bg-red-600 shadow-[0_0_15px_red] animate-pulse"></div>
+        <!-- Желтая (Обмен данными) -->
+        <div class="w-4 h-4 rounded-full border border-yellow-900 bg-yellow-500 shadow-[0_0_10px_yellow] animate-[flicker_0.1s_infinite]"></div>
+        <!-- Зеленая (Сигнал) -->
+        <div class="w-4 h-4 rounded-full border border-emerald-900 bg-emerald-500 shadow-[0_0_10px_emerald]"></div>
       </div>
     </div>
 
     <!-- КОНТЕНТ -->
-    <div class="flex-1 p-8 md:p-12 flex flex-col justify-between relative z-10">
-      <div class="space-y-6 text-left">
-        <div class="flex items-center gap-4">
-          <div class="w-10 h-10 rounded-full bg-fuchsia-700 flex items-center justify-center text-black font-black text-xl shadow-[0_0_15px_fuchsia]">
+    <div class="flex-1 p-10 md:p-16 flex flex-col justify-between relative z-10">
+
+      <div class="space-y-10 text-left">
+        <div class="flex items-center gap-5">
+          <!-- Индикатор шага -->
+          <div class="shrink-0 w-10 h-10 rounded-full border-2 border-[#b347f0] text-[#b347f0] flex items-center justify-center font-black text-xl bg-black/50 shadow-[0_0_10px_rgba(179,71,240,0.5)]">
             {{ activeStep.id }}
           </div>
-          <h3 class="text-fuchsia-500 text-2xl md:text-4xl uppercase tracking-tighter">
+          <h3 class="text-[#b347f0] text-3xl md:text-5xl uppercase tracking-tighter drop-shadow-[0_0_10px_rgba(179,71,240,0.3)]">
             {{ activeStep.title }}
           </h3>
         </div>
 
-        <p class="text-zinc-400 font-mono text-sm md:text-lg leading-relaxed max-w-2xl">
+        <p class="text-zinc-200 text-base md:text-2xl leading-relaxed max-w-3xl uppercase tracking-wide">
           {{ activeStep.desc }}
         </p>
 
+        <!-- КНОПКА КУПИТЬ -->
         <a :href="activeStep.link" target="_blank"
-           class="inline-block px-8 py-4 bg-fuchsia-700 hover:bg-fuchsia-600 text-white font-black text-lg md:text-2xl
-                  transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(162,28,175,0.4)] active:scale-95 uppercase">
+           class="inline-block px-8 py-4 bg-[#b347f0] hover:bg-[#c466f5] text-white font-black text-xl md:text-3xl
+                  transition-all duration-300 shadow-[0_0_20px_rgba(179,71,240,0.4)] active:scale-95 uppercase rounded-sm">
           {{ activeStep.btnText }}
         </a>
       </div>
 
-      <!-- НАВИГАЦИЯ -->
-      <div class="flex items-center justify-center gap-6 pt-8 border-t border-fuchsia-900/20">
+      <!-- НАВИГАЦИЯ (Точно как на фото) -->
+      <div class="flex items-center justify-center gap-6 md:gap-12 pt-10">
+
         <button @click="prevStep" :disabled="currentStep === 1"
-                class="flex items-center gap-2 text-zinc-500 hover:text-white disabled:opacity-10 transition-colors cursor-pointer uppercase text-sm md:text-lg">
-          &lt; НАЗАД
+                class="group flex items-center disabled:opacity-10 cursor-pointer">
+          <div class="border border-[#b347f0] px-6 py-2 flex items-center gap-3 text-white text-lg md:text-2xl group-hover:bg-[#b347f0]/30 transition-all shadow-[inset_0_0_10px_rgba(179,71,240,0.2)]">
+            <span class="text-[#b347f0]">&lt;</span> НАЗАД
+          </div>
         </button>
 
-        <div class="px-6 py-1 bg-fuchsia-900/20 border border-fuchsia-700 text-white text-xl md:text-2xl">
+        <div class="text-white text-2xl md:text-4xl uppercase tracking-[0.2em] border-b-2 border-[#b347f0]/30 pb-1">
           ШАГ {{ currentStep }}
         </div>
 
         <button @click="nextStep" :disabled="currentStep === steps.length"
-                class="flex items-center gap-2 text-zinc-500 hover:text-white disabled:opacity-10 transition-colors cursor-pointer uppercase text-sm md:text-lg">
-          ДАЛЕЕ &gt;
+                class="group flex items-center disabled:opacity-10 cursor-pointer">
+          <div class="border border-[#b347f0] px-6 py-2 flex items-center gap-3 text-white text-lg md:text-2xl group-hover:bg-[#b347f0]/30 transition-all shadow-[inset_0_0_10px_rgba(179,71,240,0.2)]">
+            ДАЛЕЕ <span class="text-[#b347f0]">&gt;</span>
+          </div>
         </button>
+
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+/* 1. СЛОЙ ШУМА (Зерно) */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* 2. СЛОЙ СКАНЛИНИЙ (Полоски) */
 .bg-scanlines {
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-  linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-  background-size: 100% 3px, 2px 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(179, 71, 240, 0.05) 50%
+  );
+  background-size: 100% 4px;
 }
+
+/* 3. БЕГУЩАЯ ПОЛОСА ГЛЮКА */
+.bg-glitch-line {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(179, 71, 240, 0.1) 50%,
+    transparent
+  );
+  height: 20px;
+  width: 100%;
+  position: absolute;
+}
+
+@keyframes glitch-move {
+  0% { top: -20%; }
+  100% { top: 120%; }
+}
+.animate-glitch {
+  animation: glitch-move 4s linear infinite;
+}
+
 @keyframes flicker {
-  0% { opacity: 0.15; } 50% { opacity: 0.25; } 100% { opacity: 0.15; }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
-.animate-flicker { animation: flicker 0.15s infinite; }
 </style>
