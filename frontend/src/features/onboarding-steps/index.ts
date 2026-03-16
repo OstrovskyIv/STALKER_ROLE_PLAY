@@ -1,0 +1,1 @@
+export { default as OnboardingBox } from './ui/OnboardingBox.vue'
