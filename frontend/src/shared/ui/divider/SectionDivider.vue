@@ -10,11 +10,11 @@ const navStore = useNavStore()
     :class="[
       'absolute left-0 w-full flex items-center justify-center gap-4 px-4 pointer-events-none transition-all duration-500 ease-in-out z-10',
       navStore.activeSectionId === 'home'
-        ? 'top-45 sm:top-64 xl:top-[180px]'
-        : 'top-18 xl:top-[180px]'
+        ? 'top-[180px] sm:top-[256px] xl:top-[180px]'
+        : 'top-[72px] xl:top-[180px]'
     ]"
   >
-    <!-- Твой код линий и логотипа LZ ... -->
+
     <div class="h-[1px] flex-1 max-w-[25%] md:max-w-[30%] bg-gradient-to-r from-transparent via-white/80 to-white relative">
       <div class="absolute inset-0 bg-white shadow-[0_0_15px_white] animate-pulse"></div>
     </div>

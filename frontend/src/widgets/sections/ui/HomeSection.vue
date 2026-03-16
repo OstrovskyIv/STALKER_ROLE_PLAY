@@ -6,14 +6,8 @@ import { OnboardingBox } from '@features/onboarding-steps'
 
 <template>
   <div class="w-full h-full flex flex-col items-center justify-center p-6 relative overflow-hidden">
-    <!-- Твой анимированный логотип сверху -->
     <Header />
-
-    <!-- Линия-паз под меню -->
     <SectionDivider />
-
-    <!-- Центральный блок (занимает место вместо старого текста) -->
-    <!-- pt-64 на мобилках, чтобы не перекрывать шапку -->
     <div class="flex flex-col items-center w-full pt-80 sm:pt-[450px] xl:pt-40 animate-fade-in">
       <OnboardingBox />
     </div>

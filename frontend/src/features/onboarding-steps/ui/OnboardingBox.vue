@@ -27,10 +27,7 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
 <template>
   <div class="w-full max-w-3xl aspect-[16/8] bg-black/90 border-2 border-fuchsia-900/50 rounded-3xl overflow-hidden flex flex-col relative shadow-[0_0_50px_rgba(162,28,175,0.2)] font-capture">
 
-    <!-- ЭФФЕКТ ПОМЕХ (Overlay) -->
     <div class="absolute inset-0 pointer-events-none opacity-20 mix-blend-screen bg-scanlines animate-flicker"></div>
-
-    <!-- HEADER ТЕРМИНАЛА -->
     <div class="bg-fuchsia-950/30 border-b border-fuchsia-900/50 px-8 py-4 flex justify-between items-center">
       <span class="text-white text-xl md:text-2xl tracking-widest uppercase italic">КАК НАЧАТЬ ИГРАТЬ</span>
       <div class="flex gap-2">
@@ -40,7 +37,6 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
       </div>
     </div>
 
-    <!-- КОНТЕНТ ШАГА -->
     <div class="flex-1 p-8 md:p-12 flex flex-col justify-between relative z-10">
       <div class="space-y-6">
         <div class="flex items-center gap-4">
@@ -63,7 +59,6 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
         </a>
       </div>
 
-      <!-- НАВИГАЦИЯ ШАГОВ -->
       <div class="flex items-center justify-center gap-6 pt-8 border-t border-fuchsia-900/20">
         <button @click="prevStep" :disabled="currentStep === 1"
                 class="flex items-center gap-2 text-zinc-500 hover:text-white disabled:opacity-20 transition-colors cursor-pointer uppercase text-sm md:text-lg">
@@ -84,7 +79,6 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
 </template>
 
 <style scoped>
-/* Анимация помех (сканлинии) */
 .bg-scanlines {
   background: linear-gradient(
     rgba(18, 16, 16, 0) 50%,
