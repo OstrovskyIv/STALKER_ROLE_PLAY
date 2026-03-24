@@ -19,21 +19,12 @@ const isAppReady = ref(false)
 onMounted(async () => {
   try {
     await Promise.all([
-      preloadImage(bgImg),
-      preloadImage(logoImg),
-      preloadImage(squareLogo),
-      preloadImage(step1),
-      preloadImage(step2),
-      preloadImage(step3),
-      preloadImage(step4),
-      preloadImage(step5)
+      preloadImage(bgImg), preloadImage(logoImg), preloadImage(squareLogo),
+      preloadImage(step1), preloadImage(step2), preloadImage(step3),
+      preloadImage(step4), preloadImage(step5)
     ])
-  } catch (error) {
-    console.error('Ошибка загрузки ресурсов:', error)
   } finally {
-    setTimeout(() => {
-      isAppReady.value = true
-    }, 1500)
+    setTimeout(() => { isAppReady.value = true }, 1500)
   }
 })
 </script>
@@ -43,10 +34,14 @@ onMounted(async () => {
     <Preloader v-if="!isAppReady" />
   </Transition>
 
-  <div v-if="isAppReady" class="relative w-full h-full">
+  <div v-if="isAppReady" class="relative w-full h-[100dvh] overflow-hidden">
     <MainBackground />
     <Navbar />
-    <div class="relative z-10 w-full h-full overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
+
+    <!-- scroll-pt-[150px] гарантирует, что при скролле контент не залезет под меню -->
+    <div class="relative z-10 w-full h-[100dvh] overflow-y-auto overflow-x-hidden
+                snap-y snap-mandatory scroll-smooth no-scrollbar
+                scroll-pt-[140px] xl:scroll-pt-0">
       <router-view />
     </div>
   </div>

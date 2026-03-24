@@ -17,16 +17,17 @@ const scrollToSection = (id: string) => {
   <nav
     :class="[
       'fixed left-0 w-full z-[100] flex justify-center px-4 pointer-events-none font-capture transition-all duration-300 ease-in-out',
-      navStore.activeSectionId === 'home' ? 'top-28 sm:top-40 xl:top-[65px]' : 'top-2 xl:top-[65px]'
+      navStore.activeSectionId === 'home' ? 'top-32 sm:top-44 xl:top-[65px]' : 'top-2 xl:top-[65px]'
     ]"
   >
-    <!-- Чистый черный фон БЕЗ прозрачности (bg-black), чтобы линия не просвечивала -->
+    <!-- bg-black — теперь линия не просвечивает сквозь меню! -->
     <div class="flex items-center gap-3 sm:gap-6 xl:gap-10 px-6 sm:px-10 py-2.5 sm:py-3 xl:py-4
-                bg-black border border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] rounded-full pointer-events-auto">
+                bg-black border border-white shadow-[0_0_20px_rgba(255,255,255,0.5)]
+                rounded-full pointer-events-auto">
       <button v-for="link in navLinks" :key="link.id" @click="scrollToSection(link.id)"
               :class="[
           'text-[10px] sm:text-[12px] xl:text-[15px] tracking-tight xl:tracking-[0.2em] transition-all duration-500 flex items-center gap-1 uppercase whitespace-nowrap cursor-pointer',
-          navStore.activeSectionId === link.id ? 'text-red-600 drop-shadow-[0_0_12px_rgba(220,38,38,1)] scale-105' : 'text-zinc-500 hover:text-white'
+          navStore.activeSectionId === link.id ? 'text-red-600 drop-shadow-[0_0_12px_rgba(220,38,38,1)] scale-110' : 'text-zinc-500 hover:text-white'
         ]"
       >
         <span :class="['transition-opacity duration-300', navStore.activeSectionId === link.id ? 'opacity-100' : 'opacity-0']">[</span>
