@@ -8,7 +8,9 @@ import { OnboardingBox } from '@features/onboarding-steps'
   <div class="w-full h-full flex flex-col items-center justify-start xl:justify-center p-4 relative overflow-hidden">
     <Header />
     <SectionDivider />
-    <div class="w-full flex flex-col items-center pt-[220px] sm:pt-[320px] xl:pt-10 z-10 transition-all duration-500">
+
+    <!-- pt-[180px] на мобилках — бокс начнется сразу под линией (которая на 145px) -->
+    <div class="w-full flex flex-col items-center pt-[180px] sm:pt-[280px] xl:pt-10 z-10">
       <OnboardingBox />
     </div>
   </div>

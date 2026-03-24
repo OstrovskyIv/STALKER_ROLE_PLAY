@@ -18,12 +18,14 @@ const scrollToSection = (id: string) => {
 <template>
   <nav
     :class="[
-      'fixed left-0 w-full z-50 flex justify-center px-4 pointer-events-none font-capture transition-all duration-500 ease-in-out',
-      navStore.activeSectionId === 'home' ? 'top-32 sm:top-44 xl:top-[65px]' : 'top-6 xl:top-[65px]'
+      'fixed left-0 w-full z-50 flex justify-center px-4 pointer-events-none font-capture transition-all duration-200 ease-in-out',
+      navStore.activeSectionId === 'home'
+        ? 'top-24 sm:top-40 xl:top-[65px]' /* Поджали меню выше на главной */
+        : 'top-2 xl:top-[65px]'             /* Почти в самый верх на других */
     ]"
   >
     <div class="flex items-center gap-3 sm:gap-6 xl:gap-10 px-6 sm:px-10 py-2 sm:py-3 xl:py-3.5
-                bg-black border border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]
+                bg-zinc-950 border border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]
                 rounded-full pointer-events-auto">
       <button v-for="link in navLinks" :key="link.id" @click="scrollToSection(link.id)"
               :class="[

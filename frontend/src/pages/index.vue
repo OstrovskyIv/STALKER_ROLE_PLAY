@@ -7,11 +7,14 @@ const navStore = useNavStore()
 let observer: IntersectionObserver | null = null
 
 onMounted(() => {
+  // threshold: 0.2 означает, что как только 20% следующей секции появилось - меню прыгает
   observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) navStore.setActiveSection(entry.target.id)
+      if (entry.isIntersecting) {
+        navStore.setActiveSection(entry.target.id)
+      }
     })
-  }, { threshold: 0.6 })
+  }, { threshold: 0.2 })
 
   const ids = ['home', 'information', 'connection', 'gallery']
   ids.forEach(id => {
@@ -25,22 +28,9 @@ onUnmounted(() => observer?.disconnect())
 
 <template>
   <div class="w-full flex flex-col items-center">
-
-    <section id="home" class="h-screen w-full snap-start shrink-0">
-      <HomeSection />
-    </section>
-
-    <section id="information" class="h-screen w-full snap-start shrink-0">
-      <InfoSection />
-    </section>
-
-    <section id="connection" class="h-screen w-full snap-start shrink-0">
-      <ConnectSection />
-    </section>
-
-    <section id="gallery" class="h-screen w-full snap-start shrink-0">
-      <GallerySection />
-    </section>
-
+    <section id="home" class="h-screen w-full snap-start shrink-0"><HomeSection /></section>
+    <section id="information" class="h-screen w-full snap-start shrink-0"><InfoSection /></section>
+    <section id="connection" class="h-screen w-full snap-start shrink-0"><ConnectSection /></section>
+    <section id="gallery" class="h-screen w-full snap-start shrink-0"><GallerySection /></section>
   </div>
 </template>
