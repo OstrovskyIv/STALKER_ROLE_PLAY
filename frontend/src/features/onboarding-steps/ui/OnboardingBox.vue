@@ -26,11 +26,9 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
 </script>
 
 <template>
-  <!-- min-h-[400px] на мобилках (было 500), чтобы влезло до конца экрана -->
   <div v-if="activeStep"
        class="w-full max-w-5xl min-h-[400px] md:min-h-[520px] border-[3px] md:border-[6px] border-[#9241b8] shadow-[0_0_30px_rgba(146,65,184,0.3)] rounded-2xl md:rounded-[3rem] overflow-hidden flex flex-col relative transition-all duration-500 bg-zinc-950/20 backdrop-blur-md">
 
-    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
     <div class="bg-zinc-900/80 border-b-[2px] md:border-b-[6px] border-[#9241b8]/40 px-5 py-3 md:px-10 md:py-5 flex justify-between items-center relative z-20 font-capture">
       <span class="text-white text-[12px] md:text-2xl tracking-wider uppercase italic font-bold">КАК НАЧАТЬ ИГРАТЬ</span>
       <div class="flex gap-2">
@@ -40,12 +38,17 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
       </div>
     </div>
 
-    <!-- ЦЕНТРАЛЬНЫЙ БЛОК -->
     <div class="flex-1 relative overflow-hidden flex flex-col">
-      <video autoplay muted loop playsinline :src="noiseVideo" class="absolute inset-0 w-full h-full object-cover opacity-20 z-0" />
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        :src="noiseVideo"
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-50"
+      ></video>
       <div class="absolute inset-0 bg-black/50 z-[1]"></div>
 
-      <!-- p-5 для мобилок, чтобы текст не раздувал блок в высоту -->
       <div class="relative z-10 flex-1 p-5 md:p-14 space-y-5 md:space-y-10 text-left">
         <div class="flex items-center gap-0 font-capture">
           <img :src="activeStep.img" class="h-14 md:h-24 w-auto drop-shadow-[0_0_10px_#9241b8]" />
@@ -66,7 +69,6 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
       </div>
     </div>
 
-    <!-- НИЖНЯЯ ПАНЕЛЬ -->
     <div class="bg-zinc-900/60 border-t-[2px] md:border-t-[6px] border-[#9241b8]/40 px-6 py-4 md:px-10 md:py-6 flex items-center justify-center gap-6 md:gap-16 relative z-20 font-capture">
       <button @click="prevStep" :disabled="currentStep === 1" class="group flex items-center disabled:opacity-0 transition-opacity">
         <div class="border-2 border-[#9241b8] px-4 py-1.5 md:px-8 md:py-3 flex items-center gap-2 text-white text-[10px] md:text-2xl hover:bg-[#9241b8]/20 transition-all">
