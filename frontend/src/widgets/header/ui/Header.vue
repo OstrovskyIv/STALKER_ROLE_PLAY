@@ -12,10 +12,13 @@ const navStore = useNavStore()
       navStore.activeSectionId === 'home' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'
     ]"
   >
-    <img
-      :src="logoImg"
-      class="h-24 sm:h-32 md:h-40 xl:h-48 w-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.15)] pointer-events-auto transition-all"
-      alt="Last Zone"
-    />
+    <!-- Контейнер для фото, чтобы оно было ровно по центру -->
+    <div class="flex justify-center w-full xl:w-auto">
+      <img
+        :src="logoImg"
+        class="h-20 sm:h-32 md:h-40 xl:h-48 w-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.15)] pointer-events-auto transition-all"
+        alt="Last Zone"
+      />
+    </div>
   </header>
 </template>
