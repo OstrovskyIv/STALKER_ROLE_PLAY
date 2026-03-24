@@ -7,7 +7,6 @@ const navStore = useNavStore()
 let observer: IntersectionObserver | null = null
 
 onMounted(() => {
-  // threshold: 0.2 означает, что как только 20% следующей секции появилось - меню прыгает
   observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
