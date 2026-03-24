@@ -16,7 +16,7 @@ const steps: Step[] = [
   { id: 1, title: 'ПРИОБРЕТЕНИЕ DAYZ', desc: 'ДЛЯ ИГРЫ НУЖНО ИМЕТЬ ЛИЦЕНЗИОННУЮ КОПИЮ ИГРЫ DAYZ В STEAM', img: step1, link: 'https://store.steampowered.com/app/221100/DayZ/', btnText: 'КУПИТЬ В STEAM' },
   { id: 2, title: 'УСТАНОВКА МОДОВ', desc: 'УСТАНОВИТЕ НЕОБХОДИМЫЕ МОДЫ ДЛЯ ИГРЫ НА СЕРВЕРЕ', img: step2, link: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3683932684', btnText: 'УСТАНОВИТЬ МОДЫ' },
   { id: 3, title: 'ПОИСК СЕРВЕРА', desc: 'СЕРВЕР МОЖНО НАЙТИ ПО СЛЕДУЮЩИМ ДАННЫМ:\n╭ НАЗВАНИЕ: LAST ZONE | STALKER RP NEW\n╰ IP: 80.242.59.107:2302', img: step3 },
-  { id: 4, title: 'ПОДКЛЮЧЕНИЕ К СЕРВЕРУ', desc: '╭ СКОПИРУЙТЕ НАЗВАНИЕ СЕРВЕРА, ВСТАВЬТЕ В ПОИСК ВКЛАДКИ "СООБЩЕСТВО"\n╰ НАЖМИТЕ "ПРЯМОЕ СОЕДИНЕНИЕ", ВВЕДИТЕ ДАННЫЕ ИЗ ШАГА 3', img: step4 },
+  { id: 4, title: 'ПОДКЛЮЧЕНИЕ', desc: '╭ СКОПИРУЙТЕ НАЗВАНИЕ СЕРВЕРА, ВСТАВЬТЕ В ПОИСК ВКЛАДКИ "СООБЩЕСТВО"\n╰ НАЖМИТЕ "ПРЯМОЕ СОЕДИНЕНИЕ", ВВЕДИТЕ ДАННЫЕ ИЗ ШАГ 3', img: step4 },
   { id: 5, title: 'УДАЧИ, СТАЛКЕР!', desc: 'ПРИЯТНОЙ ИГРЫ НА НАШЕМ ПРОЕКТЕ!', img: step5 }
 ]
 
@@ -26,58 +26,46 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
 </script>
 
 <template>
-  <div v-if="activeStep"
-       class="w-full max-w-5xl min-h-[400px] md:min-h-[520px] border-[3px] md:border-[6px] border-[#9241b8] shadow-[0_0_30px_rgba(146,65,184,0.3)] rounded-2xl md:rounded-[3rem] overflow-hidden flex flex-col relative transition-all duration-500 bg-zinc-950/20 backdrop-blur-md">
+  <div v-if="activeStep" class="w-full max-w-5xl min-h-[420px] md:min-h-[500px] border-[3px] md:border-[5px] border-[#9241b8] shadow-[0_0_40px_rgba(146,65,184,0.3)] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden flex flex-col relative transition-all duration-500 bg-transparent">
 
-    <div class="bg-zinc-900/80 border-b-[2px] md:border-b-[6px] border-[#9241b8]/40 px-5 py-3 md:px-10 md:py-5 flex justify-between items-center relative z-20 font-capture">
-      <span class="text-white text-[12px] md:text-2xl tracking-wider uppercase italic font-bold">КАК НАЧАТЬ ИГРАТЬ</span>
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <video autoplay muted loop playsinline :src="noiseVideo" class="w-full h-full object-cover opacity-30" />
+      <div class="absolute inset-0 bg-black/40"></div>
+    </div>
+
+    <div class="bg-zinc-900/60 border-b-[2px] md:border-b-[4px] border-[#9241b8]/30 px-6 py-3 md:px-10 md:py-4 flex justify-between items-center relative z-20 font-capture">
+      <span class="text-white text-xs md:text-xl tracking-widest uppercase italic">КАК НАЧАТЬ ИГРАТЬ</span>
       <div class="flex gap-2">
-        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-red-600 shadow-[0_0_8px_red] animate-pulse border border-red-900"></div>
-        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-yellow-500 border border-yellow-900"></div>
-        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-emerald-500 border border-emerald-900"></div>
+        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-red-600 shadow-[0_0_10px_red] animate-pulse"></div>
+        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-yellow-500"></div>
+        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-emerald-500"></div>
       </div>
     </div>
 
-    <div class="flex-1 relative overflow-hidden flex flex-col">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        :src="noiseVideo"
-        class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-50"
-      ></video>
-      <div class="absolute inset-0 bg-black/50 z-[1]"></div>
-
-      <div class="relative z-10 flex-1 p-5 md:p-14 space-y-5 md:space-y-10 text-left">
-        <div class="flex items-center gap-0 font-capture">
-          <img :src="activeStep.img" class="h-14 md:h-24 w-auto drop-shadow-[0_0_10px_#9241b8]" />
-          <h3 class="text-[#9241b8] text-lg md:text-4xl lg:text-5xl uppercase tracking-tighter leading-none">
-            {{ activeStep.title }}
-          </h3>
+    <div class="flex-1 p-6 md:p-14 flex flex-col justify-center relative z-10">
+      <div class="space-y-6 md:space-y-10 text-left">
+        <div class="flex items-center gap-0 font-capture text-[#9241b8]">
+          <img :src="activeStep.img" class="h-14 md:h-24 w-auto" />
+          <h3 class="text-lg md:text-4xl lg:text-5xl uppercase tracking-tighter leading-none">{{ activeStep.title }}</h3>
         </div>
-
-        <p class="text-zinc-100 text-sm md:text-xl lg:text-2xl leading-snug max-w-5xl whitespace-pre-line font-sans font-black uppercase tracking-wide italic">
+        <p class="text-zinc-100 text-sm md:text-xl lg:text-2xl leading-tight max-w-5xl whitespace-pre-line font-sans font-black uppercase italic drop-shadow-md">
           {{ activeStep.desc }}
         </p>
-
-        <a v-if="activeStep.link && activeStep.btnText" :href="activeStep.link" target="_blank"
-           class="inline-block px-6 py-3 md:px-12 md:py-5 bg-[#9241b8] hover:bg-[#a85cd4] text-white font-capture text-sm md:text-2xl
-                  transition-all duration-300 shadow-[0_0_20px_rgba(146,65,184,0.4)] active:scale-95 uppercase rounded-sm">
+        <a v-if="activeStep.link && activeStep.btnText" :href="activeStep.link" target="_blank" class="inline-block px-6 py-3 md:px-12 md:py-5 bg-[#9241b8] hover:bg-[#a85cd4] text-white font-capture text-sm md:text-2xl transition-all active:scale-95 uppercase rounded-sm">
           {{ activeStep.btnText }}
         </a>
       </div>
     </div>
 
-    <div class="bg-zinc-900/60 border-t-[2px] md:border-t-[6px] border-[#9241b8]/40 px-6 py-4 md:px-10 md:py-6 flex items-center justify-center gap-6 md:gap-16 relative z-20 font-capture">
-      <button @click="prevStep" :disabled="currentStep === 1" class="group flex items-center disabled:opacity-0 transition-opacity">
-        <div class="border-2 border-[#9241b8] px-4 py-1.5 md:px-8 md:py-3 flex items-center gap-2 text-white text-[10px] md:text-2xl hover:bg-[#9241b8]/20 transition-all">
+    <div class="bg-zinc-900/60 border-t-[2px] md:border-t-[4px] border-[#9241b8]/40 px-6 py-3 md:px-10 md:py-5 flex items-center justify-center gap-6 md:gap-16 relative z-20 font-capture">
+      <button @click="prevStep" :disabled="currentStep === 1" class="group flex items-center disabled:opacity-0 cursor-pointer">
+        <div class="border-2 border-[#9241b8] px-4 py-1 md:px-8 md:py-2.5 flex items-center gap-2 text-white text-[10px] md:text-2xl hover:bg-[#9241b8]/20 transition-all font-capture">
           <span class="text-[#9241b8]">&lt;</span> НАЗАД
         </div>
       </button>
-      <div class="text-white text-sm md:text-4xl uppercase font-black tracking-widest">ШАГ {{ currentStep }}</div>
-      <button @click="nextStep" :disabled="currentStep === steps.length" class="group flex items-center disabled:opacity-0 transition-opacity">
-        <div class="border-2 border-[#9241b8] px-4 py-1.5 md:px-8 md:py-3 flex items-center gap-2 text-white text-[10px] md:text-2xl hover:bg-[#9241b8]/20 transition-all">
+      <div class="text-white text-sm md:text-4xl uppercase font-black">ШАГ {{ currentStep }}</div>
+      <button @click="nextStep" :disabled="currentStep === steps.length" class="group flex items-center disabled:opacity-0 cursor-pointer">
+        <div class="border-2 border-[#9241b8] px-4 py-1 md:px-8 md:py-2.5 flex items-center gap-2 text-white text-[10px] md:text-2xl hover:bg-[#9241b8]/20 transition-all font-capture">
           ДАЛЕЕ <span class="text-[#9241b8]">&gt;</span>
         </div>
       </button>

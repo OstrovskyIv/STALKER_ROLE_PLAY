@@ -23,11 +23,11 @@ const scrollToSection = (id: string) => {
     ]"
   >
     <div class="flex items-center gap-3 sm:gap-6 xl:gap-10 px-6 sm:px-10 py-2 sm:py-3 xl:py-3.5
-                bg-zinc-950 border border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]
+                bg-black border border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]
                 rounded-full pointer-events-auto">
       <button v-for="link in navLinks" :key="link.id" @click="scrollToSection(link.id)"
               :class="[
-          'text-[10px] sm:text-[12px] xl:text-[14px] tracking-tight xl:tracking-[0.2em] transition-all duration-500 flex items-center gap-1 uppercase whitespace-nowrap cursor-pointer',
+          'text-[10px] sm:text-[12px] xl:text-[14px] tracking-tight xl:tracking-[0.2em] transition-all duration-300 flex items-center gap-1 uppercase whitespace-nowrap cursor-pointer',
           navStore.activeSectionId === link.id ? 'text-red-600 drop-shadow-[0_0_12px_rgba(220,38,38,1)]' : 'text-zinc-500 hover:text-white'
         ]"
       >
