@@ -9,8 +9,6 @@ import { OnboardingBox } from '@features/onboarding-steps'
     <Header />
     <SectionDivider />
 
-    <!-- pt-[300px] на мобилках — это ГАРАНТИЯ того, что бокс начнется НИЖЕ линии -->
-    <!-- Линия на 210px, бокс на 300px. Между ними 90 пикселей пустоты -->
     <div class="w-full flex flex-col items-center pt-[300px] sm:pt-[350px] xl:pt-10 z-10 transition-all duration-500 origin-top scale-[0.82] sm:scale-95 xl:scale-100">
       <OnboardingBox />
     </div>

@@ -9,7 +9,6 @@ let observer: IntersectionObserver | null = null
 onMounted(() => {
   observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      // Считаем секцию активной только когда она видна наполовину
       if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
         navStore.setActiveSection(entry.target.id)
       }
