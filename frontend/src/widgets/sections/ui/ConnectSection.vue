@@ -7,11 +7,13 @@ import tiktokImg from '@shared/assets/images/tiktok.webp'
 import boostyImg from '@shared/assets/images/boosty.webp'
 
 const mainSocials = [
-  { img: discordImg, link: '#' },
-  { img: vkImg, link: '#' },
-  { img: youtubeImg, link: '#' },
-  { img: tiktokImg, link: '#' }
+  { img: discordImg, link: 'https://discord.gg/last-zone' },
+  { img: vkImg, link: 'https://vk.com/lastzonerp' },
+  { img: youtubeImg, link: 'https://youtube.com/@lastzone-s2v?si=26eC9FJvArmrLAFw' },
+  { img: tiktokImg, link: 'https://www.tiktok.com/@last_zone_stalker?_r=1&_t=ZS-94eUkgWfaIZ' }
 ]
+
+const boostyLink = 'https://boosty.to/last_zone_rp'
 </script>
 
 <template>
@@ -37,7 +39,7 @@ const mainSocials = [
         <div class="w-full flex justify-center pt-2">
           <SocialCard
             :img="boostyImg"
-            link="#"
+            :link="boostyLink"
             :isWide="true"
           />
         </div>
