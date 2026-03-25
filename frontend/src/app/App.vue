@@ -13,18 +13,38 @@ import infoImg from '@shared/assets/images/information.webp'
 import drawImg from '@shared/assets/images/draw.webp'
 import shopImg from '@shared/assets/images/shop.webp'
 import voteImg from '@shared/assets/images/vote.webp'
+import discordImg from '@shared/assets/images/discord.webp'
+import vkImg from '@shared/assets/images/vk.webp'
+import youtubeImg from '@shared/assets/images/youtube.webp'
+import tiktokImg from '@shared/assets/images/tiktok.webp'
+import boostyImg from '@shared/assets/images/boosty.webp'
 
 const isAppReady = ref(false)
 
 onMounted(async () => {
   try {
     await Promise.all([
-      preloadImage(bgImg), preloadImage(logoImg), preloadImage(squareLogo),
-      preloadImage(rulesImg), preloadImage(lorImg), preloadImage(infoImg),
-      preloadImage(drawImg), preloadImage(shopImg), preloadImage(voteImg)
+      preloadImage(bgImg),
+      preloadImage(logoImg),
+      preloadImage(squareLogo),
+      preloadImage(rulesImg),
+      preloadImage(lorImg),
+      preloadImage(infoImg),
+      preloadImage(drawImg),
+      preloadImage(shopImg),
+      preloadImage(voteImg),
+      preloadImage(discordImg),
+      preloadImage(vkImg),
+      preloadImage(youtubeImg),
+      preloadImage(tiktokImg),
+      preloadImage(boostyImg)
     ])
+  } catch (error) {
+    console.error('Критическая ошибка загрузки ресурсов:', error)
   } finally {
-    setTimeout(() => { isAppReady.value = true }, 1500)
+    setTimeout(() => {
+      isAppReady.value = true
+    }, 1500)
   }
 })
 </script>
@@ -45,8 +65,18 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.fade-leave-active { transition: opacity 0.8s ease; }
-.fade-leave-to { opacity: 0; }
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.fade-leave-active {
+  transition: opacity 0.8s ease;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 </style>
