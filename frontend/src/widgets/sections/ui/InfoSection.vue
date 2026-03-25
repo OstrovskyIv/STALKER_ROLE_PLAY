@@ -8,12 +8,12 @@ import shopImg from '@shared/assets/images/shop.webp'
 import voteImg from '@shared/assets/images/vote.webp'
 
 const infoBlocks = [
-  { title: 'ПРАВИЛА', desc: 'ОСНОВНЫЕ ПРАВИЛА', img: rulesImg },
-  { title: 'ЛОР', desc: 'ИСТОРИЯ СЕРВЕРА', img: lorImg },
-  { title: 'ГАЙДЫ', desc: 'ВЫЖИВАНИЕ В ЗОНЕ', img: guidesImg },
-  { title: 'РОЗЫГРЫШИ', desc: 'УЧАСТВУЙ И ПОБЕЖДАЙ', img: drawImg },
-  { title: 'ДОНАТ ШОП', desc: 'МАГАЗИН ТОВАРОВ', img: shopImg },
-  { title: 'ГОЛОСОВАНИЕ', desc: 'ПОДДЕРЖКА ПРОЕКТА', img: voteImg }
+  { title: 'ПРАВИЛА', desc: 'ОСНОВНЫЕ ПРАВИЛА', img: rulesImg, path: '/rules' },
+  { title: 'ЛОР', desc: 'ИСТОРИЯ СЕРВЕРА', img: lorImg, path: '#' },
+  { title: 'ГАЙДЫ', desc: 'ВЫЖИВАНИЕ В ЗОНЕ', img: guidesImg, path: '#' },
+  { title: 'РОЗЫГРЫШИ', desc: 'УЧАСТВУЙ И ПОБЕЖДАЙ', img: drawImg, path: '#' },
+  { title: 'ДОНАТ ШОП', desc: 'МАГАЗИН ТОВАРОВ', img: shopImg, path: '#' },
+  { title: 'ГОЛОСОВАНИЕ', desc: 'ПОДДЕРЖКА ПРОЕКТА', img: voteImg, path: '#' }
 ]
 </script>
 
@@ -29,23 +29,33 @@ const infoBlocks = [
 
       <div class="w-full flex flex-col gap-4 md:gap-10 items-center">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full justify-items-center">
-          <InfoCard
+          <router-link
             v-for="block in infoBlocks.slice(0, 4)"
             :key="block.title"
-            :title="block.title"
-            :desc="block.desc"
-            :img="block.img"
-          />
+            :to="block.path"
+            class="w-full flex justify-center"
+          >
+            <InfoCard
+              :title="block.title"
+              :desc="block.desc"
+              :img="block.img"
+            />
+          </router-link>
         </div>
 
         <div class="grid grid-cols-2 gap-4 md:gap-10 w-full lg:max-w-2xl justify-items-center">
-          <InfoCard
+          <router-link
             v-for="block in infoBlocks.slice(4, 6)"
             :key="block.title"
-            :title="block.title"
-            :desc="block.desc"
-            :img="block.img"
-          />
+            :to="block.path"
+            class="w-full flex justify-center"
+          >
+            <InfoCard
+              :title="block.title"
+              :desc="block.desc"
+              :img="block.img"
+            />
+          </router-link>
         </div>
       </div>
     </div>

@@ -1,0 +1,1 @@
+export { default as RulesViewer } from './ui/RulesViewer.vue'
