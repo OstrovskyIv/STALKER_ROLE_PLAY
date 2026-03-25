@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { MainBackground } from '@widgets/main-background'
 import { Navbar } from '@widgets/navbar'
 import { Preloader } from '@widgets/preloader'
@@ -19,32 +20,22 @@ import youtubeImg from '@shared/assets/images/youtube.webp'
 import tiktokImg from '@shared/assets/images/tiktok.webp'
 import boostyImg from '@shared/assets/images/boosty.webp'
 
+const route = useRoute()
 const isAppReady = ref(false)
+
+const isRulesPage = computed(() => route.path.includes('/rules'))
 
 onMounted(async () => {
   try {
     await Promise.all([
-      preloadImage(bgImg),
-      preloadImage(logoImg),
-      preloadImage(squareLogo),
-      preloadImage(rulesImg),
-      preloadImage(lorImg),
-      preloadImage(infoImg),
-      preloadImage(drawImg),
-      preloadImage(shopImg),
-      preloadImage(voteImg),
-      preloadImage(discordImg),
-      preloadImage(vkImg),
-      preloadImage(youtubeImg),
-      preloadImage(tiktokImg),
-      preloadImage(boostyImg)
+      preloadImage(bgImg), preloadImage(logoImg), preloadImage(squareLogo),
+      preloadImage(rulesImg), preloadImage(lorImg), preloadImage(infoImg),
+      preloadImage(drawImg), preloadImage(shopImg), preloadImage(voteImg),
+      preloadImage(discordImg), preloadImage(vkImg), preloadImage(youtubeImg),
+      preloadImage(tiktokImg), preloadImage(boostyImg)
     ])
-  } catch (error) {
-    console.error('Критическая ошибка загрузки ресурсов:', error)
   } finally {
-    setTimeout(() => {
-      isAppReady.value = true
-    }, 1500)
+    setTimeout(() => { isAppReady.value = true }, 1500)
   }
 })
 </script>
@@ -54,29 +45,20 @@ onMounted(async () => {
     <Preloader v-if="!isAppReady" />
   </Transition>
 
-  <div v-if="isAppReady" class="relative w-full h-[100dvh] overflow-hidden bg-black">
+  <div v-if="isAppReady" class="relative w-full h-[100svh] overflow-hidden bg-black">
     <MainBackground />
-    <Navbar />
 
-    <div class="relative z-10 w-full h-[100dvh] overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
+    <Navbar v-if="!isRulesPage" />
+
+    <div class="relative z-10 w-full h-[100svh] overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
       <router-view />
     </div>
   </div>
 </template>
 
 <style scoped>
-.fade-leave-active {
-  transition: opacity 0.8s ease;
-}
-.fade-leave-to {
-  opacity: 0;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+.fade-leave-active { transition: opacity 0.8s ease; }
+.fade-leave-to { opacity: 0; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

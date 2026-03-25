@@ -8,13 +8,15 @@ import shopImg from '@shared/assets/images/shop.webp'
 import voteImg from '@shared/assets/images/vote.webp'
 
 const infoBlocks = [
-  { title: 'ПРАВИЛА', desc: 'ОСНОВНЫЕ ПРАВИЛА', img: rulesImg, path: '/rules' },
-  { title: 'ЛОР', desc: 'ИСТОРИЯ СЕРВЕРА', img: lorImg, path: '#' },
-  { title: 'ГАЙДЫ', desc: 'ВЫЖИВАНИЕ В ЗОНЕ', img: guidesImg, path: '#' },
-  { title: 'РОЗЫГРЫШИ', desc: 'УЧАСТВУЙ И ПОБЕЖДАЙ', img: drawImg, path: '#' },
-  { title: 'ДОНАТ ШОП', desc: 'МАГАЗИН ТОВАРОВ', img: shopImg, path: '#' },
-  { title: 'ГОЛОСОВАНИЕ', desc: 'ПОДДЕРЖКА ПРОЕКТА', img: voteImg, path: '#' }
+  { title: 'ПРАВИЛА', desc: 'ОСНОВНЫЕ ПРАВИЛА', img: rulesImg },
+  { title: 'ЛОР', desc: 'ИСТОРИЯ СЕРВЕРА', img: lorImg },
+  { title: 'ГАЙДЫ', desc: 'ВЫЖИВАНИЕ В ЗОНЕ', img: guidesImg },
+  { title: 'РОЗЫГРЫШИ', desc: 'УЧАСТВУЙ И ПОБЕЖДАЙ', img: drawImg },
+  { title: 'ДОНАТ ШОП', desc: 'МАГАЗИН ТОВАРОВ', img: shopImg },
+  { title: 'ГОЛОСОВАНИЕ', desc: 'ПОДДЕРЖКА ПРОЕКТА', img: voteImg }
 ]
+
+const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
 </script>
 
 <template>
@@ -22,40 +24,23 @@ const infoBlocks = [
     <SectionDivider />
 
     <div class="flex flex-col items-center w-full max-w-7xl pt-[160px] md:pt-40 gap-4 md:gap-10 transition-all origin-top scale-[0.82] sm:scale-90 md:scale-100">
-
-      <h2 class="text-4xl md:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic">
+      <h2 class="text-4xl md:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] italic text-center">
         ИНФОРМАЦИЯ
       </h2>
 
       <div class="w-full flex flex-col gap-4 md:gap-10 items-center">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full justify-items-center">
-          <router-link
-            v-for="block in infoBlocks.slice(0, 4)"
-            :key="block.title"
-            :to="block.path"
-            class="w-full flex justify-center"
-          >
-            <InfoCard
-              :title="block.title"
-              :desc="block.desc"
-              :img="block.img"
-            />
-          </router-link>
+          <template v-for="block in infoBlocks.slice(0, 4)" :key="block.title">
+            <a v-if="block.title === 'ПРАВИЛА'" :href="rulesUrl" target="_blank" class="w-full flex justify-center">
+              <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
+            </a>
+            <div v-else class="w-full flex justify-center cursor-default">
+              <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
+            </div>
+          </template>
         </div>
-
         <div class="grid grid-cols-2 gap-4 md:gap-10 w-full lg:max-w-2xl justify-items-center">
-          <router-link
-            v-for="block in infoBlocks.slice(4, 6)"
-            :key="block.title"
-            :to="block.path"
-            class="w-full flex justify-center"
-          >
-            <InfoCard
-              :title="block.title"
-              :desc="block.desc"
-              :img="block.img"
-            />
-          </router-link>
+          <InfoCard v-for="block in infoBlocks.slice(4, 6)" :key="block.title" :title="block.title" :desc="block.desc" :img="block.img" />
         </div>
       </div>
     </div>
