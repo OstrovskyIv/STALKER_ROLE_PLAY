@@ -9,11 +9,12 @@ let observer: IntersectionObserver | null = null
 onMounted(() => {
   observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+      // Считаем секцию активной только когда она видна наполовину
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
         navStore.setActiveSection(entry.target.id)
       }
     })
-  }, { threshold: 0.2 })
+  }, { threshold: 0.5 })
 
   const ids = ['home', 'information', 'connection', 'gallery']
   ids.forEach(id => {
@@ -27,9 +28,9 @@ onUnmounted(() => observer?.disconnect())
 
 <template>
   <div class="w-full flex flex-col items-center">
-    <section id="home" class="h-screen w-full snap-start shrink-0"><HomeSection /></section>
-    <section id="information" class="h-screen w-full snap-start shrink-0"><InfoSection /></section>
-    <section id="connection" class="h-screen w-full snap-start shrink-0"><ConnectSection /></section>
-    <section id="gallery" class="h-screen w-full snap-start shrink-0"><GallerySection /></section>
+    <section id="home" class="h-[100svh] w-full snap-start shrink-0"><HomeSection /></section>
+    <section id="information" class="h-[100svh] w-full snap-start shrink-0"><InfoSection /></section>
+    <section id="connection" class="h-[100svh] w-full snap-start shrink-0"><ConnectSection /></section>
+    <section id="gallery" class="h-[100svh] w-full snap-start shrink-0"><GallerySection /></section>
   </div>
 </template>

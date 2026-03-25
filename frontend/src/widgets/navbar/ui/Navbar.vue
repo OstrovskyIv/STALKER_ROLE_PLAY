@@ -16,8 +16,8 @@ const scrollToSection = (id: string) => {
 <template>
   <nav
     :class="[
-      'fixed left-0 w-full z-[100] flex justify-center px-4 pointer-events-none font-capture transition-all duration-500 ease-in-out',
-      navStore.activeSectionId === 'home' ? 'top-32 sm:top-44 xl:top-[65px]' : 'top-4 xl:top-[65px]'
+      'fixed left-0 w-full z-[100] flex justify-center px-4 pointer-events-none font-capture transition-all duration-300 ease-in-out will-change-transform',
+      navStore.activeSectionId === 'home' ? 'top-24 sm:top-36 xl:top-[65px]' : 'top-4 xl:top-[65px]'
     ]"
   >
     <div class="flex items-center gap-3 sm:gap-6 xl:gap-10 px-6 sm:px-10 py-2.5 sm:py-3 xl:py-4

@@ -8,15 +8,15 @@ const navStore = useNavStore()
   <header
     :class="[
       'absolute left-0 w-full flex justify-center xl:justify-start xl:left-12 z-20 pointer-events-none transition-all duration-500 ease-out',
-      'top-0',
-      navStore.activeSectionId === 'home' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'
+      'top-2 xl:top-0',
+      navStore.activeSectionId === 'home' ? 'opacity-100' : 'opacity-0 -translate-y-20'
     ]"
   >
-    <div class="flex justify-center w-full xl:w-auto pt-4 md:pt-6">
+    <div class="flex justify-center w-full xl:w-auto pt-2 md:pt-6">
       <img
         :src="logoImg"
-      class="h-[115px] sm:h-32 md:h-40 xl:h-48 w-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.15)] pointer-events-auto transition-all"
-      alt="Last Zone"
+        class="h-24 sm:h-32 md:h-40 xl:h-48 w-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.15)] pointer-events-auto transition-all"
+        alt="Last Zone"
       />
     </div>
   </header>

@@ -5,14 +5,14 @@ import { OnboardingBox } from '@features/onboarding-steps'
 </script>
 
 <template>
-  <div class="w-full h-[100dvh] flex flex-col relative overflow-hidden">
+  <div class="w-full h-[100svh] flex flex-col items-center justify-start xl:justify-center p-4 relative overflow-hidden">
     <Header />
     <SectionDivider />
 
-    <div class="flex-1 w-full flex flex-col items-center justify-center pt-[240px] sm:pt-[300px] xl:pt-[200px] z-10">
-      <div class="w-full flex flex-col items-center transition-all duration-500 origin-center scale-[0.85] sm:scale-95 xl:scale-100">
-        <OnboardingBox />
-      </div>
+    <!-- pt-[300px] на мобилках — это ГАРАНТИЯ того, что бокс начнется НИЖЕ линии -->
+    <!-- Линия на 210px, бокс на 300px. Между ними 90 пикселей пустоты -->
+    <div class="w-full flex flex-col items-center pt-[300px] sm:pt-[350px] xl:pt-10 z-10 transition-all duration-500 origin-top scale-[0.82] sm:scale-95 xl:scale-100">
+      <OnboardingBox />
     </div>
   </div>
 </template>
