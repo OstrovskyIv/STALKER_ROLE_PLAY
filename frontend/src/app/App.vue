@@ -4,17 +4,24 @@ import { MainBackground } from '@widgets/main-background'
 import { Navbar } from '@widgets/navbar'
 import { Preloader } from '@widgets/preloader'
 import { preloadImage } from '@shared/lib/images'
-
 import bgImg from '@shared/assets/images/bg-main.webp'
 import logoImg from '@shared/assets/images/logo.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
+import rulesImg from '@shared/assets/images/rules.webp'
+import lorImg from '@shared/assets/images/lor.webp'
+import infoImg from '@shared/assets/images/information.webp'
+import drawImg from '@shared/assets/images/draw.webp'
+import shopImg from '@shared/assets/images/shop.webp'
+import voteImg from '@shared/assets/images/vote.webp'
 
 const isAppReady = ref(false)
 
 onMounted(async () => {
   try {
     await Promise.all([
-      preloadImage(bgImg), preloadImage(logoImg), preloadImage(squareLogo)
+      preloadImage(bgImg), preloadImage(logoImg), preloadImage(squareLogo),
+      preloadImage(rulesImg), preloadImage(lorImg), preloadImage(infoImg),
+      preloadImage(drawImg), preloadImage(shopImg), preloadImage(voteImg)
     ])
   } finally {
     setTimeout(() => { isAppReady.value = true }, 1500)

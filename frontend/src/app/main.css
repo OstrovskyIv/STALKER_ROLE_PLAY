@@ -5,26 +5,23 @@
   --font-capture: "Capture It", sans-serif;
 }
 
-html, body {
-  height: 100%;
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes counter-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+.animate-spin-slow { animation: spin-slow 4s linear infinite; }
+.animate-counter-rotate { animation: counter-rotate 10s linear infinite; }
+
+html, body, #app {
   width: 100%;
-  margin: 0;
+  height: 100%;
   padding: 0;
   background-color: black;
-  overscroll-behavior: none;
-  -webkit-font-smoothing: antialiased;
-}
-
-#app {
-  height: 100%;
-  width: 100%;
-}
-
-* {
-  box-sizing: border-box;
-  outline: none;
-}
-
-::-webkit-scrollbar {
-  display: none;
+  overflow: hidden;
 }
