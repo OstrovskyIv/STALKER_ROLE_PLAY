@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import logoImg from '@shared/assets/images/logo.webp'
+
+const colors = ['#5b21b6', '#7c3aed', '#9241b8', '#a85cd4', '#c4b5fd']
 </script>
 
 <template>
@@ -11,12 +13,22 @@ import logoImg from '@shared/assets/images/logo.webp'
         LAST ZONE
       </h1>
 
-      <div class="flex flex-col gap-3">
+      <div class="flex flex-col items-center gap-6">
         <p class="text-zinc-500 font-capture tracking-[0.2em] uppercase text-[10px] md:text-sm italic">
           Пожалуйста, подождите. Загрузка данных сектора...
         </p>
-        <div class="w-64 md:w-96 h-[1px] bg-white/10 relative overflow-hidden">
-          <div class="absolute inset-0 bg-white shadow-[0_0_15px_white] animate-loading-bar"></div>
+
+        <div class="flex gap-2.5 items-end h-8">
+          <div
+            v-for="(color, i) in colors"
+            :key="i"
+            class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full animate-wave shadow-[0_0_10px_currentColor]"
+            :style="{
+              backgroundColor: color,
+              color: color,
+              animationDelay: (i * 0.15) + 's'
+            }"
+          ></div>
         </div>
       </div>
     </div>
@@ -24,11 +36,20 @@ import logoImg from '@shared/assets/images/logo.webp'
 </template>
 
 <style scoped>
-@keyframes loading-bar {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+    filter: brightness(0.8);
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 1;
+    filter: brightness(1.5);
+  }
 }
-.animate-loading-bar {
-  animation: loading-bar 2s infinite linear;
+
+.animate-wave {
+  animation: wave 1.5s infinite ease-in-out;
 }
 </style>
