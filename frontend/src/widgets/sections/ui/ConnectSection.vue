@@ -17,34 +17,24 @@ const boostyLink = 'https://boosty.to/last_zone_rp'
 </script>
 
 <template>
-  <div class="w-full h-[100svh] flex flex-col items-center relative overflow-hidden">
+  <section class="w-full min-h-screen flex flex-col items-center relative snap-start shrink-0">
     <SectionDivider />
 
-    <div class="h-[110px] xl:h-[170px] w-full shrink-0"></div>
+    <div class="h-[80px] sm:h-[160px] xl:h-[160px] 2xl:h-[200px] w-full shrink-0"></div>
 
-    <div class="w-full flex-1 flex flex-col items-center justify-center p-4 transition-all duration-500 origin-center scale-[0.85] sm:scale-95 xl:scale-100">
-      <h2 class="text-3xl md:text-7xl font-capture uppercase text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] text-center italic mb-8 md:mb-16">
+    <div class="w-full flex-1 flex flex-col items-center justify-center p-2">
+      <h2 class="text-2xl md:text-7xl font-capture uppercase text-white text-center italic mb-6 md:mb-20">
         НАШИ СОЦИАЛЬНЫЕ СЕТИ
       </h2>
 
-      <div class="w-full flex flex-col gap-6 md:gap-12 items-center">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full max-w-5xl justify-items-center">
-          <SocialCard
-            v-for="(social, i) in mainSocials"
-            :key="i"
-            :img="social.img"
-            :link="social.link"
-          />
+      <div class="w-full max-w-7xl flex flex-col gap-6 md:gap-12 items-center">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10 w-full max-w-5xl justify-items-center px-4">
+          <SocialCard v-for="(social, i) in mainSocials" :key="i" :img="social.img" :link="social.link" />
         </div>
-
-        <div class="w-full flex justify-center pt-2">
-          <SocialCard
-            :img="boostyImg"
-            :link="boostyLink"
-            :isWide="true"
-          />
+        <div class="w-full flex justify-center px-4">
+          <SocialCard :img="boostyImg" :link="boostyLink" :isWide="true" />
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>

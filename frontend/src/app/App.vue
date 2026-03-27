@@ -35,7 +35,7 @@ onMounted(async () => {
       preloadImage(tiktokImg), preloadImage(boostyImg)
     ])
   } finally {
-    setTimeout(() => { isAppReady.value = true }, 1500)
+    isAppReady.value = true
   }
 })
 </script>
@@ -45,12 +45,11 @@ onMounted(async () => {
     <Preloader v-if="!isAppReady" />
   </Transition>
 
-  <div v-if="isAppReady" class="relative w-full h-[100svh] overflow-hidden bg-black">
+  <div v-if="isAppReady" class="relative w-full h-screen bg-black overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
     <MainBackground />
-
     <Navbar v-if="!isRulesPage" />
 
-    <div class="relative z-10 w-full h-[100svh] overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
+    <div class="relative z-10 w-full">
       <router-view />
     </div>
   </div>

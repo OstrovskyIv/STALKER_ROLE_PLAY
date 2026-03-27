@@ -5,14 +5,16 @@ import { OnboardingBox } from '@features/onboarding-steps'
 </script>
 
 <template>
-  <div class="w-full h-[100svh] flex flex-col items-center relative overflow-hidden">
+  <section class="w-full min-h-screen flex flex-col items-center relative snap-start shrink-0">
     <Header />
     <SectionDivider />
 
-    <div class="h-[210px] sm:h-[270px] xl:h-[190px] w-full shrink-0"></div>
+    <div class="h-[140px] sm:h-[260px] xl:h-[210px] 2xl:h-[290px] w-full shrink-0"></div>
 
-    <div class="w-full flex-1 flex flex-col items-center justify-center z-10 pb-6 transition-all duration-500 origin-center scale-[0.82] sm:scale-100 xl:scale-100">
-      <OnboardingBox />
+    <div class="w-full flex-1 flex flex-col items-center justify-center z-10 px-4 pb-6">
+      <div class="w-full max-w-7xl flex flex-col items-center">
+        <OnboardingBox />
+      </div>
     </div>
-  </div>
+  </section>
 </template>

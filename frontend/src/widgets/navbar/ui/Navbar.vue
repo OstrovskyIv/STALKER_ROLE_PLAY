@@ -19,7 +19,7 @@ const scrollToSection = (id: string) => {
 <template>
   <nav
     :class="[
-      'fixed left-0 w-full z-[100] flex justify-center px-4 pointer-events-none font-capture transition-all duration-300 ease-in-out will-change-transform',
+      'fixed left-1/2 -translate-x-1/2 w-full max-w-[90%] lg:max-w-[70%] xl:max-w-[50%] z-[100] flex justify-center px-4 pointer-events-none font-capture transition-all duration-300 ease-in-out will-change-transform',
       navStore.activeSectionId === 'home' ? 'top-24 sm:top-36 xl:top-[65px]' : 'top-4 xl:top-[65px]'
     ]"
   >

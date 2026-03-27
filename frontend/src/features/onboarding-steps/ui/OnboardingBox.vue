@@ -36,87 +36,65 @@ const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
 onMounted(() => {
   if (videoRef.value) {
     videoRef.value.muted = true
-    const playPromise = videoRef.value.play()
-
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        console.log("Autoplay blocked, waiting for interaction")
-        document.addEventListener('click', () => videoRef.value?.play(), { once: true })
-      })
-    }
+    videoRef.value.play().catch(() => {
+      document.addEventListener('click', () => videoRef.value?.play(), { once: true })
+    })
   }
 })
 </script>
 
 <template>
   <div v-if="activeStep"
-       class="w-full max-w-5xl min-h-[420px] md:min-h-[500px] border-[3px] md:border-[5px] border-[#9241b8] shadow-[0_0_40px_rgba(146,65,184,0.2)] rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col relative transition-all duration-500 bg-transparent backdrop-blur-md">
+       class="w-full max-w-5xl min-h-[340px] md:min-h-[500px] border-[2px] md:border-[5px] border-[#9241b8] shadow-[0_0_40px_rgba(146,65,184,0.2)] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden flex flex-col relative transition-all duration-500 bg-transparent backdrop-blur-md">
 
-    <div class="h-14 md:h-20 bg-zinc-900/40 border-b-[2px] md:border-b-[4px] border-[#9241b8]/30 px-6 md:px-10 flex justify-between items-center relative z-20 font-capture">
-      <span class="text-white text-xs md:text-xl tracking-widest uppercase italic font-bold">КАК НАЧАТЬ ИГРАТЬ</span>
-      <div class="flex gap-2">
-        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-red-600 shadow-[0_0_10px_red] animate-pulse border border-red-900"></div>
-        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-yellow-500 border border-yellow-900"></div>
-        <div class="w-2.5 h-2.5 md:w-4 md:h-4 rounded-full bg-emerald-500 border border-emerald-900"></div>
+    <div class="h-10 md:h-20 bg-zinc-900/40 border-b-[1px] md:border-b-[4px] border-[#9241b8]/30 px-4 md:px-10 flex justify-between items-center relative z-20 font-capture">
+      <span class="text-white text-[10px] md:text-xl tracking-widest uppercase italic font-bold">КАК НАЧАТЬ ИГРАТЬ</span>
+      <div class="flex gap-1.5">
+        <div class="w-2 h-2 md:w-4 md:h-4 rounded-full bg-red-600 border border-red-900"></div>
+        <div class="w-2 h-2 md:w-4 md:h-4 rounded-full bg-yellow-500 border border-yellow-900"></div>
+        <div class="w-2 h-2 md:w-4 md:h-4 rounded-full bg-emerald-500 border border-emerald-900"></div>
       </div>
     </div>
 
     <div class="flex-1 relative overflow-hidden flex flex-col">
-      <video
-        ref="videoRef"
-        autoplay
-        muted
-        loop
-        playsinline
-        webkit-playsinline
-        preload="auto"
-        :src="noiseVideo"
-        class="absolute inset-0 w-full h-full object-cover opacity-25 z-0"
-      />
+      <video ref="videoRef" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-25 z-0" :src="noiseVideo" />
       <div class="absolute inset-0 bg-black/40 z-[1]"></div>
 
-      <div class="relative z-10 flex-1 p-6 md:p-14 space-y-6 md:space-y-10 text-left">
-        <div class="flex items-center gap-0 font-capture text-[#9241b8]">
-          <img :src="activeStep.img" class="h-16 md:h-24 w-auto drop-shadow-[0_0_10px_#9241b8]" />
-          <h3 class="text-lg md:text-4xl lg:text-5xl uppercase tracking-tighter leading-none">
+      <div class="relative z-10 flex-1 p-4 md:p-14 space-y-4 md:space-y-10 text-left">
+        <div class="flex items-center gap-2 font-capture text-[#9241b8]">
+          <img :src="activeStep.img" class="h-10 md:h-24 w-auto drop-shadow-[0_0_10px_#9241b8]" />
+          <h3 class="text-sm md:text-4xl lg:text-5xl uppercase tracking-tighter leading-tight">
             {{ activeStep.title }}
           </h3>
         </div>
 
-        <p class="text-zinc-100 text-sm md:text-xl lg:text-2xl leading-snug max-w-5xl whitespace-pre-line font-sans font-black uppercase italic drop-shadow-md">
+        <p class="text-zinc-100 text-[10px] md:text-xl lg:text-2xl leading-snug max-w-5xl whitespace-pre-line font-sans font-black uppercase italic drop-shadow-md">
           {{ activeStep.desc }}
         </p>
 
         <a v-if="activeStep.link && activeStep.btnText" :href="activeStep.link" target="_blank"
-           class="inline-block px-6 py-3 md:px-12 md:py-5 bg-[#9241b8] hover:bg-[#a85cd4] text-white font-capture text-sm md:text-2xl transition-all active:scale-95 uppercase rounded-sm shadow-lg">
+           class="inline-block px-4 py-2 md:px-12 md:py-5 bg-[#9241b8] text-white font-capture text-[10px] md:text-2xl uppercase rounded-sm shadow-lg active:scale-95">
           {{ activeStep.btnText }}
         </a>
       </div>
     </div>
 
-    <div class="h-14 md:h-20 bg-zinc-900/40 border-t-[2px] md:border-t-[4px] border-[#9241b8]/30 px-6 md:px-10 flex items-center justify-center gap-6 md:gap-16 relative z-20 font-capture">
-      <button @click="prevStep" :disabled="currentStep === 1" class="group flex items-center disabled:opacity-0 transition-opacity">
-        <div class="border-2 border-[#9241b8] px-4 py-1 md:px-8 md:py-2.5 flex items-center gap-2 text-white text-[10px] md:text-xl hover:bg-[#9241b8]/20 transition-all">
-          <span class="text-[#9241b8]">&lt;</span> НАЗАД
+    <div class="h-12 md:h-20 bg-zinc-900/40 border-t-[1px] md:border-t-[4px] border-[#9241b8]/30 px-4 md:px-10 flex items-center justify-center gap-4 md:gap-16 relative z-20 font-capture">
+      <button @click="prevStep" :disabled="currentStep === 1" class="disabled:opacity-0 transition-opacity">
+        <div class="border border-[#9241b8] px-3 py-1 md:px-8 md:py-2.5 text-white text-[8px] md:text-xl hover:bg-[#9241b8]/20 transition-all">
+          &lt; НАЗАД
         </div>
       </button>
 
-      <div class="text-white text-sm md:text-4xl uppercase font-black">
+      <div class="text-white text-[10px] md:text-4xl uppercase font-black">
         ШАГ {{ currentStep }}
       </div>
 
-      <button @click="nextStep" :disabled="currentStep === steps.length" class="group flex items-center disabled:opacity-0 transition-opacity">
-        <div class="border-2 border-[#9241b8] px-4 py-1 md:px-8 md:py-2.5 flex items-center gap-2 text-white text-[10px] md:text-xl hover:bg-[#9241b8]/20 transition-all">
-          ДАЛЕЕ <span class="text-[#9241b8]">&gt;</span>
+      <button @click="nextStep" :disabled="currentStep === steps.length" class="disabled:opacity-0 transition-opacity">
+        <div class="border border-[#9241b8] px-3 py-1 md:px-8 md:py-2.5 text-white text-[8px] md:text-xl hover:bg-[#9241b8]/20 transition-all">
+          ДАЛЕЕ &gt;
         </div>
       </button>
     </div>
   </div>
 </template>
-
-<style scoped>
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-</style>
