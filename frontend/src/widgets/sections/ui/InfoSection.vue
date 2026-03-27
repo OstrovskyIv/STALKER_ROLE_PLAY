@@ -30,14 +30,15 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
 </script>
 
 <template>
-  <div class="w-full h-[100svh] flex flex-col items-center justify-start xl:justify-center p-4 md:p-10 relative overflow-hidden">
+  <div class="w-full min-h-[100svh] flex flex-col items-center justify-start p-4 md:p-10 relative overflow-hidden">
     <SectionDivider />
 
-    <div class="flex flex-col items-center w-full max-w-7xl pt-[160px] md:pt-40 gap-4 md:gap-10 transition-all origin-top scale-[0.82] sm:scale-90 md:scale-100">
-      <h2 class="text-4xl md:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic">ИНФОРМАЦИЯ</h2>
+    <!-- pt-[25vh] даст больше места на телефонах под линией -->
+    <div class="flex flex-col items-center w-full max-w-7xl pt-[25vh] sm:pt-[22vh] xl:pt-[20vh] gap-3 md:gap-6 transition-all origin-top scale-[0.82] sm:scale-90 md:scale-100">
+      <h2 class="text-4xl md:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic mb-2 md:mb-4">ИНФОРМАЦИЯ</h2>
 
-      <div class="w-full flex flex-col gap-4 md:gap-10 items-center">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full justify-items-center">
+      <div class="w-full flex flex-col gap-3 md:gap-6 items-center">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full justify-items-center">
           <template v-for="block in infoBlocks.slice(0, 4)" :key="block.title">
             <a v-if="block.title === 'ПРАВИЛА'" :href="rulesUrl" target="_blank" class="w-full flex justify-center">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
@@ -48,8 +49,7 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
           </template>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 md:gap-10 w-full lg:max-w-2xl justify-items-center">
-
+        <div class="grid grid-cols-2 gap-4 md:gap-6 w-full lg:max-w-2xl justify-items-center">
           <a v-if="infoBlocks[4]" href="https://last-zone-shop.ru" target="_blank" class="w-full flex justify-center">
             <InfoCard :title="infoBlocks[4].title" :desc="infoBlocks[4].desc" :img="infoBlocks[4].img" />
           </a>
@@ -66,7 +66,6 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
               </template>
             </InfoCard>
           </div>
-
         </div>
       </div>
     </div>

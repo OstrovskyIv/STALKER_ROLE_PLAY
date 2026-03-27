@@ -17,17 +17,18 @@ const boostyLink = 'https://boosty.to/last_zone_rp'
 </script>
 
 <template>
-  <div class="w-full h-[100svh] flex flex-col items-center justify-start xl:justify-center p-4 md:p-10 relative overflow-hidden">
+  <div class="w-full h-[100svh] flex flex-col items-center relative overflow-hidden">
     <SectionDivider />
 
-    <div class="flex flex-col items-center w-full max-w-7xl pt-[140px] md:pt-40 gap-8 md:gap-16 transition-all origin-top scale-[0.85] sm:scale-95 xl:scale-100">
+    <div class="h-[110px] xl:h-[170px] w-full shrink-0"></div>
 
-      <h2 class="text-3xl md:text-7xl font-capture uppercase text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] text-center italic">
+    <div class="w-full flex-1 flex flex-col items-center justify-center p-4 transition-all duration-500 origin-center scale-[0.85] sm:scale-95 xl:scale-100">
+      <h2 class="text-3xl md:text-7xl font-capture uppercase text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] text-center italic mb-8 md:mb-16">
         НАШИ СОЦИАЛЬНЫЕ СЕТИ
       </h2>
 
       <div class="w-full flex flex-col gap-6 md:gap-12 items-center">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full max-w-4xl justify-items-center">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full max-w-5xl justify-items-center">
           <SocialCard
             v-for="(social, i) in mainSocials"
             :key="i"
@@ -44,7 +45,6 @@ const boostyLink = 'https://boosty.to/last_zone_rp'
           />
         </div>
       </div>
-
     </div>
   </div>
 </template>
