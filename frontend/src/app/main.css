@@ -5,22 +5,29 @@
   --font-capture: "Capture It", sans-serif;
 }
 
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+*, ::before, ::after {
+  box-sizing: border-box;
 }
 
-@keyframes counter-rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(-360deg); }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  -webkit-text-size-adjust: 100%;
 }
 
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes counter-rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
 .animate-spin-slow { animation: spin-slow 4s linear infinite; }
 .animate-counter-rotate { animation: counter-rotate 10s linear infinite; }
-
-html, body, #app {
-  width: 100%;
-  min-height: 100%;
-  padding: 0;
-  background-color: black;
-}
