@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import logoImg from '@shared/assets/images/logo.webp'
+import logoImg from '@shared/assets/images/logo-full.webp'
 
 const colors = ['#5b21b6', '#7c3aed', '#9241b8', '#a85cd4', '#c4b5fd']
 </script>

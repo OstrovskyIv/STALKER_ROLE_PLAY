@@ -6,7 +6,8 @@ import { Navbar } from '@widgets/navbar'
 import { Preloader } from '@widgets/preloader'
 import { preloadImage } from '@shared/lib/images'
 import bgImg from '@shared/assets/images/bg-main.webp'
-import logoImg from '@shared/assets/images/logo.webp'
+import logoFull from '@shared/assets/images/logo-full.webp'
+import logoCircle from '@shared/assets/images/logo-circle.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
 import rulesImg from '@shared/assets/images/rules.webp'
 import lorImg from '@shared/assets/images/lor.webp'
@@ -28,11 +29,11 @@ const isRulesPage = computed(() => route.path.includes('/rules'))
 onMounted(async () => {
   try {
     await Promise.all([
-      preloadImage(bgImg), preloadImage(logoImg), preloadImage(squareLogo),
-      preloadImage(rulesImg), preloadImage(lorImg), preloadImage(infoImg),
-      preloadImage(drawImg), preloadImage(shopImg), preloadImage(voteImg),
-      preloadImage(discordImg), preloadImage(vkImg), preloadImage(youtubeImg),
-      preloadImage(tiktokImg), preloadImage(boostyImg)
+      preloadImage(bgImg), preloadImage(logoFull), preloadImage(logoCircle),
+      preloadImage(squareLogo), preloadImage(rulesImg), preloadImage(lorImg),
+      preloadImage(infoImg), preloadImage(drawImg), preloadImage(shopImg),
+      preloadImage(voteImg), preloadImage(discordImg), preloadImage(vkImg),
+      preloadImage(youtubeImg), preloadImage(tiktokImg), preloadImage(boostyImg)
     ])
   } finally {
     isAppReady.value = true
