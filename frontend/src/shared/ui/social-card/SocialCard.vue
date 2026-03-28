@@ -10,7 +10,7 @@ defineProps<{
   <a :href="link" target="_blank"
      :class="[
        'group relative flex items-center justify-center overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(146,65,184,0.4)]',
-       isWide ? 'w-full max-w-[280px] h-[80px] md:h-[100px] rounded-full' : 'w-full max-w-[140px] md:max-w-[220px] aspect-square rounded-[1.5rem] md:rounded-[2.5rem]'
+       isWide ? 'w-full max-w-[240px] md:max-w-[280px] h-[60px] md:h-[100px] rounded-full' : 'w-full max-w-[110px] sm:max-w-[140px] md:max-w-[220px] aspect-square rounded-[1.2rem] md:rounded-[2.5rem]'
      ]">
 
     <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -18,8 +18,8 @@ defineProps<{
     </div>
 
     <div :class="[
-      'absolute inset-[1.5px] md:inset-[2.5px] bg-zinc-950 z-10 flex items-center justify-center p-4',
-      isWide ? 'rounded-full px-8' : 'rounded-[1.4rem] md:rounded-[2.4rem]'
+      'absolute inset-[1.5px] md:inset-[2.5px] bg-zinc-950 z-10 flex items-center justify-center p-3 md:p-4',
+      isWide ? 'rounded-full px-6' : 'rounded-[1.1rem] md:rounded-[2.4rem]'
     ]">
       <img
         :src="img"
