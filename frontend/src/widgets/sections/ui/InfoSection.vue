@@ -26,12 +26,12 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
 <template>
   <section class="w-full h-screen flex flex-col items-center relative snap-start shrink-0 overflow-hidden">
     <SectionDivider />
-    <div class="h-[80px] sm:h-[120px] xl:h-[150px] w-full shrink-0"></div>
+    <div class="h-[100px] sm:h-[120px] xl:h-[140px] w-full shrink-0"></div>
 
     <div class="w-full flex-1 flex flex-col items-center justify-center p-4">
-      <h2 class="text-3xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic mb-8 xl:mb-12">ИНФОРМАЦИЯ</h2>
+      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic mb-6 xl:mb-12">ИНФОРМАЦИЯ</h2>
 
-      <div class="w-full max-w-7xl flex flex-col gap-6 md:gap-10 items-center">
+      <div class="w-full max-w-7xl flex flex-col gap-4 sm:gap-10 items-center">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full justify-items-center">
           <template v-for="block in infoBlocks.slice(0, 4)" :key="block.title">
             <a v-if="block.title === 'ПРАВИЛА'" :href="rulesUrl" target="_blank" class="w-full flex justify-center">
@@ -49,15 +49,9 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
               <InfoCard :title="infoBlocks[4].title" :desc="infoBlocks[4].desc" :img="infoBlocks[4].img" />
             </a>
           </template>
-
           <template v-if="infoBlocks[5]">
             <div class="w-full flex justify-center" @click="isVotingOpen = !isVotingOpen">
-              <InfoCard
-                :title="infoBlocks[5].title"
-                :desc="infoBlocks[5].desc"
-                :img="infoBlocks[5].img"
-                :isActive="isVotingOpen"
-              />
+              <InfoCard :title="infoBlocks[5].title" :desc="infoBlocks[5].desc" :img="infoBlocks[5].img" :isActive="isVotingOpen" />
             </div>
           </template>
         </div>
