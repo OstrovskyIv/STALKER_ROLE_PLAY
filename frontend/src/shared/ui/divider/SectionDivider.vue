@@ -9,7 +9,7 @@ const navStore = useNavStore()
     :class="[
       'absolute left-0 w-full flex items-center justify-center gap-4 px-4 pointer-events-none z-10 transition-all duration-500 ease-in-out',
       navStore.activeSectionId === 'home'
-        ? 'top-[170px] sm:top-[220px] xl:top-[140px]'
+        ? 'top-[145px] sm:top-[220px] xl:top-[140px]'
         : 'top-[75px] xl:top-[120px]'
     ]"
   >

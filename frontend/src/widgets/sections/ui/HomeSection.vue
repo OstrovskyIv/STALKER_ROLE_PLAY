@@ -9,7 +9,7 @@ import { OnboardingBox } from '@features/onboarding-steps'
     <Header />
     <SectionDivider />
 
-    <div class="h-[180px] sm:h-[240px] xl:h-[180px] w-full shrink-0 transition-all duration-500"></div>
+    <div class="h-[155px] sm:h-[240px] xl:h-[180px] w-full shrink-0 transition-all duration-500"></div>
 
     <div class="w-full flex-1 flex flex-col items-center justify-center z-10 px-4 pb-10 transition-all duration-700">
       <div class="w-full max-w-7xl flex flex-col items-center">
