@@ -15,9 +15,11 @@ onMounted(() => {
     <SectionDivider />
 
     <div class="w-full flex-1 flex flex-col items-center justify-center p-4 gap-6 md:gap-16 2xl:gap-32">
-      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic leading-none">МОНИТОРИНГ</h2>
+      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic leading-none text-center">
+        МОНИТОРИНГ
+      </h2>
 
-      <!-- 1. УСПЕШНО -->
+      <!-- УСПЕШНО -->
       <div v-if="serverStore.isOnline && serverStore.serverData" class="w-full max-w-lg 2xl:max-w-7xl grid grid-cols-1 2xl:grid-cols-4 gap-3 sm:gap-4 2xl:gap-8 px-4 sm:px-6">
         <div class="bg-black/40 border border-white/10 p-4 2xl:p-10 rounded-2xl 2xl:rounded-[2.5rem] backdrop-blur-xl flex flex-row 2xl:flex-col items-center justify-between 2xl:justify-center gap-4 shadow-xl">
           <span class="text-zinc-500 font-capture text-[10px] 2xl:text-base uppercase tracking-widest">СТАТУС</span>
@@ -26,39 +28,33 @@ onMounted(() => {
             <span class="text-white font-capture text-lg 2xl:text-4xl uppercase">ONLINE</span>
           </div>
         </div>
-        <!-- ... другие карточки (игроки, время, карта) ... -->
+
         <div class="bg-black/40 border border-white/10 p-4 2xl:p-10 rounded-2xl 2xl:rounded-[2.5rem] backdrop-blur-xl flex flex-row 2xl:flex-col items-center justify-between 2xl:justify-center gap-4 shadow-xl">
           <span class="text-zinc-500 font-capture text-[10px] 2xl:text-base uppercase tracking-widest">ИГРОКИ</span>
-          <span class="text-[#9241b8] font-capture text-xl 2xl:text-6xl">{{ serverStore.serverData.players }}/{{ serverStore.serverData.maxPlayers }}</span>
+          <span class="text-[#9241b8] font-capture text-xl 2xl:text-6xl drop-shadow-[0_0_20px_#9241b8]">
+            {{ serverStore.serverData.players }} / {{ serverStore.serverData.maxPlayers }}
+          </span>
         </div>
+
         <div class="bg-black/40 border border-white/10 p-4 2xl:p-10 rounded-2xl 2xl:rounded-[2.5rem] backdrop-blur-xl flex flex-row 2xl:flex-col items-center justify-between 2xl:justify-center gap-4 shadow-xl">
           <span class="text-zinc-500 font-capture text-[10px] 2xl:text-base uppercase tracking-widest">ВРЕМЯ</span>
           <span class="text-white font-capture text-lg 2xl:text-4xl uppercase">{{ serverStore.serverData.time }}</span>
         </div>
+
         <div class="bg-black/40 border border-white/10 p-4 2xl:p-10 rounded-2xl 2xl:rounded-[2.5rem] backdrop-blur-xl flex flex-row 2xl:flex-col items-center justify-between 2xl:justify-center gap-4 shadow-xl">
           <span class="text-zinc-500 font-capture text-[10px] 2xl:text-base uppercase tracking-widest">ЛОКАЦИЯ</span>
           <span class="text-white font-capture text-sm 2xl:text-2xl uppercase truncate max-w-[150px] 2xl:max-w-none">{{ serverStore.serverData.map }}</span>
         </div>
       </div>
 
-      <!-- 2. БЛОК ДИАГНОСТИКИ ОШИБКИ -->
-      <div v-else-if="serverStore.errorType" class="flex flex-col items-center gap-6 px-10">
-        <div class="p-6 md:p-10 bg-red-950/20 border-2 border-red-500/50 rounded-3xl backdrop-blur-xl flex flex-col items-center gap-4">
-          <p class="text-red-500 font-capture text-2xl md:text-4xl uppercase">СИГНАЛ ПОТЕРЯН</p>
-          <div class="flex flex-col gap-2 text-center font-sans">
-            <p class="text-zinc-400 text-xs md:text-sm uppercase font-bold tracking-widest">Код ошибки: <span class="text-white">{{ serverStore.errorType }}</span></p>
-            <a href="https://dayzsalauncher.com/api/v1/query/80.242.59.107:2303" target="_blank" class="text-[#9241b8] text-[10px] md:text-xs underline uppercase font-black">Проверить прямую связь с сервером</a>
-          </div>
-        </div>
-
-        <p class="text-zinc-500 text-[10px] md:text-sm max-w-sm text-center italic uppercase leading-relaxed">
-          Если ссылка выше открывается — значит ваш браузер блокирует запрос (CORS). Если не открывается — провайдер или AdBlock.
-        </p>
-
-        <button @click="serverStore.fetchStatus()" class="px-12 py-4 bg-[#9241b8] text-white font-capture rounded-xl active:scale-95 transition-all shadow-[0_0_30px_rgba(146,65,184,0.3)]">ПОВТОРИТЬ</button>
+      <!-- ОШИБКА -->
+      <div v-else-if="serverStore.errorType" class="flex flex-col items-center gap-6">
+        <p class="text-red-500 font-capture text-2xl uppercase italic">СИГНАЛ ПОТЕРЯН</p>
+        <p class="text-zinc-500 text-xs md:text-sm max-w-md text-center italic uppercase">Провайдер заблокировал прямой доступ к спутнику мониторинга. Активирован резервный канал связи через прокси.</p>
+        <button @click="serverStore.fetchStatus()" class="px-12 py-4 bg-[#9241b8] text-white font-capture rounded-xl active:scale-95 transition-all">ПОВТОРИТЬ</button>
       </div>
 
-      <!-- 3. ЗАГРУЗКА -->
+      <!-- ЗАГРУЗКА -->
       <div v-else class="text-zinc-500 font-capture animate-pulse text-lg md:text-4xl uppercase tracking-[0.3em]">УСТАНОВКА СВЯЗИ...</div>
     </div>
   </section>
