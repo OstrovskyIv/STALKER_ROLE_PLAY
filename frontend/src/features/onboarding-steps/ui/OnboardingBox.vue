@@ -24,7 +24,12 @@ const activeStep = computed((): Step => steps[currentStep.value - 1] ?? (steps[0
 const nextStep = () => { if (currentStep.value < steps.length) currentStep.value++ }
 const prevStep = () => { if (currentStep.value > 1) currentStep.value-- }
 
-onMounted(() => { if (videoRef.value) { videoRef.value.muted = true; videoRef.value.play().catch(() => {}); } })
+onMounted(() => {
+  if (videoRef.value) {
+    videoRef.value.muted = true
+    videoRef.value.play().catch(() => {})
+  }
+})
 </script>
 
 <template>
@@ -39,8 +44,8 @@ onMounted(() => { if (videoRef.value) { videoRef.value.muted = true; videoRef.va
     </div>
 
     <div class="flex-1 relative overflow-hidden flex flex-col">
-      <video ref="videoRef" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-25" :src="noiseVideo" />
-      <div class="absolute inset-0 bg-black/40"></div>
+      <video ref="videoRef" autoplay muted loop playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover opacity-20" :src="noiseVideo" />
+      <div class="absolute inset-0 bg-black/50"></div>
 
       <div class="relative z-10 flex-1 p-5 md:p-16 2xl:p-20 flex flex-col justify-center gap-4 md:gap-10">
         <div class="flex items-center font-capture text-[#9241b8]">
@@ -73,9 +78,7 @@ onMounted(() => { if (videoRef.value) { videoRef.value.muted = true; videoRef.va
       <button @click="prevStep" :disabled="currentStep === 1" class="disabled:opacity-0 transition-opacity">
         <div class="border border-[#9241b8] px-3 py-1 md:px-10 md:py-3 text-white text-[9px] md:text-xl uppercase rounded-md">Назад</div>
       </button>
-
       <div class="text-white text-xs md:text-5xl uppercase font-black">ШАГ {{ currentStep }}</div>
-
       <button @click="nextStep" :disabled="currentStep === steps.length" class="disabled:opacity-0 transition-opacity">
         <div class="border border-[#9241b8] px-3 py-1 md:px-10 md:py-3 text-white text-[9px] md:text-xl uppercase rounded-md">Далее</div>
       </button>

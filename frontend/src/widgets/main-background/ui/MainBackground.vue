@@ -2,7 +2,6 @@
 import { Firefly } from '@shared/ui'
 import bgImage from '@shared/assets/images/bg-main.webp'
 
-// Рой из 80 светлячков
 const fireflies = Array.from({ length: 80 }).map((_, i) => ({
   id: i,
   size: `${Math.random() * 4 + 1.5}px`,
@@ -14,11 +13,16 @@ const fireflies = Array.from({ length: 80 }).map((_, i) => ({
 </script>
 
 <template>
-  <div class="fixed inset-0 z-0 overflow-hidden bg-[#0a0a0a] flex items-center justify-center pointer-events-none">
+  <div class="fixed inset-0 z-0 overflow-hidden bg-black flex items-center justify-center pointer-events-none">
 
-    <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale-[0.1]" :style="{ backgroundImage: `url(${bgImage})` }"></div>
+    <img
+      :src="bgImage"
+      class="absolute inset-0 w-full h-full object-cover opacity-50 grayscale-[0.1]"
+      style="will-change: transform; transform: translateZ(0);"
+      alt="Background"
+    />
 
-    <!-- Рой светлячков -->
+    <!-- Рой из 80 светлячков -->
     <Firefly
       v-for="f in fireflies"
       :key="f.id"
@@ -30,7 +34,6 @@ const fireflies = Array.from({ length: 80 }).map((_, i) => ({
     />
 
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,black_100%)] opacity-40"></div>
-
     <div class="absolute inset-0 bg-fuchsia-900/5 mix-blend-overlay"></div>
   </div>
 </template>

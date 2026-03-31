@@ -20,7 +20,9 @@ const infoBlocks: InfoBlock[] = [
   { title: 'ГОЛОСОВАНИЕ', desc: 'ПОДДЕРЖКА ПРОЕКТА', img: voteImg }
 ]
 
+// Генерируем пути с учетом базового URL проекта
 const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
+const lorUrl = `${import.meta.env.BASE_URL}lor`.replace(/\/+/g, '/')
 </script>
 
 <template>
@@ -35,7 +37,12 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
       <div class="w-full max-w-7xl flex flex-col gap-4 sm:gap-10 items-center">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full justify-items-center">
           <template v-for="block in infoBlocks.slice(0, 4)" :key="block.title">
-            <a v-if="block.title === 'ПРАВИЛА'" :href="rulesUrl" target="_blank" class="w-full flex justify-center">
+            <!-- ССЫЛКА НА ПРАВИЛА -->
+            <a v-if="block.title === 'ПРАВИЛА'" :href="rulesUrl" class="w-full flex justify-center">
+              <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
+            </a>
+            <!-- ССЫЛКА НА ЛОР -->
+            <a v-else-if="block.title === 'ЛОР'" :href="lorUrl" class="w-full flex justify-center">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
             </a>
             <div v-else class="w-full flex justify-center cursor-default">
@@ -50,26 +57,13 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
               <InfoCard :title="infoBlocks[4].title" :desc="infoBlocks[4].desc" :img="infoBlocks[4].img" />
             </a>
           </template>
-
           <template v-if="infoBlocks[5]">
             <div class="w-full flex justify-center" @click="isVotingOpen = !isVotingOpen">
-              <InfoCard
-                :title="infoBlocks[5].title"
-                :desc="infoBlocks[5].desc"
-                :img="infoBlocks[5].img"
-                :isActive="isVotingOpen"
-              >
-                <!-- Используем слот для отображения ссылок при клике -->
+              <InfoCard :title="infoBlocks[5].title" :desc="infoBlocks[5].desc" :img="infoBlocks[5].img" :isActive="isVotingOpen">
                 <template #content v-if="isVotingOpen">
                   <div class="flex flex-col w-full h-full justify-center items-center gap-2 md:gap-4 p-1">
-                    <a href="https://wargm.ru/server/72966" target="_blank" @click.stop
-                       class="w-full py-2 md:py-3 bg-[#9241b8] hover:bg-[#a85cd4] text-white font-capture text-[9px] md:text-xl uppercase rounded-lg transition-all shadow-lg text-center">
-                      WARGM.RU
-                    </a>
-                    <a href="https://gamemonitoring.ru/dayz/servers/9106817" target="_blank" @click.stop
-                       class="w-full py-2 md:py-3 bg-[#9241b8] hover:bg-[#a85cd4] text-white font-capture text-[9px] md:text-xl uppercase rounded-lg transition-all shadow-lg text-center">
-                      GAMEMONITORING
-                    </a>
+                    <a href="https://wargm.ru/server/72966" target="_blank" @click.stop class="w-full py-2 md:py-3 bg-[#9241b8] text-white font-capture text-[9px] md:text-xl uppercase rounded-lg shadow-lg text-center">WARGM.RU</a>
+                    <a href="https://gamemonitoring.ru/dayz/servers/9106817" target="_blank" @click.stop class="w-full py-2 md:py-3 bg-[#9241b8] text-white font-capture text-[9px] md:text-xl uppercase rounded-lg shadow-lg text-center">MONITORING</a>
                   </div>
                 </template>
               </InfoCard>
