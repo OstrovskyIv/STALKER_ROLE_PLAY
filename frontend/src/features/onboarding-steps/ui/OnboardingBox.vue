@@ -43,7 +43,7 @@ onMounted(() => { if (videoRef.value) { videoRef.value.muted = true; videoRef.va
       <div class="absolute inset-0 bg-black/40"></div>
 
       <div class="relative z-10 flex-1 p-5 md:p-16 2xl:p-20 flex flex-col justify-center gap-4 md:gap-10">
-        <div class="flex items-center gap-3 md:gap-10 font-capture text-[#9241b8]">
+        <div class="flex items-center font-capture text-[#9241b8]">
           <img :src="activeStep.img" class="h-10 md:h-24 2xl:h-28 w-auto shrink-0 drop-shadow-[0_0_15px_#9241b8]" />
           <h3 class="text-sm md:text-5xl 2xl:text-6xl uppercase leading-none italic">{{ activeStep.title }}</h3>
         </div>

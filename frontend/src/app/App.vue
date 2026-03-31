@@ -3,8 +3,6 @@ import { ref, onMounted } from 'vue'
 import { MainBackground } from '@widgets/main-background'
 import { Preloader } from '@widgets/preloader'
 import { preloadImage } from '@shared/lib/images'
-
-// Импорт ассетов
 import bgImg from '@shared/assets/images/bg-main.webp'
 import logoSvg from '@shared/assets/images/logo.svg'
 import logoFull from '@shared/assets/images/logo-full.webp'
@@ -44,7 +42,6 @@ onMounted(async () => {
   </Transition>
 
   <div v-if="isAppReady" class="relative w-full h-screen bg-black overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
-    <!-- ФОН ВЕРНУЛСЯ -->
     <MainBackground />
 
     <div class="relative z-10 w-full">

@@ -1,5 +1,11 @@
 @import "tailwindcss";
-@import url('https://fonts.cdnfonts.com/css/capture-it');
+
+@font-face {
+  font-family: "Capture It";
+  src: url("@shared/assets/fonts/CaptureIt.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 @theme {
   --font-capture: "Capture It", sans-serif;
