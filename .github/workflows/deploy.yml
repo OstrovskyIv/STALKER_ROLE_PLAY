@@ -32,6 +32,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      # ХАК ДЛЯ РОУТИНГА: Копируем index.html в 404.html
+      # Это нужно, чтобы страницы /rules и /lor открывались при прямой ссылке
+      - name: Fix SPA Routing
+        run: cp dist/index.html dist/404.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
