@@ -13,17 +13,21 @@ export const useServerStore = defineStore('server', () => {
   const serverData = ref<ServerData | null>(null)
   const isOnline = ref(false)
   const isLoading = ref(false)
-  const error = ref(false)
+  const errorType = ref<string | null>(null) // Храним тип ошибки
 
   async function fetchStatus() {
     isLoading.value = true
-    error.value = false
+    errorType.value = null
+
+    const apiUrl = 'https://dayzsalauncher.com/api/v1/query/80.242.59.107:2303'
 
     try {
-      // Добавляем timestamp, чтобы браузеры (особенно в ТГ) не выдавали старые данные из кэша
-      const response = await fetch(`https://dayzsalauncher.com/api/v1/query/80.242.59.107:2303?t=${Date.now()}`)
+      // Пытаемся сделать запрос с минимальным таймаутом
+      const controller = new AbortController()
+      const id = setTimeout(() => controller.abort(), 5000)
 
-      if (!response.ok) throw new Error('CORS or Network error')
+      const response = await fetch(`${apiUrl}?t=${Date.now()}`, { signal: controller.signal })
+      clearTimeout(id)
 
       const data = await response.json()
 
@@ -31,17 +35,22 @@ export const useServerStore = defineStore('server', () => {
         serverData.value = data.result
         isOnline.value = true
       } else {
-        // Если API ответил, но данных по этому IP нет
+        errorType.value = 'EMPTY_RESPONSE'
         isOnline.value = false
       }
-    } catch (err) {
-      console.error('Monitoring Error:', err)
+    } catch (err: any) {
       isOnline.value = false
-      error.value = true
+      if (err.name === 'AbortError') {
+        errorType.value = 'TIMEOUT (Медленный интернет)'
+      } else if (err.message === 'Failed to fetch') {
+        errorType.value = 'BLOCKED (CORS / AdBlock / Провайдер)'
+      } else {
+        errorType.value = err.message || 'UNKNOWN_ERROR'
+      }
     } finally {
       isLoading.value = false
     }
   }
 
-  return { serverData, isOnline, isLoading, error, fetchStatus }
+  return { serverData, isOnline, isLoading, errorType, fetchStatus }
 })
