@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted } from 'vue'
 import { MainBackground } from '@widgets/main-background'
-import { Navbar } from '@widgets/navbar'
 import { Preloader } from '@widgets/preloader'
 import { preloadImage } from '@shared/lib/images'
+
+// Импорт ассетов
 import bgImg from '@shared/assets/images/bg-main.webp'
 import logoSvg from '@shared/assets/images/logo.svg'
+import logoFull from '@shared/assets/images/logo-full.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
 import rulesImg from '@shared/assets/images/rules.webp'
 import lorImg from '@shared/assets/images/lor.webp'
@@ -20,22 +21,19 @@ import youtubeImg from '@shared/assets/images/youtube.webp'
 import tiktokImg from '@shared/assets/images/tiktok.webp'
 import boostyImg from '@shared/assets/images/boosty.webp'
 
-const route = useRoute()
 const isAppReady = ref(false)
-
-const isRulesPage = computed(() => route.path.includes('/rules'))
 
 onMounted(async () => {
   try {
     await Promise.all([
-      preloadImage(bgImg), preloadImage(logoSvg),
+      preloadImage(bgImg), preloadImage(logoSvg), preloadImage(logoFull),
       preloadImage(squareLogo), preloadImage(rulesImg), preloadImage(lorImg),
       preloadImage(infoImg), preloadImage(drawImg), preloadImage(shopImg),
       preloadImage(voteImg), preloadImage(discordImg), preloadImage(vkImg),
       preloadImage(youtubeImg), preloadImage(tiktokImg), preloadImage(boostyImg)
     ])
   } finally {
-    isAppReady.value = true
+    setTimeout(() => { isAppReady.value = true }, 500)
   }
 })
 </script>
@@ -46,8 +44,8 @@ onMounted(async () => {
   </Transition>
 
   <div v-if="isAppReady" class="relative w-full h-screen bg-black overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
+    <!-- ФОН ВЕРНУЛСЯ -->
     <MainBackground />
-    <Navbar v-if="!isRulesPage" />
 
     <div class="relative z-10 w-full">
       <router-view />
