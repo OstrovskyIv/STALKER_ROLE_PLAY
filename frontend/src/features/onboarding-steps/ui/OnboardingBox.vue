@@ -39,7 +39,7 @@ onMounted(() => { if (videoRef.value) { videoRef.value.muted = true; videoRef.va
     </div>
 
     <div class="flex-1 relative overflow-hidden flex flex-col">
-      <video ref="videoRef" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-30" :src="noiseVideo" />
+      <video ref="videoRef" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-25" :src="noiseVideo" />
       <div class="absolute inset-0 bg-black/40"></div>
 
       <div class="relative z-10 flex-1 p-5 md:p-16 2xl:p-20 flex flex-col justify-center gap-4 md:gap-10">
@@ -48,9 +48,17 @@ onMounted(() => { if (videoRef.value) { videoRef.value.muted = true; videoRef.va
           <h3 class="text-sm md:text-5xl 2xl:text-6xl uppercase leading-none italic">{{ activeStep.title }}</h3>
         </div>
 
-        <p class="text-zinc-100 text-[10px] md:text-3xl leading-tight max-w-4xl whitespace-pre-line font-sans font-black uppercase italic border-l-2 md:border-l-6 border-[#9241b8] pl-3 md:pl-10">
-          {{ activeStep.desc }}
-        </p>
+        <div class="flex flex-col gap-1 md:gap-2 border-l-2 md:border-l-6 border-[#9241b8] pl-3 md:pl-10">
+          <div v-for="(line, i) in activeStep.desc.split('\n')" :key="i" class="flex items-start">
+            <template v-if="line.trim().startsWith('╭') || line.trim().startsWith('╰')">
+              <span class="w-[12px] md:w-[32px] shrink-0 text-[#9241b8] font-mono text-[10px] md:text-3xl leading-tight">{{ line.trim().charAt(0) }}</span>
+              <span class="text-zinc-100 text-[10px] md:text-3xl leading-tight font-sans font-black uppercase italic">{{ line.trim().substring(1) }}</span>
+            </template>
+            <template v-else>
+              <span class="text-zinc-100 text-[10px] md:text-3xl leading-tight font-sans font-black uppercase italic">{{ line }}</span>
+            </template>
+          </div>
+        </div>
 
         <div v-if="activeStep.link" class="pt-2 md:pt-4">
           <a :href="activeStep.link" target="_blank"
