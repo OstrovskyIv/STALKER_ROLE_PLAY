@@ -17,15 +17,17 @@ const boostyLink = 'https://boosty.to/last_zone_rp'
 
 <template>
   <section class="w-full h-screen flex flex-col items-center relative snap-start shrink-0 overflow-hidden">
+    <div class="w-full h-[55px] sm:h-[90px] md:h-[100px] 2xl:h-[115px] shrink-0 pointer-events-none"></div>
+
     <SectionDivider />
-    <div class="h-[80px] sm:h-[120px] xl:h-[140px] w-full shrink-0"></div>
-    <div class="w-full flex-1 flex flex-col items-center justify-center p-4">
-      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white text-center italic mb-6 md:mb-12">
+
+    <div class="w-full flex-1 flex flex-col items-center justify-center p-4 gap-10 md:gap-20 2xl:gap-32">
+      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic leading-none text-center">
         НАШИ СОЦИАЛЬНЫЕ СЕТИ
       </h2>
-      <div class="w-full max-w-7xl flex flex-col gap-4 sm:gap-8 items-center">
-        <!-- На мобилках уменьшил gap и padding -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-10 w-full max-w-4xl justify-items-center px-2">
+
+      <div class="w-full max-w-7xl flex flex-col gap-8 md:gap-16 items-center">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-10 w-full max-w-5xl justify-items-center px-2">
           <SocialCard v-for="(social, i) in mainSocials" :key="i" :img="social.img" :link="social.link" />
         </div>
         <div class="w-full flex justify-center px-4">

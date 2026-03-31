@@ -25,11 +25,12 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
 
 <template>
   <section class="w-full h-screen flex flex-col items-center relative snap-start shrink-0 overflow-hidden">
-    <SectionDivider />
-    <div class="h-[100px] sm:h-[120px] xl:h-[140px] w-full shrink-0"></div>
+    <div class="w-full h-[55px] sm:h-[90px] md:h-[100px] 2xl:h-[115px] shrink-0 pointer-events-none"></div>
 
-    <div class="w-full flex-1 flex flex-col items-center justify-center p-4">
-      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic mb-6 xl:mb-12">ИНФОРМАЦИЯ</h2>
+    <SectionDivider />
+
+    <div class="w-full flex-1 flex flex-col items-center justify-center p-4 gap-10 md:gap-20 2xl:gap-32">
+      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic leading-none">ИНФОРМАЦИЯ</h2>
 
       <div class="w-full max-w-7xl flex flex-col gap-4 sm:gap-10 items-center">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 w-full justify-items-center">
