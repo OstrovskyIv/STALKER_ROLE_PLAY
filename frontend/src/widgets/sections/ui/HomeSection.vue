@@ -11,7 +11,7 @@ import { OnboardingBox } from '@features/onboarding-steps'
     <Header />
 
     <div class="w-full flex-1 flex flex-col items-center justify-center z-10 px-3 md:px-6">
-      <div class="w-full max-w-7xl flex flex-col items-center">
+      <div class="w-full flex flex-col items-center">
         <OnboardingBox />
       </div>
     </div>

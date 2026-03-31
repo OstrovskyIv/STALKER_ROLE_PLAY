@@ -28,13 +28,13 @@ onMounted(() => { if (videoRef.value) { videoRef.value.muted = true; videoRef.va
 </script>
 
 <template>
-  <div v-if="activeStep" class="w-full max-w-6xl min-h-0 md:min-h-[600px] border-[2px] md:border-[6px] border-[#9241b8] shadow-[0_0_40px_rgba(146,65,184,0.3)] rounded-[1.5rem] md:rounded-[4rem] overflow-hidden flex flex-col relative bg-zinc-950/40 backdrop-blur-xl">
-    <div class="h-10 md:h-24 bg-zinc-900/80 border-b-[2px] md:border-b-[5px] border-[#9241b8]/40 px-4 md:px-14 flex justify-between items-center relative z-20 font-capture">
-      <span class="text-white text-[10px] md:text-2xl tracking-wider uppercase italic font-bold">КАК НАЧАТЬ ИГРАТЬ</span>
+  <div v-if="activeStep" class="w-full max-w-lg md:max-w-4xl 2xl:max-w-5xl min-h-0 md:min-h-[500px] 2xl:min-h-[550px] border-[2px] md:border-[6px] border-[#9241b8] shadow-[0_0_40px_rgba(146,65,184,0.3)] rounded-[1.5rem] md:rounded-[3.5rem] overflow-hidden flex flex-col relative bg-zinc-950/40 backdrop-blur-xl">
+    <div class="h-10 md:h-20 bg-zinc-900/80 border-b-[2px] md:border-b-[5px] border-[#9241b8]/40 px-4 md:px-12 flex justify-between items-center relative z-20 font-capture">
+      <span class="text-white text-[10px] md:text-xl tracking-wider uppercase italic font-bold">КАК НАЧАТЬ ИГРАТЬ</span>
       <div class="flex gap-1.5 md:gap-3">
-        <div class="w-2 h-2 md:w-4 md:h-4 rounded-full bg-red-600"></div>
-        <div class="w-2 h-2 md:w-4 md:h-4 rounded-full bg-yellow-500"></div>
-        <div class="w-2 h-2 md:w-4 md:h-4 rounded-full bg-emerald-500"></div>
+        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-red-600"></div>
+        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-yellow-500"></div>
+        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-emerald-500"></div>
       </div>
     </div>
 
@@ -42,34 +42,34 @@ onMounted(() => { if (videoRef.value) { videoRef.value.muted = true; videoRef.va
       <video ref="videoRef" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-30" :src="noiseVideo" />
       <div class="absolute inset-0 bg-black/40"></div>
 
-      <div class="relative z-10 flex-1 p-5 md:p-24 flex flex-col justify-center gap-4 md:gap-14">
-        <div class="flex items-center gap-3 md:gap-12 font-capture text-[#9241b8]">
-          <img :src="activeStep.img" class="h-10 md:h-32 w-auto shrink-0 drop-shadow-[0_0_15px_#9241b8]" />
-          <h3 class="text-sm md:text-7xl uppercase leading-none italic">{{ activeStep.title }}</h3>
+      <div class="relative z-10 flex-1 p-5 md:p-16 2xl:p-20 flex flex-col justify-center gap-4 md:gap-10">
+        <div class="flex items-center gap-3 md:gap-10 font-capture text-[#9241b8]">
+          <img :src="activeStep.img" class="h-10 md:h-24 2xl:h-28 w-auto shrink-0 drop-shadow-[0_0_15px_#9241b8]" />
+          <h3 class="text-sm md:text-5xl 2xl:text-6xl uppercase leading-none italic">{{ activeStep.title }}</h3>
         </div>
 
-        <p class="text-zinc-100 text-[10px] md:text-4xl leading-tight max-w-5xl whitespace-pre-line font-sans font-black uppercase italic border-l-2 md:border-l-8 border-[#9241b8] pl-3 md:pl-12">
+        <p class="text-zinc-100 text-[10px] md:text-3xl leading-tight max-w-4xl whitespace-pre-line font-sans font-black uppercase italic border-l-2 md:border-l-6 border-[#9241b8] pl-3 md:pl-10">
           {{ activeStep.desc }}
         </p>
 
-        <div v-if="activeStep.link" class="pt-2 md:pt-6">
+        <div v-if="activeStep.link" class="pt-2 md:pt-4">
           <a :href="activeStep.link" target="_blank"
-             class="inline-block px-5 py-2 md:px-20 md:py-8 bg-[#9241b8] text-white font-capture text-[10px] md:text-3xl uppercase rounded-lg shadow-lg active:scale-95 transition-all">
+             class="inline-block px-5 py-2 md:px-16 md:py-6 bg-[#9241b8] text-white font-capture text-[10px] md:text-2xl uppercase rounded-lg shadow-lg active:scale-95 transition-all">
             {{ activeStep.btnText }}
           </a>
         </div>
       </div>
     </div>
 
-    <div class="h-12 md:h-32 bg-zinc-900/80 border-t-[2px] md:border-t-[5px] border-[#9241b8]/40 px-4 md:px-14 flex items-center justify-between relative z-20 font-capture">
+    <div class="h-12 md:h-24 bg-zinc-900/80 border-t-[2px] md:border-t-[5px] border-[#9241b8]/40 px-4 md:px-12 flex items-center justify-between relative z-20 font-capture">
       <button @click="prevStep" :disabled="currentStep === 1" class="disabled:opacity-0 transition-opacity">
-        <div class="border border-[#9241b8] px-3 py-1 md:px-12 md:py-4 text-white text-[9px] md:text-2xl uppercase rounded-md">Назад</div>
+        <div class="border border-[#9241b8] px-3 py-1 md:px-10 md:py-3 text-white text-[9px] md:text-xl uppercase rounded-md">Назад</div>
       </button>
 
-      <div class="text-white text-xs md:text-6xl uppercase font-black">ШАГ {{ currentStep }}</div>
+      <div class="text-white text-xs md:text-5xl uppercase font-black">ШАГ {{ currentStep }}</div>
 
       <button @click="nextStep" :disabled="currentStep === steps.length" class="disabled:opacity-0 transition-opacity">
-        <div class="border border-[#9241b8] px-3 py-1 md:px-12 md:py-4 text-white text-[9px] md:text-2xl uppercase rounded-md">Далее</div>
+        <div class="border border-[#9241b8] px-3 py-1 md:px-10 md:py-3 text-white text-[9px] md:text-xl uppercase rounded-md">Далее</div>
       </button>
     </div>
   </div>
