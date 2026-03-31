@@ -50,9 +50,29 @@ const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
               <InfoCard :title="infoBlocks[4].title" :desc="infoBlocks[4].desc" :img="infoBlocks[4].img" />
             </a>
           </template>
+
           <template v-if="infoBlocks[5]">
             <div class="w-full flex justify-center" @click="isVotingOpen = !isVotingOpen">
-              <InfoCard :title="infoBlocks[5].title" :desc="infoBlocks[5].desc" :img="infoBlocks[5].img" :isActive="isVotingOpen" />
+              <InfoCard
+                :title="infoBlocks[5].title"
+                :desc="infoBlocks[5].desc"
+                :img="infoBlocks[5].img"
+                :isActive="isVotingOpen"
+              >
+                <!-- Используем слот для отображения ссылок при клике -->
+                <template #content v-if="isVotingOpen">
+                  <div class="flex flex-col w-full h-full justify-center items-center gap-2 md:gap-4 p-1">
+                    <a href="https://wargm.ru/server/72966" target="_blank" @click.stop
+                       class="w-full py-2 md:py-3 bg-[#9241b8] hover:bg-[#a85cd4] text-white font-capture text-[9px] md:text-xl uppercase rounded-lg transition-all shadow-lg text-center">
+                      WARGM.RU
+                    </a>
+                    <a href="https://gamemonitoring.ru/dayz/servers/9106817" target="_blank" @click.stop
+                       class="w-full py-2 md:py-3 bg-[#9241b8] hover:bg-[#a85cd4] text-white font-capture text-[9px] md:text-xl uppercase rounded-lg transition-all shadow-lg text-center">
+                      GAMEMONITORING
+                    </a>
+                  </div>
+                </template>
+              </InfoCard>
             </div>
           </template>
         </div>
