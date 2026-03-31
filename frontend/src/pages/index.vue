@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 import { useNavStore } from '@entities/navigation'
-import { HomeSection, InfoSection, ConnectSection, GallerySection } from '@widgets/sections'
+import { HomeSection, InfoSection, ConnectSection, GallerySection, ServerSection } from '@widgets/sections'
 
 const navStore = useNavStore()
 let observer: IntersectionObserver | null = null
@@ -15,7 +15,7 @@ onMounted(() => {
     })
   }, { threshold: 0.5 })
 
-  const ids = ['home', 'information', 'connection', 'gallery']
+  const ids = ['home', 'information', 'connection', 'gallery', 'server']
   ids.forEach(id => {
     const el = document.getElementById(id)
     if (el) observer?.observe(el)
@@ -31,5 +31,6 @@ onUnmounted(() => observer?.disconnect())
     <section id="information" class="h-[100svh] w-full snap-start shrink-0"><InfoSection /></section>
     <section id="connection" class="h-[100svh] w-full snap-start shrink-0"><ConnectSection /></section>
     <section id="gallery" class="h-[100svh] w-full snap-start shrink-0"><GallerySection /></section>
+    <section id="server" class="h-[100svh] w-full snap-start shrink-0"><ServerSection /></section>
   </div>
 </template>
