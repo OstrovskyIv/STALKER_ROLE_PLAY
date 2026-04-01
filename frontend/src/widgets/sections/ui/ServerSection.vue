@@ -13,7 +13,8 @@ onMounted(() => {
 
 <template>
   <section class="w-full h-screen flex flex-col items-center relative snap-start shrink-0 overflow-hidden">
-    <div class="w-full h-[55px] sm:h-[90px] md:h-[100px] 2xl:h-[115px] shrink-0 pointer-events-none"></div>
+    <div class="w-full h-[75px] sm:h-[90px] md:h-[100px] 2xl:h-[115px] shrink-0 pointer-events-none transition-all duration-500"></div>
+
     <SectionDivider />
 
     <div class="w-full flex-1 flex flex-col items-center justify-center p-4 gap-6 md:gap-16 2xl:gap-32">
@@ -22,7 +23,6 @@ onMounted(() => {
       </h2>
 
       <div v-if="serverStore.isOnline && serverStore.serverData" class="w-full max-w-lg 2xl:max-w-7xl grid grid-cols-1 2xl:grid-cols-4 gap-3 sm:gap-4 2xl:gap-8 px-4 sm:px-6">
-
         <div class="bg-black/40 border border-white/10 p-4 2xl:p-10 rounded-2xl 2xl:rounded-[2.5rem] backdrop-blur-xl flex flex-row 2xl:flex-col items-center justify-between 2xl:justify-center gap-4 shadow-xl">
           <span class="text-zinc-500 font-capture text-[10px] 2xl:text-base uppercase tracking-widest">СТАТУС</span>
           <div class="flex items-center gap-2 2xl:gap-4">

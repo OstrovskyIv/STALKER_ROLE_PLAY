@@ -50,7 +50,6 @@ export const useServerStore = defineStore('server', () => {
           return
         }
       } catch {
-        // Ошибка конкретного прокси, идем к следующему
         continue
       }
     }
