@@ -15,11 +15,8 @@ onMounted(() => {
     <SectionDivider />
 
     <div class="w-full flex-1 flex flex-col items-center justify-center p-4 gap-6 md:gap-16 2xl:gap-32">
-      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic leading-none text-center">
-        МОНИТОРИНГ
-      </h2>
+      <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic leading-none">МОНИТОРИНГ</h2>
 
-      <!-- УСПЕШНО -->
       <div v-if="serverStore.isOnline && serverStore.serverData" class="w-full max-w-lg 2xl:max-w-7xl grid grid-cols-1 2xl:grid-cols-4 gap-3 sm:gap-4 2xl:gap-8 px-4 sm:px-6">
         <div class="bg-black/40 border border-white/10 p-4 2xl:p-10 rounded-2xl 2xl:rounded-[2.5rem] backdrop-blur-xl flex flex-row 2xl:flex-col items-center justify-between 2xl:justify-center gap-4 shadow-xl">
           <span class="text-zinc-500 font-capture text-[10px] 2xl:text-base uppercase tracking-widest">СТАТУС</span>
@@ -47,14 +44,12 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- ОШИБКА -->
       <div v-else-if="serverStore.errorType" class="flex flex-col items-center gap-6">
         <p class="text-red-500 font-capture text-2xl uppercase italic">СИГНАЛ ПОТЕРЯН</p>
-        <p class="text-zinc-500 text-xs md:text-sm max-w-md text-center italic uppercase">Провайдер заблокировал прямой доступ к спутнику мониторинга. Активирован резервный канал связи через прокси.</p>
+        <p class="text-zinc-500 text-[10px] md:text-sm max-w-sm text-center uppercase">Ошибка {{ serverStore.errorType }}. Проверьте консоль (F12) для диагностики.</p>
         <button @click="serverStore.fetchStatus()" class="px-12 py-4 bg-[#9241b8] text-white font-capture rounded-xl active:scale-95 transition-all">ПОВТОРИТЬ</button>
       </div>
 
-      <!-- ЗАГРУЗКА -->
       <div v-else class="text-zinc-500 font-capture animate-pulse text-lg md:text-4xl uppercase tracking-[0.3em]">УСТАНОВКА СВЯЗИ...</div>
     </div>
   </section>
