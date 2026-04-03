@@ -23,6 +23,7 @@ defineProps<{
     ]">
       <img
         :src="img"
+        loading="lazy"
         class="w-full h-full object-contain transition-all duration-700 group-hover:animate-counter-rotate drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
         alt="social icon"
       />

@@ -4,16 +4,11 @@ import { useRoute } from 'vue-router'
 import { MainBackground } from '@widgets/main-background'
 import { Preloader } from '@widgets/preloader'
 import { preloadImage } from '@shared/lib/images'
-import noiseVideo from '@shared/assets/video/terminal-noise.mov'
 
 import bgImg from '@shared/assets/images/bg-main.webp'
 import logoSvg from '@shared/assets/images/logo.svg'
 import logoFull from '@shared/assets/images/logo-full.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
-
-interface AssetModule {
-  default: string;
-}
 
 const route = useRoute()
 const isAppReady = ref(false)
@@ -21,26 +16,19 @@ const isPreloaderVisible = ref(true)
 const isContentVisible = ref(false)
 const isLongPage = computed(() => route.path.includes('/rules') || route.path.includes('/lor'))
 
-const preloadVideoStrict = (src: string): Promise<void> => {
-  return new Promise((resolve) => {
-    const video = document.createElement('video')
-    video.src = src
-    video.preload = 'auto'
-    video.oncanplaythrough = () => resolve()
-    video.onerror = () => resolve()
-  })
+const preloadCritical = async () => {
+  const assets = [bgImg, logoSvg, squareLogo]
+  await Promise.all(assets.map(src => {
+    const img = new Image()
+    img.src = src
+    return img.decode ? img.decode() : preloadImage(src)
+  }))
 }
 
 onMounted(async () => {
   try {
     await preloadImage(logoFull)
-
-    await Promise.all([
-      preloadImage(bgImg),
-      preloadImage(logoSvg),
-      preloadImage(squareLogo),
-      preloadVideoStrict(noiseVideo)
-    ])
+    await preloadCritical()
 
     document.getElementById('initial-loader')?.remove()
     isAppReady.value = true
@@ -52,21 +40,6 @@ onMounted(async () => {
         isPreloaderVisible.value = false
       }, 300)
     }, 1500)
-
-    setTimeout(() => {
-      const secondaryAssets = import.meta.glob<AssetModule>([
-        '@shared/assets/images/*.webp',
-        '@shared/assets/images/lor/*.webp',
-        '@shared/assets/images/gallery/*.webp'
-      ])
-
-      Object.values(secondaryAssets).forEach(async (importFn) => {
-        const mod = await importFn()
-        const img = new Image()
-        img.src = mod.default
-      })
-    }, 5000)
-
   } catch {
     isAppReady.value = true
     isPreloaderVisible.value = false

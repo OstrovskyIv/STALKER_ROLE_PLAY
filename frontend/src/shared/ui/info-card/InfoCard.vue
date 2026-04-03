@@ -18,10 +18,9 @@ defineProps<{
     </div>
 
     <div class="absolute inset-[1px] md:inset-[2px] bg-zinc-950 rounded-[0.9rem] md:rounded-[2.1rem] z-10 flex flex-col items-center justify-center p-2 md:p-5 text-center gap-1 md:gap-3">
-
       <slot name="content">
         <div class="relative w-10 h-10 md:w-20 md:h-20 flex items-center justify-center">
-          <img :src="img" class="w-full h-full object-contain transition-all duration-700 group-hover:animate-counter-rotate drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]" alt="icon" />
+          <img :src="img" loading="lazy" class="w-full h-full object-contain transition-all duration-700 group-hover:animate-counter-rotate drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]" alt="icon" />
         </div>
 
         <div class="flex flex-col gap-0">
