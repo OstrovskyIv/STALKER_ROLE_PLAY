@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import noiseVideo from '@shared/assets/video/terminal-noise.mp4'
-import step1 from '@shared/assets/images/step1.webp'
-import step2 from '@shared/assets/images/step2.webp'
-import step3 from '@shared/assets/images/step3.webp'
-import step4 from '@shared/assets/images/step4.webp'
-import step5 from '@shared/assets/images/step5.webp'
+import noiseVideo from '@shared/assets/video/terminal-noise.mov'
+import step1 from '@shared/assets/images/steps/step1.webp'
+import step2 from '@shared/assets/images/steps/step2.webp'
+import step3 from '@shared/assets/images/steps/step3.webp'
+import step4 from '@shared/assets/images/steps/step4.webp'
+import step5 from '@shared/assets/images/steps/step5.webp'
 
 interface Step { id: number; title: string; desc: string; img: string; link?: string; btnText?: string; }
 

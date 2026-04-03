@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SectionDivider, InfoCard } from '@shared/ui'
-import rulesImg from '@shared/assets/images/rules.webp'
-import lorImg from '@shared/assets/images/lor.webp'
-import guidesImg from '@shared/assets/images/information.webp'
-import drawImg from '@shared/assets/images/draw.webp'
-import shopImg from '@shared/assets/images/shop.webp'
-import voteImg from '@shared/assets/images/vote.webp'
+import rulesImg from '@shared/assets/images/ui/info/rules.webp'
+import lorImg from '@shared/assets/images/ui/info/lor.webp'
+import guidesImg from '@shared/assets/images/ui/info/information.webp'
+import drawImg from '@shared/assets/images/ui/info/draw.webp'
+import shopImg from '@shared/assets/images/ui/info/shop.webp'
+import voteImg from '@shared/assets/images/ui/info/vote.webp'
 
 interface InfoBlock { title: string; desc: string; img: string; }
 const isVotingOpen = ref(false)

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { SectionDivider, SocialCard } from '@shared/ui'
-import discordImg from '@shared/assets/images/discord.webp'
-import vkImg from '@shared/assets/images/vk.webp'
-import youtubeImg from '@shared/assets/images/youtube.webp'
-import tiktokImg from '@shared/assets/images/tiktok.webp'
-import boostyImg from '@shared/assets/images/boosty.webp'
+import discordImg from '@shared/assets/images/ui/socials/discord.webp'
+import vkImg from '@shared/assets/images/ui/socials/vk.webp'
+import youtubeImg from '@shared/assets/images/ui/socials/youtube.webp'
+import tiktokImg from '@shared/assets/images/ui/socials/tiktok.webp'
+import boostyImg from '@shared/assets/images/ui/socials/boosty.webp'
 
 const mainSocials = [
   { img: discordImg, link: 'https://discord.gg/last-zone' },
