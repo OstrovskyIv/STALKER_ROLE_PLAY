@@ -7,12 +7,11 @@ const selectedRuleId = ref(rulesData[0]?.id || '')
 
 const filteredRules = computed(() => {
   const query = searchQuery.value.toLowerCase().trim()
+  if (!query) return rulesData
 
   return rulesData.filter(rule => {
-    const inTitle = rule.title.toLowerCase().includes(query)
-    const inContent = rule.content.toLowerCase().includes(query)
-
-    return inTitle || inContent
+    return rule.title.toLowerCase().includes(query) ||
+      rule.content.toLowerCase().includes(query)
   })
 })
 
@@ -20,6 +19,15 @@ const activeRule = computed((): RuleSection => {
   const found = rulesData.find(r => r.id === selectedRuleId.value)
   return found ?? (rulesData[0] as RuleSection)
 })
+
+const highlightText = (text: string, query: string) => {
+  if (!query.trim()) return text
+
+  const escapedQuery = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const regex = new RegExp(`(${escapedQuery})`, 'gi')
+
+  return text.replace(regex, '<span class="bg-[#9241b8] text-white px-1 rounded-sm shadow-[0_0_10px_#9241b8]">$1</span>')
+}
 </script>
 
 <template>
@@ -38,8 +46,8 @@ const activeRule = computed((): RuleSection => {
         <button v-for="rule in filteredRules" :key="rule.id" @click="selectedRuleId = rule.id"
                 :class="['shrink-0 md:shrink-1 text-left p-4 md:p-6 rounded-xl font-capture text-[10px] md:text-lg tracking-widest transition-all uppercase whitespace-nowrap md:whitespace-normal',
             selectedRuleId === rule.id ? 'bg-[#9241b8] text-white shadow-[0_0_30px_rgba(146,65,184,0.6)]' : 'text-zinc-500 hover:bg-white/5']"
+                v-html="highlightText(rule.title, searchQuery)"
         >
-          {{ rule.title }}
         </button>
       </div>
     </div>
@@ -48,12 +56,12 @@ const activeRule = computed((): RuleSection => {
       <div class="absolute inset-0 opacity-5 pointer-events-none bg-scanlines"></div>
 
       <div class="p-6 md:p-16 overflow-y-auto relative z-10 no-scrollbar text-left flex flex-col gap-6 md:gap-10">
-        <h2 class="text-2xl md:text-5xl font-capture text-[#9241b8] uppercase italic leading-tight drop-shadow-xl">
-          {{ activeRule.title }}
+        <h2 class="text-2xl md:text-5xl font-capture text-[#9241b8] uppercase italic leading-tight drop-shadow-xl"
+            v-html="highlightText(activeRule.title, searchQuery)">
         </h2>
 
-        <div class="text-zinc-100 text-base md:text-2xl leading-relaxed whitespace-pre-line border-l-[4px] md:border-l-[8px] border-[#9241b8]/50 pl-6 md:pl-10 font-sans font-medium italic drop-shadow-md">
-          {{ activeRule.content }}
+        <div class="text-zinc-100 text-base md:text-2xl leading-relaxed whitespace-pre-line border-l-[4px] md:border-l-[8px] border-[#9241b8]/50 pl-6 md:pl-10 font-sans font-medium italic drop-shadow-md"
+             v-html="highlightText(activeRule.content, searchQuery)">
         </div>
       </div>
     </div>
