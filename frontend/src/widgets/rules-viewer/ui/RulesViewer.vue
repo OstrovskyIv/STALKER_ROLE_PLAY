@@ -6,9 +6,14 @@ const searchQuery = ref('')
 const selectedRuleId = ref(rulesData[0]?.id || '')
 
 const filteredRules = computed(() => {
-  return rulesData.filter(rule =>
-    rule.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
+  const query = searchQuery.value.toLowerCase().trim()
+
+  return rulesData.filter(rule => {
+    const inTitle = rule.title.toLowerCase().includes(query)
+    const inContent = rule.content.toLowerCase().includes(query)
+
+    return inTitle || inContent
+  })
 })
 
 const activeRule = computed((): RuleSection => {
@@ -22,12 +27,14 @@ const activeRule = computed((): RuleSection => {
 
     <div class="w-full md:w-[450px] border-b md:border-b-0 md:border-r border-white/10 flex flex-col bg-black/20">
       <div class="p-4 md:p-10 border-b border-white/10">
-        <input v-model="searchQuery" type="text" placeholder="ПОИСК..."
+        <input v-model="searchQuery" type="text" placeholder="ПОИСК ПО ПРАВИЛАМ..."
                class="w-full bg-black/40 border border-[#9241b8]/50 p-4 rounded-xl text-white font-capture text-xs md:text-base outline-none focus:border-[#9241b8]"
         />
       </div>
 
       <div class="flex md:flex-col overflow-x-auto md:overflow-y-auto p-4 gap-3 no-scrollbar">
+        <div v-if="filteredRules.length === 0" class="p-10 text-center text-zinc-600 font-capture uppercase text-xs">Ничего не найдено</div>
+
         <button v-for="rule in filteredRules" :key="rule.id" @click="selectedRuleId = rule.id"
                 :class="['shrink-0 md:shrink-1 text-left p-4 md:p-6 rounded-xl font-capture text-[10px] md:text-lg tracking-widest transition-all uppercase whitespace-nowrap md:whitespace-normal',
             selectedRuleId === rule.id ? 'bg-[#9241b8] text-white shadow-[0_0_30px_rgba(146,65,184,0.6)]' : 'text-zinc-500 hover:bg-white/5']"
@@ -55,6 +62,7 @@ const activeRule = computed((): RuleSection => {
 
 <style scoped>
 .no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .bg-scanlines {
   background: linear-gradient(rgba(255,255,255,0) 50%, rgba(255,255,255,0.05) 50%);
   background-size: 100% 6px;
