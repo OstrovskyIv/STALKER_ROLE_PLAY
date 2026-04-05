@@ -9,6 +9,7 @@ import bgImg from '@shared/assets/images/bg-main.webp'
 import logoSvg from '@shared/assets/images/logo.svg'
 import logoFull from '@shared/assets/images/logo-full.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
+import priceImg from '@shared/assets/images/ui/info/price.webp'
 
 const route = useRoute()
 const isAppReady = ref(false)
@@ -17,7 +18,7 @@ const isContentVisible = ref(false)
 const isLongPage = computed(() => route.path.includes('/rules') || route.path.includes('/lor'))
 
 const preloadCritical = async () => {
-  const assets = [bgImg, logoSvg, squareLogo]
+  const assets = [bgImg, logoSvg, squareLogo, priceImg]
   await Promise.all(assets.map(src => {
     const img = new Image()
     img.src = src
