@@ -27,9 +27,10 @@ export const useServerStore = defineStore('server', () => {
       if (data && data.result) {
         serverData.value = data.result as ServerData
         isOnline.value = true
+      } else {
+        isOnline.value = false
       }
-    } catch (err) {
-      console.error('Ошибка прямого подключения:', err)
+    } catch {
       isOnline.value = false
     } finally {
       isLoading.value = false
