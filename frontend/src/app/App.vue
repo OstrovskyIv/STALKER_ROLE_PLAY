@@ -9,16 +9,15 @@ import bgImg from '@shared/assets/images/bg-main.webp'
 import logoSvg from '@shared/assets/images/logo.svg'
 import logoFull from '@shared/assets/images/logo-full.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
-import priceImg from '@shared/assets/images/ui/info/price.webp'
 
 const route = useRoute()
 const isAppReady = ref(false)
 const isPreloaderVisible = ref(true)
 const isContentVisible = ref(false)
-const isLongPage = computed(() => route.path.includes('/rules') || route.path.includes('/lor'))
+const isLongPage = computed(() => route.path.includes('/rules') || route.path.includes('/lor') || route.path.includes('/shop'))
 
 const preloadCritical = async () => {
-  const assets = [bgImg, logoSvg, squareLogo, priceImg]
+  const assets = [bgImg, logoSvg, squareLogo]
   await Promise.all(assets.map(src => {
     const img = new Image()
     img.src = src
@@ -31,7 +30,9 @@ onMounted(async () => {
     await preloadImage(logoFull)
     await preloadCritical()
 
-    document.getElementById('initial-loader')?.remove()
+    const loader = document.getElementById('initial-loader')
+    if (loader) loader.remove()
+
     isAppReady.value = true
     await nextTick()
 
