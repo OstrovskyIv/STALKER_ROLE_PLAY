@@ -23,12 +23,13 @@ const isVotingOpen = ref(false)
 const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
 const lorUrl = `${import.meta.env.BASE_URL}lor`.replace(/\/+/g, '/')
 const shopUrl = `${import.meta.env.BASE_URL}shop`.replace(/\/+/g, '/')
+const drawsUrl = `${import.meta.env.BASE_URL}draws`.replace(/\/+/g, '/')
 
 const allBlocks: InfoBlock[] = [
   { id: 'rules', title: 'ПРАВИЛА', desc: 'ОСНОВНЫЕ ПРАВИЛА', img: rulesImg, link: rulesUrl },
   { id: 'lor', title: 'ЛОР', desc: 'ИСТОРИЯ СЕРВЕРА', img: lorImg, link: lorUrl },
   { id: 'guides', title: 'ГАЙДЫ', desc: 'ВЫЖИВАНИЕ В ЗОНЕ', img: guidesImg },
-  { id: 'draws', title: 'РОЗЫГРЫШИ', desc: 'УЧАСТВУЙ И ПОБЕЖДАЙ', img: drawImg },
+  { id: 'draws', title: 'РОЗЫГРЫШИ', desc: 'УЧАСТВУЙ И ПОБЕЖДАЙ', img: drawImg, link: drawsUrl },
   { id: 'donat', title: 'ДОНАТ ШОП', desc: 'МАГАЗИН ТОВАРОВ', img: shopImg, link: 'https://last-zone-shop.ru', isExternal: true },
   { id: 'vote', title: 'ГОЛОСОВАНИЕ', desc: 'ПОДДЕРЖКА ПРОЕКТА', img: voteImg },
   { id: 'price', title: 'ПРАЙС-ЛИСТ', desc: 'ЦЕНЫ НА УСЛУГИ', img: priceImg, link: shopUrl }
@@ -54,6 +55,7 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
                :class="['w-full flex justify-center', block.id === 'price' ? 'col-span-2' : '']">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
             </a>
+
             <div v-else-if="block.id === 'vote'" class="w-full flex justify-center" @click="isVotingOpen = !isVotingOpen">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" :isActive="isVotingOpen">
                 <template #content v-if="isVotingOpen">
@@ -64,6 +66,7 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
                 </template>
               </InfoCard>
             </div>
+
             <div v-else class="w-full flex justify-center cursor-default">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
             </div>
@@ -84,6 +87,7 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
             <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'" class="w-full flex justify-center">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
             </a>
+
             <div v-else-if="block.id === 'vote'" class="w-full flex justify-center" @click="isVotingOpen = !isVotingOpen">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" :isActive="isVotingOpen">
                 <template #content v-if="isVotingOpen">
