@@ -81,7 +81,6 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
 
         <div class="hidden lg:grid grid-cols-3 gap-10 w-full lg:max-w-5xl justify-items-center">
           <template v-for="block in bottomBlocks" :key="block.id">
-            <!-- Донат и Прайс -->
             <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'" class="w-full flex justify-center">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
             </a>

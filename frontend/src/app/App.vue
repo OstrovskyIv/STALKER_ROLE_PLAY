@@ -10,11 +10,19 @@ import logoSvg from '@shared/assets/images/logo.svg'
 import logoFull from '@shared/assets/images/logo-full.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
 
+interface AssetModule {
+  default: string;
+}
+
 const route = useRoute()
 const isAppReady = ref(false)
 const isPreloaderVisible = ref(true)
 const isContentVisible = ref(false)
-const isLongPage = computed(() => route.path.includes('/rules') || route.path.includes('/lor') || route.path.includes('/shop'))
+const isLongPage = computed(() =>
+  route.path.includes('/rules') ||
+  route.path.includes('/lor') ||
+  route.path.includes('/shop')
+)
 
 const preloadCritical = async () => {
   const assets = [bgImg, logoSvg, squareLogo]
@@ -28,6 +36,7 @@ const preloadCritical = async () => {
 onMounted(async () => {
   try {
     await preloadImage(logoFull)
+
     await preloadCritical()
 
     const loader = document.getElementById('initial-loader')
@@ -42,6 +51,26 @@ onMounted(async () => {
         isPreloaderVisible.value = false
       }, 300)
     }, 1500)
+
+    setTimeout(() => {
+      const images = import.meta.glob<AssetModule>([
+        '@shared/assets/images/ui/info/*.webp',
+        '@shared/assets/images/ui/socials/*.webp',
+        '@shared/assets/images/steps/*.webp',
+        '@shared/assets/images/lor/*.webp',
+        '@shared/assets/images/gallery/*.webp'
+      ])
+
+      Object.values(images).forEach(async (importFn) => {
+        try {
+          const mod = await importFn()
+          const img = new Image()
+          img.src = mod.default
+        } catch {
+        }
+      })
+    }, 5000)
+
   } catch {
     isAppReady.value = true
     isPreloaderVisible.value = false
