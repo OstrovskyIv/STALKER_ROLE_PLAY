@@ -18,17 +18,17 @@ export const useServerStore = defineStore('server', () => {
     if (isLoading.value) return
     isLoading.value = true
 
-    const targetUrl = `https://dayzsalauncher.com/api/v1/query/80.242.59.107:2303?t=${Date.now()}`
+    const workerUrl = 'https://lz-monitoring.ostrovskyiml.workers.dev/'
 
     try {
-      const response = await fetch(targetUrl)
+      const response = await fetch(workerUrl)
+      if (!response.ok) throw new Error()
+
       const data = await response.json()
 
       if (data && data.result) {
         serverData.value = data.result as ServerData
         isOnline.value = true
-      } else {
-        isOnline.value = false
       }
     } catch {
       isOnline.value = false
