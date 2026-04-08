@@ -32,7 +32,7 @@ const allBlocks: InfoBlock[] = [
   { id: 'draws', title: 'РОЗЫГРЫШИ', desc: 'УЧАСТВУЙ И ПОБЕЖДАЙ', img: drawImg, link: drawsUrl },
   { id: 'donat', title: 'ДОНАТ ШОП', desc: 'МАГАЗИН ТОВАРОВ', img: shopImg, link: 'https://last-zone-shop.ru', isExternal: true },
   { id: 'vote', title: 'ГОЛОСОВАНИЕ', desc: 'ПОДДЕРЖКА ПРОЕКТА', img: voteImg },
-  { id: 'price', title: 'ПРАЙС-ЛИСТ', desc: 'ЦЕНЫ НА УСЛУГИ', img: priceImg, link: shopUrl }
+  { id: 'price', title: 'ПРАЙС-ЛИСТ', desc: 'ВООРУЖЕНИЕ В ТРЕЙДЕР', img: priceImg, link: shopUrl }
 ]
 
 const topBlocks = computed(() => allBlocks.slice(0, 4))
@@ -48,14 +48,11 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
       <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic leading-none shrink-0 pt-4 md:pt-0">ИНФОРМАЦИЯ</h2>
 
       <div class="w-full max-w-7xl flex flex-col gap-4 sm:gap-10 items-center 2xl:-translate-y-12 transition-transform duration-500 pb-10 md:pb-0">
-
         <div class="grid grid-cols-2 lg:hidden gap-3 w-full justify-items-center">
           <template v-for="block in allBlocks" :key="block.id">
-            <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'"
-               :class="['w-full flex justify-center', block.id === 'price' ? 'col-span-2' : '']">
+            <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'" :class="['w-full flex justify-center', block.id === 'price' ? 'col-span-2' : '']">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
             </a>
-
             <div v-else-if="block.id === 'vote'" class="w-full flex justify-center" @click="isVotingOpen = !isVotingOpen">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" :isActive="isVotingOpen">
                 <template #content v-if="isVotingOpen">
@@ -66,28 +63,19 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
                 </template>
               </InfoCard>
             </div>
-
-            <div v-else class="w-full flex justify-center cursor-default">
-              <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
-            </div>
+            <div v-else class="w-full flex justify-center cursor-default"><InfoCard :title="block.title" :desc="block.desc" :img="block.img" /></div>
           </template>
         </div>
 
         <div class="hidden lg:grid grid-cols-4 gap-10 w-full justify-items-center">
           <template v-for="block in topBlocks" :key="block.id">
-            <a v-if="block.link" :href="block.link" class="w-full flex justify-center">
-              <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
-            </a>
+            <a v-if="block.link" :href="block.link" class="w-full flex justify-center"><InfoCard :title="block.title" :desc="block.desc" :img="block.img" /></a>
             <InfoCard v-else :title="block.title" :desc="block.desc" :img="block.img" />
           </template>
         </div>
-
         <div class="hidden lg:grid grid-cols-3 gap-10 w-full lg:max-w-5xl justify-items-center">
           <template v-for="block in bottomBlocks" :key="block.id">
-            <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'" class="w-full flex justify-center">
-              <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
-            </a>
-
+            <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'" class="w-full flex justify-center"><InfoCard :title="block.title" :desc="block.desc" :img="block.img" /></a>
             <div v-else-if="block.id === 'vote'" class="w-full flex justify-center" @click="isVotingOpen = !isVotingOpen">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" :isActive="isVotingOpen">
                 <template #content v-if="isVotingOpen">
@@ -100,7 +88,6 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
             </div>
           </template>
         </div>
-
       </div>
     </div>
   </section>
