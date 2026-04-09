@@ -27,10 +27,11 @@ onUnmounted(() => observer?.disconnect())
 
 <template>
   <div class="w-full flex flex-col items-center">
-    <section id="home" class="h-[100svh] w-full snap-start shrink-0"><HomeSection /></section>
-    <section id="information" class="h-[100svh] w-full snap-start shrink-0"><InfoSection /></section>
-    <section id="connection" class="h-[100svh] w-full snap-start shrink-0"><ConnectSection /></section>
-    <section id="gallery" class="h-[100svh] w-full snap-start shrink-0"><GallerySection /></section>
-    <section id="server" class="h-[100svh] w-full snap-start shrink-0"><ServerSection /></section>
+    <!-- УБРАН КЛАСС snap-start ИЗ ВСЕХ СЕКЦИЙ -->
+    <section id="home" class="h-[100svh] w-full shrink-0"><HomeSection /></section>
+    <section id="information" class="h-[100svh] w-full shrink-0"><InfoSection /></section>
+    <section id="connection" class="h-[100svh] w-full shrink-0"><ConnectSection /></section>
+    <section id="gallery" class="h-[100svh] w-full shrink-0"><GallerySection /></section>
+    <section id="server" class="h-[100svh] w-full shrink-0"><ServerSection /></section>
   </div>
 </template>
