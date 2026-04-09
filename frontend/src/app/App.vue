@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed, nextTick } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, nextTick } from 'vue'
 import { MainBackground } from '@widgets/main-background'
 import { Preloader } from '@widgets/preloader'
 import { preloadImage } from '@shared/lib/images'
@@ -10,22 +9,13 @@ import logoSvg from '@shared/assets/images/logo.svg'
 import logoFull from '@shared/assets/images/logo-full.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
 
-import noiseVideo from '@shared/assets/video/terminal-noise.mov'
-
 interface AssetModule {
   default: string;
 }
 
-const route = useRoute()
 const isAppReady = ref(false)
 const isPreloaderVisible = ref(true)
 const isContentVisible = ref(false)
-const isLongPage = computed(() =>
-  route.path.includes('/rules') ||
-  route.path.includes('/lor') ||
-  route.path.includes('/shop') ||
-  route.path.includes('/draws')
-)
 
 const preloadCritical = async () => {
   const assets = [bgImg, logoSvg, squareLogo]
@@ -85,7 +75,6 @@ onMounted(async () => {
     <Preloader v-if="isPreloaderVisible" />
   </Transition>
 
-  <!-- УБРАНЫ КЛАССЫ snap-y и snap-mandatory -->
   <div
     v-if="isAppReady"
     :class="[
@@ -101,8 +90,12 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.fade-leave-active { transition: opacity 1.2s ease-in-out; }
-.fade-leave-to { opacity: 0; }
+.fade-leave-active {
+  transition: opacity 1.2s ease-in-out;
+}
+.fade-leave-to {
+  opacity: 0;
+}
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

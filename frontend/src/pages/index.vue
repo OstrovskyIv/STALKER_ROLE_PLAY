@@ -27,7 +27,6 @@ onUnmounted(() => observer?.disconnect())
 
 <template>
   <div class="w-full flex flex-col items-center">
-    <!-- УБРАН КЛАСС snap-start ИЗ ВСЕХ СЕКЦИЙ -->
     <section id="home" class="h-[100svh] w-full shrink-0"><HomeSection /></section>
     <section id="information" class="h-[100svh] w-full shrink-0"><InfoSection /></section>
     <section id="connection" class="h-[100svh] w-full shrink-0"><ConnectSection /></section>
