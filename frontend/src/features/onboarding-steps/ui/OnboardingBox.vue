@@ -37,15 +37,16 @@ onMounted(() => {
        :class="[
       'w-full max-w-lg md:max-w-4xl 2xl:max-w-5xl',
       'h-[300px] md:h-[650px] 2xl:h-[650px]',
-      'border-[2px] md:border-[6px] border-[#9241b8] shadow-[0_0_40px_rgba(146,65,184,0.3)] rounded-[1.5rem] md:rounded-[3.5rem] overflow-hidden flex flex-col relative bg-zinc-950/40 backdrop-blur-xl'
+      'border-[2px] md:border-[6px] border-[#9241b8] shadow-[0_0_40px_rgba(146,65,184,0.3)]',
+      'rounded-[1.5rem] md:rounded-[3.5rem] overflow-hidden flex flex-col relative bg-zinc-950/40 backdrop-blur-xl transition-all duration-500'
     ]"
   >
-    <div class="h-10 md:h-20 bg-zinc-900/80 border-b-[2px] md:border-b-[5px] border-[#9241b8]/40 px-4 md:px-12 flex justify-between items-center relative z-20 font-capture shrink-0">
-      <span class="text-white text-[10px] md:text-xl tracking-wider uppercase italic font-bold">КАК НАЧАТЬ ИГРАТЬ</span>
+    <div class="h-10 md:h-20 bg-zinc-900/80 border-b-[2px] md:border-b-[5px] border-[#9241b8]/40 px-5 md:px-12 flex justify-between items-center relative z-20 shrink-0">
+      <span class="text-zinc-100 text-[14px] md:text-3xl tracking-widest uppercase font-capture">КАК НАЧАТЬ ИГРАТЬ</span>
       <div class="flex gap-1.5 md:gap-3">
-        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-red-600"></div>
-        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-yellow-500"></div>
-        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-emerald-500"></div>
+        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-red-600 shadow-[0_0_10px_#dc2626]"></div>
+        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-yellow-500 shadow-[0_0_10px_#eab308]"></div>
+        <div class="w-2 h-2 md:w-3.5 md:h-3.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]"></div>
       </div>
     </div>
 
@@ -53,13 +54,14 @@ onMounted(() => {
       <video ref="videoRef" autoplay muted loop playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover opacity-20" :src="noiseVideo" />
       <div class="absolute inset-0 bg-black/50"></div>
 
-      <div class="relative z-10 flex-1 p-5 md:p-16 2xl:p-20 flex flex-col justify-center gap-4 md:gap-10">
+      <div class="relative z-10 flex-1 p-5 md:p-16 2xl:p-20 pb-10 md:pb-16 flex flex-col justify-center gap-4 md:gap-10">
+
         <div class="flex items-center font-capture text-[#9241b8] shrink-0">
-          <img :src="activeStep.img" class="h-10 md:h-24 2xl:h-28 w-auto shrink-0 drop-shadow-[0_0_15px_#9241b8]" />
-          <h3 class="text-sm md:text-5xl 2xl:text-6xl uppercase leading-none italic ml-2 md:ml-4">{{ activeStep.title }}</h3>
+          <img :src="activeStep.img" class="h-10 md:h-24 2xl:h-28 w-auto shrink-0 drop-shadow-[0_0_15px_#9241b8]" alt="step" />
+          <h3 class="text-[15px] md:text-5xl 2xl:text-6xl uppercase leading-none ml-2 md:ml-6">{{ activeStep.title }}</h3>
         </div>
 
-        <div class="flex flex-col gap-1 md:gap-2 border-l-2 md:border-l-6 border-[#9241b8] pl-3 md:pl-10">
+        <div class="flex flex-col gap-2 md:gap-4 border-l-2 md:border-l-6 border-[#9241b8] pl-3 md:pl-10 text-left">
           <div v-for="(line, i) in activeStep.desc.split('\n')" :key="i" class="flex items-start">
             <template v-if="line.trim().startsWith('╭') || line.trim().startsWith('╰')">
               <span class="w-[12px] md:w-[32px] shrink-0 text-[#9241b8] font-mono text-[10px] md:text-3xl leading-tight">{{ line.trim().charAt(0) }}</span>
@@ -74,7 +76,7 @@ onMounted(() => {
         <div class="h-10 md:h-16 flex items-center shrink-0">
           <div v-if="activeStep.link">
             <a :href="activeStep.link" target="_blank"
-               class="inline-block px-5 py-2 md:px-16 md:py-6 bg-[#9241b8] text-white font-capture text-[10px] md:text-2xl uppercase rounded-lg shadow-lg active:scale-95 transition-all">
+               class="inline-block px-5 py-2 md:px-16 md:py-6 bg-[#9241b8] hover:bg-[#a85cd4] text-white font-capture text-[10px] md:text-2xl uppercase rounded-lg shadow-lg active:scale-95 transition-all">
               {{ activeStep.btnText }}
             </a>
           </div>
@@ -82,14 +84,20 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="h-12 md:h-24 bg-zinc-900/80 border-t-[2px] md:border-t-[5px] border-[#9241b8]/40 px-4 md:px-12 flex items-center justify-between relative z-20 font-capture shrink-0">
-      <button @click="prevStep" :disabled="currentStep === 1" class="disabled:opacity-0 transition-opacity">
-        <div class="border border-[#9241b8] px-3 py-1 md:px-10 md:py-3 text-white text-[9px] md:text-xl uppercase rounded-md">Назад</div>
-      </button>
-      <div class="text-white text-xs md:text-5xl uppercase font-black">ШАГ {{ currentStep }}</div>
-      <button @click="nextStep" :disabled="currentStep === steps.length" class="disabled:opacity-0 transition-opacity">
-        <div class="border border-[#9241b8] px-3 py-1 md:px-10 md:py-3 text-white text-[9px] md:text-xl uppercase rounded-md">Далее</div>
-      </button>
+    <div class="h-12 md:h-24 bg-zinc-900/80 border-t-[2px] md:border-t-[5px] border-[#9241b8]/40 px-4 md:px-12 flex items-center justify-between relative z-20 shrink-0">
+      <div class="flex-1 flex justify-start">
+        <button @click="prevStep" :disabled="currentStep === 1" :class="['transition-all duration-300', currentStep === 1 ? 'opacity-0 pointer-events-none' : 'opacity-100']">
+          <div class="border-2 border-[#9241b8] px-4 py-2 md:px-12 md:py-4 text-white text-[11px] md:text-2xl uppercase rounded-lg hover:bg-[#9241b8]/20 transition-all font-capture shadow-lg">← НАЗАД</div>
+        </button>
+      </div>
+
+      <div class="text-zinc-100 text-[10px] md:text-5xl uppercase font-capture tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">ШАГ {{ currentStep }}</div>
+
+      <div class="flex-1 flex justify-end">
+        <button @click="nextStep" :disabled="currentStep === steps.length" :class="['transition-all duration-300', currentStep === steps.length ? 'opacity-0 pointer-events-none' : 'opacity-100']">
+          <div class="border-2 border-[#9241b8] px-4 py-2 md:px-12 md:py-4 text-white text-[11px] md:text-2xl uppercase rounded-lg hover:bg-[#9241b8]/20 transition-all font-capture shadow-lg">ДАЛЕЕ →</div>
+        </button>
+      </div>
     </div>
   </div>
 </template>
