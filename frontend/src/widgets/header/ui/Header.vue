@@ -35,7 +35,7 @@ const scrollToSection = (id: string) => {
             : 'h-0 opacity-0'
         ]"
       >
-        <img :src="logoSvg" alt="Last Zone" class="h-[65px] sm:h-[90px] md:h-[110px] 2xl:h-[130px] w-auto drop-shadow-[0_0_35px_rgba(255,255,255,0.15)]" />
+        <img :src="logoSvg" alt="Last Zone" class="h-[65px] sm:h-[90px] md:h-[110px] 2xl:h-[130px] w-auto" />
       </div>
 
       <div class="flex justify-center 2xl:w-full transition-all duration-700 mt-0 sm:mt-4 2xl:mt-0">
