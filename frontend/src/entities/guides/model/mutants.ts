@@ -119,7 +119,7 @@ export const mutantsData: GuideItem[] = [
     features: 'Пси-атаки, контроль разума.',
     danger: 'Держит «свиту» из зомбированных и мутантов.',
     trophies: '«Мозг контролёра»',
-    lethality: 'Высокая',
+    lethality: 'Экстремальная',
     imageName: 'kontroler.webp'
   },
   {
@@ -132,6 +132,17 @@ export const mutantsData: GuideItem[] = [
     trophies: '«Глаз псевдогиганта»',
     lethality: 'Экстремальная',
     imageName: 'psevdogigant.webp'
+  },
+  {
+    id: 'object_1488',
+    category: 'mutants',
+    title: 'ОБЪЕКТ №14-88',
+    description: 'Засекреченный мутант.',
+    features: 'Внешность: ЗАСЕКРЕЧЕНО.',
+    danger: 'Управляет электричеством. Опасность: ЗАСЕКРЕЧЕНО.',
+    trophies: '«Голова»',
+    lethality: 'Экстремальная',
+    imageName: 'object_1488.webp'
   },
   {
     id: 'poltergeist',

@@ -36,8 +36,6 @@ onMounted(() => {
   <div v-if="activeStep"
        :class="[
       'w-full max-w-lg md:max-w-4xl 2xl:max-w-5xl',
-      // Стабильная высота: блок не будет менять размер, так как h зафиксирован.
-      // На десктопе 650px, на ноутбуках (Opera) 580px.
       'h-[350px] md:h-[580px] 2xl:h-[650px]',
       'border-[2px] md:border-[6px] border-[#9241b8] shadow-[0_0_40px_rgba(146,65,184,0.3)]',
       'rounded-[1.5rem] md:rounded-[3.5rem] overflow-hidden flex flex-col relative bg-zinc-950/40 backdrop-blur-xl transition-all duration-500'
