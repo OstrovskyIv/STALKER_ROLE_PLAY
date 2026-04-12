@@ -9,10 +9,6 @@ import logoSvg from '@shared/assets/images/logo.svg'
 import logoFull from '@shared/assets/images/logo-full.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
 
-interface AssetModule {
-  default: string;
-}
-
 const isAppReady = ref(false)
 const isPreloaderVisible = ref(true)
 const isContentVisible = ref(false)
@@ -20,14 +16,13 @@ const isContentVisible = ref(false)
 const preloadCritical = async () => {
   const assets = [bgImg, logoSvg, squareLogo]
   await Promise.all(assets.map(src => {
-    const img = new Image()
-    img.src = src
-    return img.decode ? img.decode() : preloadImage(src)
+    return preloadImage(src).catch(() => console.warn('Asset load failed:', src))
   }))
 }
 
 onMounted(async () => {
   try {
+    // 1. Грузим только самое важное для первого экрана
     await preloadImage(logoFull)
     await preloadCritical()
 
@@ -37,30 +32,13 @@ onMounted(async () => {
     isAppReady.value = true
     await nextTick()
 
+    // Плавное появление контента
     setTimeout(() => {
       isContentVisible.value = true
       setTimeout(() => {
         isPreloaderVisible.value = false
       }, 300)
     }, 1500)
-
-    setTimeout(() => {
-      const images = import.meta.glob<AssetModule>([
-        '@shared/assets/images/ui/info/*.webp',
-        '@shared/assets/images/ui/socials/*.webp',
-        '@shared/assets/images/steps/*.webp',
-        '@shared/assets/images/lor/*.webp',
-        '@shared/assets/images/gallery/*.webp'
-      ])
-
-      Object.values(images).forEach(async (importFn) => {
-        try {
-          const mod = await importFn()
-          const img = new Image()
-          img.src = mod.default
-        } catch { }
-      })
-    }, 5000)
 
   } catch {
     isAppReady.value = true
@@ -90,12 +68,8 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.fade-leave-active {
-  transition: opacity 1.2s ease-in-out;
-}
-.fade-leave-to {
-  opacity: 0;
-}
+.fade-leave-active { transition: opacity 1.2s ease-in-out; }
+.fade-leave-to { opacity: 0; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

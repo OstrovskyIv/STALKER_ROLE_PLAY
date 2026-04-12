@@ -20,15 +20,17 @@ interface InfoBlock {
 
 const isVotingOpen = ref(false)
 
+// Генерируем URL для всех страниц проекта
 const rulesUrl = `${import.meta.env.BASE_URL}rules`.replace(/\/+/g, '/')
 const lorUrl = `${import.meta.env.BASE_URL}lor`.replace(/\/+/g, '/')
 const shopUrl = `${import.meta.env.BASE_URL}shop`.replace(/\/+/g, '/')
 const drawsUrl = `${import.meta.env.BASE_URL}draws`.replace(/\/+/g, '/')
+const guidesUrl = `${import.meta.env.BASE_URL}guides`.replace(/\/+/g, '/')
 
 const allBlocks: InfoBlock[] = [
   { id: 'rules', title: 'ПРАВИЛА', desc: 'ОСНОВНЫЕ ПРАВИЛА', img: rulesImg, link: rulesUrl },
   { id: 'lor', title: 'ЛОР', desc: 'ИСТОРИЯ СЕРВЕРА', img: lorImg, link: lorUrl },
-  { id: 'guides', title: 'ГАЙДЫ', desc: 'ВЫЖИВАНИЕ В ЗОНЕ', img: guidesImg },
+  { id: 'guides', title: 'ГАЙДЫ', desc: 'ВЫЖИВАНИЕ В ЗОНЕ', img: guidesImg, link: guidesUrl },
   { id: 'draws', title: 'РОЗЫГРЫШИ', desc: 'УЧАСТВУЙ И ПОБЕЖДАЙ', img: drawImg, link: drawsUrl },
   { id: 'donat', title: 'ДОНАТ ШОП', desc: 'МАГАЗИН ТОВАРОВ', img: shopImg, link: 'https://last-zone-shop.ru', isExternal: true },
   { id: 'vote', title: 'ГОЛОСОВАНИЕ', desc: 'ПОДДЕРЖКА ПРОЕКТА', img: voteImg },
@@ -48,6 +50,8 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
       <h2 class="text-2xl sm:text-5xl xl:text-7xl font-capture uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] italic leading-none shrink-0 pt-4 md:pt-0">ИНФОРМАЦИЯ</h2>
 
       <div class="w-full max-w-7xl flex flex-col gap-4 sm:gap-10 items-center 2xl:-translate-y-12 transition-transform duration-500 pb-10 md:pb-0">
+
+        <!-- МОБИЛЬНЫЙ ГРИД -->
         <div class="grid grid-cols-2 lg:hidden gap-3 w-full justify-items-center">
           <template v-for="block in allBlocks" :key="block.id">
             <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'" :class="['w-full flex justify-center', block.id === 'price' ? 'col-span-2' : '']">
@@ -67,15 +71,22 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
           </template>
         </div>
 
+        <!-- ДЕСКТОПНЫЙ ГРИД (ВЕРХ) -->
         <div class="hidden lg:grid grid-cols-4 gap-10 w-full justify-items-center">
           <template v-for="block in topBlocks" :key="block.id">
-            <a v-if="block.link" :href="block.link" class="w-full flex justify-center"><InfoCard :title="block.title" :desc="block.desc" :img="block.img" /></a>
+            <a v-if="block.link" :href="block.link" class="w-full flex justify-center">
+              <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
+            </a>
             <InfoCard v-else :title="block.title" :desc="block.desc" :img="block.img" />
           </template>
         </div>
+
+        <!-- ДЕСКТОПНЫЙ ГРИД (НИЗ) -->
         <div class="hidden lg:grid grid-cols-3 gap-10 w-full lg:max-w-5xl justify-items-center">
           <template v-for="block in bottomBlocks" :key="block.id">
-            <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'" class="w-full flex justify-center"><InfoCard :title="block.title" :desc="block.desc" :img="block.img" /></a>
+            <a v-if="block.link" :href="block.link" :target="block.isExternal ? '_blank' : '_self'" class="w-full flex justify-center">
+              <InfoCard :title="block.title" :desc="block.desc" :img="block.img" />
+            </a>
             <div v-else-if="block.id === 'vote'" class="w-full flex justify-center" @click="isVotingOpen = !isVotingOpen">
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" :isActive="isVotingOpen">
                 <template #content v-if="isVotingOpen">
@@ -88,7 +99,13 @@ const bottomBlocks = computed(() => allBlocks.slice(4, 7))
             </div>
           </template>
         </div>
+
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
