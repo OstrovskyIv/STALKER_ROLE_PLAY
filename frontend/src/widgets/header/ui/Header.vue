@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useNavStore } from '@entities/navigation'
 import { useServerStore } from '@entities/server/model/store'
 import logoSvg from '@shared/assets/images/logo.svg'
+import squareLogo from '@shared/assets/images/square-logo.webp'
 
 const navStore = useNavStore()
 const serverStore = useServerStore()
+
+const isScrolling = ref(false)
+let scrollTimer: ReturnType<typeof setTimeout> | null = null
 
 const navLinks = [
   { name: 'подключение', id: 'home' },
@@ -17,20 +22,51 @@ const scrollToSection = (id: string) => {
   const el = document.getElementById(id)
   if (el) el.scrollIntoView({ behavior: 'smooth' })
 }
+
+const handleScroll = () => {
+  isScrolling.value = true
+
+  if (scrollTimer) clearTimeout(scrollTimer)
+
+  scrollTimer = setTimeout(() => {
+    isScrolling.value = false
+  }, 400)
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, true)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll, true)
+  if (scrollTimer) clearTimeout(scrollTimer)
+})
 </script>
 
 <template>
   <header class="fixed top-0 left-0 w-full z-[100] pointer-events-none transition-all duration-700">
+
+    <div
+      :class="[
+        'absolute top-4 left-1/2 -translate-x-1/2 transition-all duration-500 ease-in-out flex flex-col items-center gap-1',
+        isScrolling ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+      ]"
+    >
+      <img :src="squareLogo" class="h-6 w-auto grayscale brightness-200 animate-pulse drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" alt="Nav Hidden" />
+      <div class="w-1 h-1 bg-[#9241b8] rounded-full animate-ping"></div>
+    </div>
+
     <div
       :class="[
         'w-full flex flex-col 2xl:flex-row items-center justify-center 2xl:justify-between px-6 2xl:px-16 pt-4 sm:pt-6 2xl:pt-8 transition-all duration-700 relative',
-        navStore.activeSectionId === 'home' ? 'pt-4 sm:pt-6 2xl:pt-8' : 'pt-2 2xl:pt-10'
+        navStore.activeSectionId === 'home' ? 'pt-4 sm:pt-6 2xl:pt-8' : 'pt-2 2xl:pt-10',
+        isScrolling ? 'opacity-0 -translate-y-20 scale-95' : 'opacity-100 translate-y-0 scale-100'
       ]"
     >
       <div
         :class="[
           'transition-all duration-700 ease-in-out pointer-events-auto shrink-0 2xl:absolute 2xl:left-16 overflow-hidden',
-          navStore.activeSectionId === 'home'
+          (navStore.activeSectionId === 'home' && !isScrolling)
             ? 'h-[70px] sm:h-[95px] md:h-[115px] 2xl:h-[135px] opacity-100'
             : 'h-0 opacity-0'
         ]"
