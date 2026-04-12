@@ -13,26 +13,15 @@ const isHeaderCollapsed = ref(false)
 const filteredGuides = computed(() => {
   const query = searchQuery.value.toLowerCase().trim()
   const source = (guidesData || []) as GuideItem[]
-
-  if (!query) {
-    return source.filter(g => g.category === activeCategory.value)
-  }
-
-  return source.filter(item => {
-    const title = item.title || ''
-    const desc = item.description || ''
-    return title.toLowerCase().includes(query) || desc.toLowerCase().includes(query)
-  })
+  if (!query) return source.filter(g => g.category === activeCategory.value)
+  return source.filter(item => (item.title?.toLowerCase().includes(query)) || (item.description?.toLowerCase().includes(query)))
 })
 
 const getImageUrl = (imageName: string | undefined): string => {
   if (!imageName) return ''
   const keys = Object.keys(guideImages)
   const matchedKey = keys.find(key => key.endsWith(imageName))
-  if (matchedKey && guideImages[matchedKey]) {
-    return guideImages[matchedKey].default
-  }
-  return ''
+  return (matchedKey && guideImages[matchedKey]) ? guideImages[matchedKey].default : ''
 }
 
 const isExtreme = (level: string | undefined) => {
@@ -59,7 +48,7 @@ const highlightText = (text: string | undefined, query: string) => {
 }
 
 const handleScroll = (e: Event) => {
-  if (window.innerWidth >= 768) return
+  if (window.innerWidth >= 1024) return
   const target = e.target as HTMLElement
   isHeaderCollapsed.value = target.scrollTop > 20
 }
@@ -76,80 +65,81 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="w-full max-w-[1750px] h-[92vh] flex flex-col md:flex-row bg-black/40 border-2 border-white/10 rounded-[1.5rem] md:rounded-[3.5rem] overflow-hidden backdrop-blur-xl shadow-2xl">
+  <div class="w-full max-w-[1750px] h-[95vh] md:h-[90vh] flex flex-col lg:flex-row bg-black/40 border-2 border-white/10 rounded-[1.5rem] md:rounded-[3.5rem] overflow-hidden backdrop-blur-xl shadow-2xl">
 
-    <div class="w-full md:w-[380px] border-b md:border-b-0 md:border-r border-white/10 flex flex-col bg-black/30 shrink-0 transition-all duration-500">
+    <div class="w-full lg:w-[350px] xl:w-[400px] border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col bg-black/30 shrink-0 transition-all duration-500">
 
       <div :class="[
         'transition-all duration-500 ease-in-out overflow-hidden flex flex-col',
-        isHeaderCollapsed ? 'max-h-0 opacity-0 p-0 transform -translate-y-full' : 'max-h-[400px] opacity-100 p-4 md:p-8 gap-4 md:gap-6'
+        isHeaderCollapsed ? 'max-h-0 opacity-0 p-0 transform -translate-y-full' : 'max-h-[400px] opacity-100 p-6 xl:p-8 gap-4'
       ]">
         <BackButton to="/" />
-        <h2 class="text-white font-capture text-xl md:text-2xl tracking-tighter">ПДА: СПРАВОЧНИК</h2>
+        <h2 class="text-white font-capture text-xl xl:text-2xl tracking-tighter">ПДА: СПРАВОЧНИК</h2>
         <input v-model="searchQuery" type="text" placeholder="ПОИСК..."
-               class="w-full bg-black/60 border border-[#9241b8]/40 p-3 md:p-4 rounded-xl text-white font-capture text-xs md:text-sm outline-none focus:border-[#9241b8] transition-all" />
+               class="w-full bg-black/60 border border-[#9241b8]/40 p-3 xl:p-4 rounded-xl text-white font-capture text-xs xl:text-sm outline-none focus:border-[#9241b8] transition-all shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]" />
       </div>
 
       <div :class="[
-        'flex md:flex-col overflow-x-auto md:overflow-y-auto gap-2 no-scrollbar bg-black/40 md:bg-transparent sticky top-0 z-20 transition-all duration-500',
+        'flex lg:flex-col overflow-x-auto lg:overflow-y-auto gap-2 no-scrollbar bg-black/40 lg:bg-transparent sticky top-0 z-20 transition-all duration-500',
         isHeaderCollapsed ? 'p-2' : 'p-4'
       ]">
         <button v-for="cat in guideCategories" :key="cat.id"
                 @click="activeCategory = cat.id; searchQuery = ''; isHeaderCollapsed = false"
-                :class="['shrink-0 md:shrink-1 text-left px-4 py-2.5 md:px-8 md:py-5 rounded-lg md:rounded-xl font-capture text-[9px] md:text-base transition-all uppercase',
+                :class="['shrink-0 lg:shrink-1 text-left px-5 py-3 xl:px-8 xl:py-5 rounded-xl font-capture text-[10px] xl:text-base transition-all uppercase',
             (activeCategory === cat.id && !searchQuery) ? 'bg-[#9241b8] text-white shadow-[0_0_15px_#9241b866]' : 'text-zinc-500 hover:text-white hover:bg-white/5']">
           {{ cat.title }}
         </button>
       </div>
     </div>
 
-    <div ref="contentRef" class="flex-1 overflow-y-auto no-scrollbar p-4 md:p-12 bg-black/10 relative scroll-smooth">
-      <div v-if="filteredGuides.length" class="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-12">
+    <div ref="contentRef" class="flex-1 overflow-y-auto no-scrollbar p-4 xl:p-12 bg-black/10 relative scroll-smooth">
+      <div v-if="filteredGuides.length" class="grid grid-cols-1 2xl:grid-cols-2 gap-6 xl:gap-10">
         <div v-for="guide in filteredGuides" :key="guide.id"
              :class="[
-               'group relative rounded-[2rem] md:rounded-[2.5rem] p-[1.5px] md:p-[2px] transition-all duration-700 overflow-hidden',
+               'group relative rounded-[2rem] xl:rounded-[2.5rem] p-[1.5px] xl:p-[2px] transition-all duration-700 overflow-hidden',
                isExtreme(guide.lethality) ? 'animate-extreme-border shadow-[0_0_50px_rgba(146,65,184,0.3)]' : 'bg-white/5 hover:bg-white/10'
              ]">
 
           <div v-if="isExtreme(guide.lethality)" class="absolute inset-[-100%] animate-slow-spin bg-[conic-gradient(from_0deg,#ff0000,#9241b8,#ff0000)] opacity-30"></div>
 
-          <div class="relative h-full w-full bg-[#0a0a0a] rounded-[1.9rem] md:rounded-[2.4rem] p-5 md:p-8 flex flex-col gap-5 md:gap-6 z-10">
+          <div class="relative h-full w-full bg-[#0a0a0a] rounded-[1.9rem] xl:rounded-[2.4rem] p-5 xl:p-8 flex flex-col gap-5 xl:gap-8 z-10">
 
-            <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
+            <div class="flex flex-col sm:flex-row gap-6 xl:gap-8 items-center sm:items-start">
               <div class="relative shrink-0">
                 <div :class="[
-                  'w-32 h-32 md:w-48 md:h-48 rounded-2xl md:rounded-3xl overflow-hidden border-2 transition-all duration-500 group-hover:scale-105',
+                  'w-32 h-32 xl:w-48 xl:h-48 rounded-2xl xl:rounded-3xl overflow-hidden border-2 transition-all duration-500 group-hover:scale-105',
                   isExtreme(guide.lethality) ? 'border-[#9241b8] shadow-[0_0_30px_rgba(146,65,184,0.4)]' : 'border-white/10'
                 ]">
                   <img :src="getImageUrl(guide.imageName)" :alt="guide.title" class="w-full h-full object-contain bg-zinc-900/30" loading="lazy" />
                 </div>
-                <div v-if="isExtreme(guide.lethality)" class="absolute -top-2 -right-2 bg-red-600 text-white font-capture text-[8px] md:text-[10px] px-2 md:px-3 py-1 rounded-full animate-pulse border border-white/20">УГРОЗА</div>
+                <div v-if="isExtreme(guide.lethality)" class="absolute -top-2 -right-2 bg-red-600 text-white font-capture text-[8px] xl:text-[10px] px-2 xl:px-3 py-1 rounded-full animate-pulse border border-white/20">УГРОЗА</div>
               </div>
 
-              <div class="flex-1 flex flex-col gap-3 text-center md:text-left">
-                <div class="border-l-4 border-[#9241b8] pl-4 md:pl-5 flex flex-col gap-1">
-                  <h3 class="text-white font-capture text-xl md:text-4xl uppercase italic leading-none" v-html="highlightText(guide.title, searchQuery)"></h3>
-                  <div v-if="guide.lethality" class="flex items-center justify-center md:justify-start gap-2 mt-1">
+              <div class="flex-1 flex flex-col gap-3 text-center sm:text-left">
+                <div class="border-l-4 border-[#9241b8] pl-4 xl:pl-5 flex flex-col gap-1">
+                  <h3 class="text-white font-capture text-xl xl:text-4xl uppercase italic leading-none" v-html="highlightText(guide.title, searchQuery)"></h3>
+                  <div v-if="guide.lethality" class="flex items-center justify-center sm:justify-start gap-2 mt-1">
                     <span class="text-zinc-600 font-capture text-[9px] uppercase">Класс:</span>
-                    <span :class="['font-capture text-[10px] md:text-sm uppercase italic', getLethalityClass(guide.lethality)]">{{ guide.lethality }}</span>
+                    <span :class="['font-capture text-[10px] xl:text-sm uppercase italic', getLethalityClass(guide.lethality)]">{{ guide.lethality }}</span>
                   </div>
                 </div>
-                <p class="text-zinc-400 font-sans italic text-xs md:text-base leading-relaxed opacity-80" v-html="highlightText(guide.description, searchQuery)"></p>
+                <p class="text-zinc-400 font-sans italic text-xs xl:text-base leading-relaxed opacity-80" v-html="highlightText(guide.description, searchQuery)"></p>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              <div v-if="guide.features" class="bg-white/[0.03] border border-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col gap-1">
+            <!-- Характеристики -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 xl:gap-4">
+              <div v-if="guide.features" class="bg-white/[0.03] border border-white/5 p-3 xl:p-4 rounded-xl xl:rounded-2xl flex flex-col gap-1">
                 <span class="text-[#9241b8] font-capture text-[9px] uppercase tracking-widest opacity-60">Особенности</span>
-                <span class="text-zinc-200 font-sans text-[10px] md:text-xs italic leading-tight">{{ guide.features }}</span>
+                <span class="text-zinc-200 font-sans text-[10px] xl:text-xs italic leading-tight">{{ guide.features }}</span>
               </div>
-              <div v-if="guide.trophies" class="bg-emerald-500/[0.03] border border-emerald-500/10 p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col gap-1">
+              <div v-if="guide.trophies" class="bg-emerald-500/[0.03] border border-emerald-500/10 p-3 xl:p-4 rounded-xl xl:rounded-2xl flex flex-col gap-1">
                 <span class="text-emerald-500 font-capture text-[9px] uppercase tracking-widest opacity-60">Трофеи</span>
-                <span class="text-zinc-200 font-sans text-[10px] md:text-xs italic leading-tight">{{ guide.trophies }}</span>
+                <span class="text-zinc-200 font-sans text-[10px] xl:text-xs italic leading-tight">{{ guide.trophies }}</span>
               </div>
-              <div v-if="guide.danger" class="md:col-span-2 bg-red-500/[0.03] border border-red-500/10 p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col gap-1">
+              <div v-if="guide.danger" class="sm:col-span-2 bg-red-500/[0.03] border border-red-500/10 p-3 xl:p-4 rounded-xl xl:rounded-2xl flex flex-col gap-1">
                 <span class="text-red-500 font-capture text-[9px] uppercase tracking-widest opacity-60">Поведение</span>
-                <span class="text-zinc-200 font-sans text-[10px] md:text-xs italic leading-tight">{{ guide.danger }}</span>
+                <span class="text-zinc-200 font-sans text-[10px] xl:text-xs italic leading-tight">{{ guide.danger }}</span>
               </div>
             </div>
 
@@ -166,14 +156,11 @@ onUnmounted(() => {
   50% { color: #9241b8; text-shadow: 0 0 25px #9241b8; }
   100% { color: #ff0000; text-shadow: 0 0 15px #ff0000; }
 }
-
 @keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes extreme-border { 0%, 100% { background: #ff0000; } 50% { background: #9241b8; } }
-
 .animate-extreme-text { animation: extreme-glow 3s infinite linear; }
 .animate-slow-spin { animation: slow-spin 8s infinite linear; }
 .animate-extreme-border { animation: extreme-border 4s infinite ease-in-out; }
-
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

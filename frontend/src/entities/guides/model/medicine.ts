@@ -2,141 +2,273 @@ import type { GuideItem } from './types';
 
 export const medicineData: GuideItem[] = [
   {
-    id: 'nzt_injector',
+    id: 'nzt',
     category: 'medicine',
     title: 'NZT',
     description: 'Экспериментальный инъектор для быстрого лечения.',
-    negative: 'Имеет побочные эффекты.'
+    features: 'Мгновенное восстановление тканей.',
+    danger: 'Имеет побочные эффекты.',
+    imageName: 'nzt.webp',
+    lethality: 'Средняя'
   },
   {
-    id: 'golden_star',
+    id: 'zolotaya_zvezda',
     category: 'medicine',
-    title: 'ЗОЛОТАЯ ЗВЕЗДА',
-    description: 'Мазь, которая спасает от головной боли, простуды и насморка.'
+    title: 'МАЗЬ «ЗОЛОТАЯ ЗВЕЗДА»',
+    description: 'Классическое средство от головной боли, простуды и насморка.',
+    features: 'Облегчает симптомы легких недомоганий.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'zolotaya_zvezda.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'cystamine',
+    id: 'cistamin',
     category: 'medicine',
     title: 'ЦИСТАМИН',
-    description: 'Инъектор для быстрого вывода накопленной радиации из организма.'
+    description: 'Инъектор для быстрого вывода радиации из организма.',
+    features: 'Эффективен при сильном облучении.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'cistamin.webp',
+    lethality: 'Низкая'
   },
   {
     id: 'esmarh',
     category: 'medicine',
     title: 'ЖГУТ ЭСМАРХА',
-    description: 'Позволяет закрыть несколько порезов за короткий промежуток времени.'
+    description: 'Средство для остановки кровотечений.',
+    features: 'Закрывает несколько порезов за короткий промежуток времени.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'esmaskha.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'hercules',
+    id: 'herkules',
     category: 'medicine',
     title: 'ГЕРКУЛЕС',
-    description: 'Повышает уровень соматотропина в организме. Даёт возможность переносить тяжёлые грузы на большие расстояния.'
+    description: 'Повышает уровень соматотропина в организме.',
+    features: 'Дает возможность переносить тяжелые грузы на большие расстояния.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'herkules.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'splint',
+    id: 'shina',
     category: 'medicine',
     title: 'ШИНА',
-    description: 'Медицинская шина для фиксации повреждённых костей при оказании первой помощи.'
+    description: 'Средство для фиксации поврежденных костей.',
+    features: 'Необходима при оказании первой помощи при переломах.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'shina.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'anabiotic_med',
+    id: 'anabiotik',
     category: 'medicine',
     title: 'АНАБИОТИК',
-    description: 'Экспериментальный препарат, вызывающий полный паралич ЦНС. Позволяет выжить во время Выброса под открытым небом.'
+    description: 'Препарат, вызывающий полный паралич ЦНС.',
+    features: 'Позволяет пережить Выброс вне укрытия.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'anabiotik.webp',
+    lethality: 'Низкая'
   },
   {
     id: 'aminazin',
     category: 'medicine',
     title: 'АМИНАЗИН',
-    description: 'Защищает центральную нервную систему, препятствуя воздействию атак на нервный центр.'
+    description: 'Препарат для защиты центральной нервной системы.',
+    features: 'Препятствует воздействию ментальных атак на нервный центр.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'aminazin.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'cms_kit',
+    id: 'cms',
     category: 'medicine',
     title: 'CMS',
-    description: 'Хирургический набор для закрытия значительного количества кровоточащих ран за короткий срок.'
+    description: 'Хирургический набор для полевых условий.',
+    features: 'Закрывает значительное количество кровоточащих ран.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'cms.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'ifak_kit',
+    id: 'ifak',
     category: 'medicine',
     title: 'IFAK',
-    description: 'Индивидуальная тактическая аптечка для быстрого восстановления части здоровья.'
+    description: 'Индивидуальная тактическая аптечка.',
+    features: 'Позволяет быстро восстановить часть потерянного здоровья.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'ifak.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'cat_tourniquet',
+    id: 'cat',
     category: 'medicine',
     title: 'CAT',
-    description: 'Турникет, предотвращающий кровопотерю за очень короткий промежуток времени.'
+    description: 'Современный кровоостанавливающий турникет.',
+    features: 'Значительно предотвращает кровопотерю за короткий срок.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'cat.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'afak_kit',
+    id: 'afak',
     category: 'medicine',
     title: 'AFAK',
-    description: 'Улучшенная тактическая аптечка для восстановления значительной части здоровья.'
+    description: 'Улучшенная тактическая аптечка.',
+    features: 'Помогает восстановить значительную часть здоровья.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'afak.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'calok_b',
+    id: 'calok',
     category: 'medicine',
     title: 'CALOK-B',
-    description: 'Кровоостанавливающее средство для быстрой остановки нескольких ран.'
+    description: 'Кровоостанавливающее гемостатическое средство.',
+    features: 'Останавливает несколько ран за очень короткий срок.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'calok.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'salewa_kit',
+    id: 'saleva',
     category: 'medicine',
     title: 'SALEWA',
-    description: 'Аптечка последнего поколения для восстановления большого количества здоровья.'
+    description: 'Медицинская аптечка последнего поколения.',
+    features: 'Восстанавливает большое количество здоровья.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'saleva.webp',
+    lethality: 'Низкая'
   },
   {
-    id: 'surv_12',
+    id: 'surv',
     category: 'medicine',
     title: 'SURV-12',
-    description: 'Расширенный хирургический набор: останавливает кровотечение и восстанавливает 2/3 здоровья.'
+    description: 'Расширенный хирургический набор.',
+    features: 'Останавливает кровотечение и восстанавливает 2/3 здоровья.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'surv.webp',
+    lethality: 'Низкая'
   },
   {
     id: 'obdolbos',
     category: 'medicine',
     title: 'ОБДОЛБОС',
-    description: 'Самодельный препарат. Быстро восстанавливает выносливость и здоровье.',
-    negative: 'Имеет серьёзные побочные эффекты.'
+    description: 'Самодельный препарат для быстрого восстановления.',
+    features: 'Повышает выносливость и здоровье.',
+    danger: 'Имеет серьёзные побочные эффекты.',
+    imageName: 'obdolbos.webp',
+    lethality: 'Высокая'
   },
   {
-    id: 'adrenaline',
+    id: 'obdolbos2',
+    category: 'medicine',
+    title: 'ОБДОЛБОС 2',
+    description: 'Второе поколение самодельного препарата.',
+    features: 'Более сильные положительные эффекты.',
+    danger: 'Обладает более опасными побочными эффектами.',
+    imageName: 'obdolbos2.webp',
+    lethality: 'Высокая'
+  },
+  {
+    id: 'adrenalin',
     category: 'medicine',
     title: 'АДРЕНАЛИН',
-    description: 'Улучшает дыхание, стимулирует сердце и повышает кровяное давление.'
+    description: 'Стимулятор для экстренных ситуаций.',
+    features: 'Улучшает дыхание и стимулирует работу сердца.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'adrenalin.webp',
+    lethality: 'Низкая'
   },
   {
     id: 'propital',
     category: 'medicine',
     title: 'ПРОПИТАЛ',
-    description: 'Обеспечивает регенерацию здоровья на протяжении длительного времени.',
-    negative: 'Имеет неприятные побочные эффекты.'
+    description: 'Обезболивающий инъектор длительного действия.',
+    features: 'Обеспечивает постепенную регенерацию здоровья.',
+    danger: 'Имеет неприятные побочные эффекты.',
+    imageName: 'propital.webp',
+    lethality: 'Средняя'
   },
   {
     id: 'sj1',
     category: 'medicine',
     title: 'SJ1',
-    description: 'Боевой стимулятор. Восстанавливает выносливость каждую секунду в течение 100с.',
-    negative: 'Побочные эффекты после окончания действия.'
+    description: 'Боевой стимулятор кратковременного действия.',
+    features: 'Восстанавливает выносливость в течение 100 секунд.',
+    danger: 'После окончания действия возникают побочные эффекты.',
+    imageName: 'sj1.webp',
+    lethality: 'Средняя'
   },
   {
-    id: 'mule_stim',
+    id: 'mule',
     category: 'medicine',
     title: 'M.U.L.E',
-    description: 'Инъектор длительного действия для восстановления выносливости.',
-    negative: 'Вызывает побочные эффекты.'
+    description: 'Инъектор для работы с тяжелыми грузами.',
+    features: 'Длительное восстановление выносливости.',
+    danger: 'После окончания действия вызывает побочные эффекты.',
+    imageName: 'mule.webp',
+    lethality: 'Средняя'
   },
   {
     id: 'perfotoran',
     category: 'medicine',
     title: 'ПЕРФТОРАН',
-    description: 'Восстанавливает значительную часть кровопотери за короткое время.',
-    negative: 'Имеет побочные эффекты.'
+    description: 'Препарат для экстренного восстановления крови.',
+    features: 'Восстанавливает значительную часть кровопотери.',
+    danger: 'После окончания действия имеет побочные эффекты.',
+    imageName: 'perfotoran.webp',
+    lethality: 'Средняя'
   },
   {
-    id: 'psiblokada',
+    id: 'sj6',
+    category: 'medicine',
+    title: 'SJ6',
+    description: 'Улучшенный боевой стимулятор.',
+    features: 'Восстанавливает выносливость в течение 200 секунд.',
+    danger: 'После окончания действия вызывает побочные эффекты.',
+    imageName: 'sj6.webp',
+    lethality: 'Средняя'
+  },
+  {
+    id: 'etg',
+    category: 'medicine',
+    title: 'eTG',
+    description: 'Мощный регенеративный стимулятор.',
+    features: 'Восстанавливает здоровье, еду и воду в течение минуты.',
+    danger: 'После окончания действия препарата возникают побочные эффекты.',
+    imageName: 'etg.webp',
+    lethality: 'Высокая'
+  },
+  {
+    id: 'zagustin',
+    category: 'medicine',
+    title: 'ЗАГУСТИН',
+    description: 'Военный кровоостанавливающий препарат.',
+    features: 'Полная остановка всех кровотечений на три минуты.',
+    danger: 'После окончания действия возникают побочные эффекты.',
+    imageName: 'zagustin.webp',
+    lethality: 'Средняя'
+  },
+  {
+    id: 'xtg12',
+    category: 'medicine',
+    title: 'XTG-12',
+    description: 'Комплексный антидот.',
+    features: 'Нейтрализует все известные яды и токсины.',
+    danger: 'После окончания действия возникают побочные эффекты.',
+    imageName: 'xtg12.webp',
+    lethality: 'Средняя'
+  },
+  {
+    id: 'psi_blokada',
     category: 'medicine',
     title: 'ПСИ-БЛОКАДА',
-    description: 'Инъектор для защиты от пси-излучения и снятия его последствий.'
+    description: 'Инъектор для защиты разума.',
+    features: 'Позволяет защититься от ПСИ-излучения и снять его эффекты.',
+    danger: 'Побочных эффектов нет.',
+    imageName: 'psi_blokada.webp',
+    lethality: 'Низкая'
   }
 ];

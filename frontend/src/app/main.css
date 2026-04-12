@@ -11,6 +11,19 @@
   --font-capture: "Capture It", sans-serif;
 }
 
+/* Глобальная адаптация под "тесные" браузеры (Opera GX, маленькие ноутбуки) */
+@media (max-height: 800px) and (min-width: 1024px) {
+  #app {
+    zoom: 0.9; /* Слегка уменьшаем всё, если высота экрана меньше 800px */
+  }
+}
+
+@media (max-height: 700px) and (min-width: 1024px) {
+  #app {
+    zoom: 0.85;
+  }
+}
+
 *, ::before, ::after {
   box-sizing: border-box;
 }
@@ -23,6 +36,7 @@ html, body {
   background-color: black;
   color: white;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 #app {
