@@ -27,12 +27,13 @@ const scrollToSection = (id: string) => {
         navStore.activeSectionId === 'home' ? 'pt-4 sm:pt-6 2xl:pt-8' : 'pt-2 2xl:pt-10'
       ]"
     >
+      <!-- ЛОГОТИП: Теперь он точно знает, когда мы ушли с первой секции -->
       <div
         :class="[
           'transition-all duration-700 ease-in-out pointer-events-auto shrink-0 2xl:absolute 2xl:left-16 overflow-hidden',
           navStore.activeSectionId === 'home'
-            ? 'h-[70px] sm:h-[95px] md:h-[115px] 2xl:h-[135px] opacity-100'
-            : 'h-0 opacity-0'
+            ? 'h-[70px] sm:h-[95px] md:h-[115px] 2xl:h-[135px] opacity-100 translate-y-0'
+            : 'h-0 opacity-0 -translate-y-10'
         ]"
       >
         <img :src="logoSvg" alt="Last Zone" class="h-[65px] sm:h-[90px] md:h-[110px] 2xl:h-[130px] w-auto" />

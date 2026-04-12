@@ -107,7 +107,6 @@ const scroll = (direction: 'left' | 'right') => {
       <div class="md:hidden text-zinc-500 font-capture text-[10px] animate-pulse uppercase tracking-widest shrink-0">Листайте вправо »</div>
     </div>
 
-    <!-- БЕЗОПАСНЫЙ ОТСТУП СНИЗУ: Теперь секция сама раздвинется в Опере -->
     <div class="h-20 md:h-[15vh] shrink-0 w-full"></div>
   </section>
 </template>
