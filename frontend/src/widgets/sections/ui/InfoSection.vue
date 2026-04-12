@@ -34,7 +34,8 @@ const allBlocks: InfoBlock[] = [
 <template>
   <section class="w-full min-h-screen flex flex-col items-center relative snap-start shrink-0 bg-transparent overflow-x-hidden">
 
-    <div class="w-full h-[75px] sm:h-[90px] md:h-[100px] 2xl:h-[115px] shrink-0 pointer-events-none transition-all duration-500"></div>
+    <!-- ФИКС ДЛЯ ОПЕРЫ (md:h-[140px]) -->
+    <div class="w-full h-[80px] sm:h-[110px] md:h-[140px] 2xl:h-[120px] shrink-0 pointer-events-none transition-all duration-500"></div>
 
     <SectionDivider />
 
@@ -62,8 +63,8 @@ const allBlocks: InfoBlock[] = [
               <InfoCard :title="block.title" :desc="block.desc" :img="block.img" :isActive="isVotingOpen">
                 <template #content v-if="isVotingOpen">
                   <div class="flex flex-col w-full h-full justify-center items-center gap-2 p-1">
-                    <a href="https://wargm.ru/server/72966" target="_blank" @click.stop class="w-full py-2 bg-[#9241b8] text-white font-capture text-[10px] md:text-[12px] rounded uppercase shadow-lg hover:bg-[#a85cd4] transition-colors">WARGM</a>
-                    <a href="https://gamemonitoring.ru/dayz/servers/9106817" target="_blank" @click.stop class="w-full py-2 bg-[#9241b8] text-white font-capture text-[10px] md:text-[12px] rounded uppercase shadow-lg hover:bg-[#a85cd4] transition-colors">MONITOR</a>
+                    <a href="https://wargm.ru/server/72966" target="_blank" @click.stop class="w-full py-2 bg-[#9241b8] text-white font-capture text-[10px] md:text-[12px] rounded uppercase shadow-lg">WARGM</a>
+                    <a href="https://gamemonitoring.ru/dayz/servers/9106817" target="_blank" @click.stop class="w-full py-2 bg-[#9241b8] text-white font-capture text-[10px] md:text-[12px] rounded uppercase shadow-lg">MONITOR</a>
                   </div>
                 </template>
               </InfoCard>

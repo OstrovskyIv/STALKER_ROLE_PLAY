@@ -16,8 +16,10 @@ const boostyLink = 'https://boosty.to/last_zone_rp'
 </script>
 
 <template>
-  <section class="w-full h-screen flex flex-col items-center relative snap-start shrink-0 overflow-hidden">
-    <div class="w-full h-[75px] sm:h-[90px] md:h-[100px] 2xl:h-[115px] shrink-0 pointer-events-none transition-all duration-500"></div>
+  <section class="w-full h-screen flex flex-col items-center relative snap-start shrink-0 overflow-hidden bg-transparent">
+
+    <!-- ФИКС ДЛЯ ОПЕРЫ (md:h-[140px]) -->
+    <div class="w-full h-[80px] sm:h-[110px] md:h-[140px] 2xl:h-[120px] shrink-0 pointer-events-none transition-all duration-500"></div>
 
     <SectionDivider />
 
