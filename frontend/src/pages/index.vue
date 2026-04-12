@@ -28,12 +28,12 @@ onUnmounted(() => observer?.disconnect())
 <template>
   <div class="w-full flex flex-col items-center">
     <section id="home" class="h-[100svh] w-full shrink-0"><HomeSection /></section>
-
-    <!-- ФИКС ТУТ: сменили h на min-h, чтобы секция могла расти и толкать следующую -->
     <section id="information" class="min-h-[100svh] h-auto w-full shrink-0"><InfoSection /></section>
-
     <section id="connection" class="h-[100svh] w-full shrink-0"><ConnectSection /></section>
-    <section id="gallery" class="h-[100svh] w-full shrink-0"><GallerySection /></section>
+
+    <!-- ФИКС ТУТ: сменили h на min-h, чтобы галерея могла расти вниз -->
+    <section id="gallery" class="min-h-[100svh] h-auto w-full shrink-0"><GallerySection /></section>
+
     <section id="server" class="h-[100svh] w-full shrink-0"><ServerSection /></section>
   </div>
 </template>

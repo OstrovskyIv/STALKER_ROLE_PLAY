@@ -22,7 +22,6 @@ const preloadCritical = async () => {
 
 onMounted(async () => {
   try {
-    // 1. Грузим только самое важное для первого экрана
     await preloadImage(logoFull)
     await preloadCritical()
 
@@ -32,7 +31,6 @@ onMounted(async () => {
     isAppReady.value = true
     await nextTick()
 
-    // Плавное появление контента
     setTimeout(() => {
       isContentVisible.value = true
       setTimeout(() => {
