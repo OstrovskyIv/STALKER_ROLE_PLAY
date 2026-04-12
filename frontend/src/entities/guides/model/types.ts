@@ -1,6 +1,6 @@
 export interface GuideItem {
   id: string;
-  category: 'anomalies' | 'mutants' | 'artifacts' | 'medicine' | 'roles' | 'blowout';
+  category: 'anomalies' | 'mutants' | 'artifacts' | 'medicine' | 'roles' | 'blowout' | 'factions';
   title: string;
   description: string;
   effect?: string;
