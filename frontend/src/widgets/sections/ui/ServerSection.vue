@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { SectionDivider } from '@shared/ui'
 import { useServerStore } from '@entities/server'
 
 const serverStore = useServerStore()
+let intervalId: ReturnType<typeof setInterval> | null = null
 
 onMounted(() => {
   serverStore.fetchStatus()
-  setInterval(serverStore.fetchStatus, 60000)
+
+  intervalId = setInterval(() => {
+    serverStore.fetchStatus()
+  }, 600000)
+})
+
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId)
 })
 </script>
 
@@ -39,7 +47,7 @@ onMounted(() => {
 
           <div class="bg-black/40 border border-white/10 p-5 md:p-8 2xl:p-10 rounded-2xl 2xl:rounded-[2.5rem] backdrop-blur-xl flex flex-row 2xl:flex-col items-center justify-between 2xl:justify-center gap-4 shadow-xl">
             <span class="text-zinc-500 font-capture text-[12px] md:text-lg 2xl:text-base uppercase tracking-widest">ИГРОКИ</span>
-            <span class="text-[#9241b8] font-capture text-2xl md:text-5xl 2xl:text-6xl drop-shadow-[0_0_20px_#9241b8]">
+            <span class="text-[#9241b8] font-capture text-2xl md:text-5xl 2xl:text-6xl drop-shadow-[0_0_20px_#9241b8">
               {{ serverStore.serverData.players }}/{{ serverStore.serverData.maxPlayers }}
             </span>
           </div>
