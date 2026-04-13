@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { rulesData, type RuleSection } from '@entities/rules'
 import { BackButton } from '@shared/ui'
 
 const searchQuery = ref('')
 const selectedRuleId = ref(rulesData[0]?.id || '')
+const scrollContainer = ref<HTMLElement | null>(null)
 
 const filteredRules = computed(() => {
   const query = searchQuery.value.toLowerCase().trim()
@@ -15,6 +16,12 @@ const filteredRules = computed(() => {
 const activeRule = computed((): RuleSection => {
   const found = rulesData.find(r => r.id === selectedRuleId.value)
   return found ?? (rulesData[0] as RuleSection)
+})
+
+watch(selectedRuleId, () => {
+  if (scrollContainer.value) {
+    scrollContainer.value.scrollTop = 0
+  }
 })
 
 const highlightText = (text: string, query: string) => {
@@ -49,7 +56,7 @@ const highlightText = (text: string, query: string) => {
     </div>
 
     <div class="flex-1 flex flex-col overflow-hidden relative">
-      <div class="p-6 md:p-16 overflow-y-auto relative z-10 no-scrollbar text-left flex flex-col gap-6 md:gap-10">
+      <div ref="scrollContainer" class="p-6 md:p-16 overflow-y-auto relative z-10 no-scrollbar text-left flex flex-col gap-6 md:gap-10">
         <h2 class="text-2xl md:text-5xl font-capture text-[#9241b8] uppercase italic leading-tight drop-shadow-xl"
             v-html="highlightText(activeRule.title, searchQuery)">
         </h2>

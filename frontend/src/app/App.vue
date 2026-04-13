@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { MainBackground } from '@widgets/main-background'
 import { Preloader } from '@widgets/preloader'
 import { preloadImage } from '@shared/lib/images'
@@ -9,16 +10,33 @@ import logoSvg from '@shared/assets/images/logo.svg'
 import logoFull from '@shared/assets/images/logo-full.webp'
 import squareLogo from '@shared/assets/images/square-logo.webp'
 
+interface AssetModule {
+  default: string;
+}
+
+const route = useRoute()
 const isAppReady = ref(false)
 const isPreloaderVisible = ref(true)
 const isContentVisible = ref(false)
+const scrollContainer = ref<HTMLElement | null>(null)
 
 const preloadCritical = async () => {
   const assets = [bgImg, logoSvg, squareLogo]
   await Promise.all(assets.map(src => {
-    return preloadImage(src).catch(() => console.warn('Asset load failed:', src))
+    const img = new Image()
+    img.src = src
+    return img.decode ? img.decode() : preloadImage(src)
   }))
 }
+
+watch(
+  () => route.path,
+  () => {
+    if (scrollContainer.value) {
+      scrollContainer.value.scrollTo({ top: 0, behavior: 'instant' })
+    }
+  }
+)
 
 onMounted(async () => {
   try {
@@ -38,6 +56,24 @@ onMounted(async () => {
       }, 300)
     }, 1500)
 
+    setTimeout(() => {
+      const images = import.meta.glob<AssetModule>([
+        '@shared/assets/images/ui/info/*.webp',
+        '@shared/assets/images/ui/socials/*.webp',
+        '@shared/assets/images/steps/*.webp',
+        '@shared/assets/images/lor/*.webp',
+        '@shared/assets/images/gallery/*.webp'
+      ])
+
+      Object.values(images).forEach(async (importFn) => {
+        try {
+          const mod = await importFn()
+          const img = new Image()
+          img.src = mod.default
+        } catch { }
+      })
+    }, 5000)
+
   } catch {
     isAppReady.value = true
     isPreloaderVisible.value = false
@@ -53,6 +89,7 @@ onMounted(async () => {
 
   <div
     v-if="isAppReady"
+    ref="scrollContainer"
     :class="[
       'relative w-full h-screen bg-black overflow-y-auto scroll-smooth no-scrollbar transition-opacity duration-1000 ease-in-out',
       isContentVisible ? 'opacity-100' : 'opacity-[0.01]'
@@ -66,8 +103,12 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.fade-leave-active { transition: opacity 1.2s ease-in-out; }
-.fade-leave-to { opacity: 0; }
+.fade-leave-active {
+  transition: opacity 1.2s ease-in-out;
+}
+.fade-leave-to {
+  opacity: 0;
+}
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

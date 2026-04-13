@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { shopData, type ShopCategory, type ShopItem } from '@entities/shop'
 import { BackButton } from '@shared/ui'
 
@@ -7,6 +7,7 @@ const shopImages = import.meta.glob<{ default: string }>('@shared/assets/images/
 
 const searchQuery = ref('')
 const activeCategory = ref('weapons')
+const scrollContainer = ref<HTMLElement | null>(null)
 
 const filteredItems = computed(() => {
   const query = searchQuery.value.toLowerCase().trim()
@@ -22,6 +23,12 @@ const filteredItems = computed(() => {
     item.name.toLowerCase().includes(query) ||
     (item.details && item.details.toLowerCase().includes(query))
   )
+})
+
+watch(activeCategory, () => {
+  if (scrollContainer.value) {
+    scrollContainer.value.scrollTop = 0
+  }
 })
 
 const getImageUrl = (imageName: string): string => {
@@ -78,7 +85,8 @@ const highlightText = (text: string, query: string) => {
     </div>
 
     <div class="flex-1 flex flex-col overflow-hidden relative">
-      <div class="p-6 md:p-12 overflow-y-auto no-scrollbar">
+      <!-- Добавлен ref="scrollContainer" -->
+      <div ref="scrollContainer" class="p-6 md:p-12 overflow-y-auto no-scrollbar h-full">
         <div v-if="filteredItems.length > 0" class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6 pb-20">
           <div v-for="item in filteredItems" :key="item.name"
                class="bg-black/30 border border-white/5 rounded-2xl md:rounded-[2rem] p-4 md:p-6 flex flex-col gap-4 hover:border-[#9241b8]/50 transition-all group">

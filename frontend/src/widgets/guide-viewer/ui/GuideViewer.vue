@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { guidesData, guideCategories, type GuideItem } from '@entities/guides'
 import { BackButton } from '@shared/ui'
 
@@ -9,6 +9,12 @@ const searchQuery = ref('')
 const activeCategory = ref('mutants')
 const contentRef = ref<HTMLElement | null>(null)
 const isHeaderCollapsed = ref(false)
+
+watch(activeCategory, () => {
+  if (contentRef.value) {
+    contentRef.value.scrollTop = 0
+  }
+})
 
 const filteredGuides = computed(() => {
   const query = searchQuery.value.toLowerCase().trim()
@@ -127,7 +133,6 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <!-- Характеристики -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 xl:gap-4">
               <div v-if="guide.features" class="bg-white/[0.03] border border-white/5 p-3 xl:p-4 rounded-xl xl:rounded-2xl flex flex-col gap-1">
                 <span class="text-[#9241b8] font-capture text-[9px] uppercase tracking-widest opacity-60">Особенности</span>
