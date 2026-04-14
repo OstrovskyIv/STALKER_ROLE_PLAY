@@ -13,6 +13,7 @@ export interface GuideItem {
   features?: string;
   access?: string;
   imageName?: string;
+  videoName?: string;
   artifacts?: string[];
 }
 
