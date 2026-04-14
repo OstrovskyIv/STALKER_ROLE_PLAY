@@ -68,12 +68,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="w-full max-w-[1700px] h-[92vh] flex flex-col md:flex-row bg-black/40 border-2 border-white/10 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden backdrop-blur-xl shadow-2xl">
+  <div class="w-full max-w-[1750px] h-[92vh] flex flex-col md:flex-row bg-black/40 border-2 border-white/10 rounded-[1.5rem] md:rounded-[3rem] overflow-hidden backdrop-blur-xl shadow-2xl">
 
-    <!-- ЛЕВАЯ ПАНЕЛЬ -->
     <div class="w-full md:w-[400px] border-b md:border-b-0 md:border-r border-white/10 flex flex-col bg-black/20 shrink-0 transition-all duration-500">
 
-      <!-- Поиск и Назад -->
       <div :class="[
         'transition-all duration-500 ease-in-out overflow-hidden flex flex-col',
         isHeaderCollapsed ? 'max-h-0 opacity-0 p-0 pointer-events-none' : 'max-h-[300px] opacity-100 p-6 md:p-8 gap-4'
@@ -84,7 +82,6 @@ onUnmounted(() => {
         />
       </div>
 
-      <!-- Кнопки категорий -->
       <div :class="[
         'flex md:flex-col overflow-x-auto md:overflow-y-auto no-scrollbar sticky top-0 z-20 transition-all duration-500 bg-zinc-950/80 md:bg-transparent backdrop-blur-md md:backdrop-blur-none border-b md:border-b-0 border-white/5',
         isHeaderCollapsed ? 'p-2' : 'p-4 md:p-6'
@@ -99,14 +96,13 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <!-- Инфо-блок -->
       <div :class="[
         'mt-auto p-6 md:p-10 bg-[#9241b8]/5 border-t border-white/5 transition-all duration-500 hidden md:block',
         isHeaderCollapsed ? 'opacity-0 h-0 p-0 overflow-hidden' : 'opacity-100'
       ]">
         <div class="flex flex-col gap-4 animate-glow-text">
           <p class="text-white font-sans font-medium text-[10px] md:text-sm uppercase leading-tight opacity-80 italic">
-            Всё оружие в <span class="text-yellow-400 font-bold">золотых обвесах</span> + <span class="text-yellow-400 font-bold">патроны</span>.
+            Всё оружие в <span class="text-yellow-400 font-bold">золотых обвесах</span> + <span class="text-blue-400 font-bold">патроны</span>.
           </p>
           <p class="text-white font-capture text-xs md:text-lg uppercase leading-tight">
             ЦЕНА НА <span class="text-[#9241b8]">ОДИН МЕСЯЦ!</span>
@@ -118,7 +114,6 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- СЕТКА ТОВАРОВ -->
     <div ref="scrollContainer" class="flex-1 overflow-y-auto no-scrollbar relative bg-black/10 scroll-smooth">
       <div class="p-4 md:p-12">
         <div v-if="filteredItems.length > 0" class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3 md:gap-6 pb-20">
